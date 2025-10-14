@@ -24,23 +24,22 @@ export default function ModernCta() {
           <div className="relative">
             <div className="absolute -inset-1 bg-gradient-to-r from-red-500 to-amber-500 rounded-2xl blur-lg opacity-70"></div>
             <div className="relative bg-black/80 backdrop-blur-sm border border-white/10 rounded-xl p-5 sm:p-8 md:p-12 text-center">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6">Ready to Transform Your Workflow?</h2>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6">Meet Our Skilled Team Of Smart Home Professionals</h2>
               <p className="text-base sm:text-lg md:text-xl text-white/70 mb-6 sm:mb-8 max-w-2xl mx-auto">
-                Join thousands of satisfied customers who are already using Nova to streamline their operations and
-                boost productivity.
+                Let our Award-Winning team spearhead your project, turning ideas into flawless execution with unrivaled expertise.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button className="bg-gradient-to-r from-red-500 to-amber-500 hover:from-red-600 hover:to-amber-600 text-white border-0 h-10 sm:h-12 px-6 sm:px-8 text-sm sm:text-base">
-                  Start Free Trial
+                  Get a Quote
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
                 <Button variant="outline" className="border-white/20 text-white hover:bg-white/10 h-10 sm:h-12 px-6 sm:px-8 text-sm sm:text-base">
-                  Schedule Demo
+                  Contact Us
                 </Button>
               </div>
 
-              <p className="mt-4 sm:mt-6 text-white/50 text-xs sm:text-sm">No credit card required. 14-day free trial.</p>
+              <p className="mt-4 sm:mt-6 text-white/50 text-xs sm:text-sm">Need Help? Talk to an Expert: +919606457175</p>
             </div>
           </div>
         </motion.div>

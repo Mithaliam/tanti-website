@@ -1,0 +1,28 @@
+<svg id="Group_364" data-name="Group 364" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="65" height="65" viewBox="0 0 65 65">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Rectangle_315" data-name="Rectangle 315" width="65" height="65" fill="none" stroke="#a78a6a" stroke-width="3"/>
+    </clipPath>
+  </defs>
+  <line id="Line_24" data-name="Line 24" y1="32" transform="translate(48 27)" fill="none" stroke="#a78a6a" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+  <line id="Line_25" data-name="Line 25" y2="32" transform="translate(17 27)" fill="none" stroke="#a78a6a" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+  <g id="Group_359" data-name="Group 359">
+    <g id="Group_358" data-name="Group 358" clip-path="url(#clip-path)">
+      <path id="Path_381" data-name="Path 381" d="M1,29.969,6,34.6,32.25,10.27,58.5,34.6l5-4.635-10-9.27V5.635H46v8.111L32.25,1Z" transform="translate(0.25 0.159)" fill="none" stroke="#a78a6a" stroke-linejoin="round" stroke-width="3"/>
+    </g>
+  </g>
+  <g id="Group_361" data-name="Group 361">
+    <g id="Group_360" data-name="Group 360" clip-path="url(#clip-path)">
+      <path id="Path_384" data-name="Path 384" d="M24.5,25V57.445H17" transform="translate(4.25 3.969)" fill="none" stroke="#a78a6a" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" stroke-dasharray="0 4 4 4 22 4"/>
+      <path id="Path_385" data-name="Path 385" d="M29,23V57.763h7.5" transform="translate(7.25 3.651)" fill="none" stroke="#a78a6a" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" stroke-dasharray="2 4 10 4 16 0"/>
+    </g>
+  </g>
+  <rect id="Rectangle_317" data-name="Rectangle 317" width="10" height="10" transform="translate(3 38)" fill="none" stroke="#a78a6a" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+  <g id="Group_363" data-name="Group 363">
+    <g id="Group_362" data-name="Group 362" clip-path="url(#clip-path)">
+      <rect id="Rectangle_318" data-name="Rectangle 318" width="5.118" height="4.27" transform="translate(10.378 59.307)" fill="none" stroke="#a78a6a" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+      <rect id="Rectangle_319" data-name="Rectangle 319" width="5.118" height="4.27" transform="translate(49.504 59.307)" fill="none" stroke="#a78a6a" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+    </g>
+  </g>
+  <rect id="Rectangle_321" data-name="Rectangle 321" width="10" height="10" transform="translate(52 38)" fill="none" stroke="#a78a6a" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+</svg>

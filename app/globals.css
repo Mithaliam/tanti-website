@@ -2,6 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Tanti Branding Styles */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,400;1,500;1,700;1,900&display=swap');
+
+/* Tanti Color Scheme */
+:root {
+  --tanti-primary: #4066e6;
+  --tanti-secondary: #e68d40;
+  --tanti-accent: #f5c645;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;

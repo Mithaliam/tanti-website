@@ -7,8 +7,11 @@ import NavDropdown from "./NavDropdown"
 
 export default function DesktopNav() {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
-  const productItems = ["Analytics", "Automation", "Collaboration", "Security"]
-  const solutionItems = ["For Startups", "For Enterprise", "For Teams", "For Developers"]
+  const productItems = ["Residential", "Commercial", "Security", "Home Entertainment"]
+  const solutionItems = ["Lighting Automation", "BMS Control", "Energy Management", "Central Management"]
+  const companyItems = ["About Us", "Career", "Success Story", "Reviews"]
+  const supportItems = ["Support Request", "Contact"]
+  const projectItems = ["Success Stories"]
 
   // Handle escape key to close dropdowns
   useEffect(() => {
@@ -48,21 +51,29 @@ export default function DesktopNav() {
           setActiveDropdown={handleActiveDropdown}
         />
 
-        <Link 
-          href="#pricing" 
-          className="text-white/80 hover:text-white transition-colors py-2 px-1 rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-500/70 text-sm lg:text-base"
-          onMouseEnter={() => setActiveDropdown(null)}
-        >
-          Pricing
-        </Link>
+        <NavDropdown 
+          id="company"
+          label="Company" 
+          items={companyItems}
+          activeDropdown={activeDropdown}
+          setActiveDropdown={handleActiveDropdown}
+        />
 
-        <Link 
-          href="#testimonials" 
-          className="text-white/80 hover:text-white transition-colors py-2 px-1 rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-500/70 text-sm lg:text-base"
-          onMouseEnter={() => setActiveDropdown(null)}
-        >
-          Testimonials
-        </Link>
+        <NavDropdown 
+          id="support"
+          label="Support" 
+          items={supportItems}
+          activeDropdown={activeDropdown}
+          setActiveDropdown={handleActiveDropdown}
+        />
+
+        <NavDropdown 
+          id="projects"
+          label="Projects" 
+          items={projectItems}
+          activeDropdown={activeDropdown}
+          setActiveDropdown={handleActiveDropdown}
+        />
       </nav>
 
       <div 
@@ -73,12 +84,12 @@ export default function DesktopNav() {
           variant="ghost" 
           className="text-white hover:bg-white/10 focus-visible:ring-2 focus-visible:ring-amber-500/70 text-sm lg:text-base"
         >
-          Log in
+          Need Help? +919606457175
         </Button>
         <Button 
           className="bg-gradient-to-r from-red-500 to-amber-500 hover:from-red-600 hover:to-amber-600 text-white border-0 shadow-lg shadow-amber-500/20 hover:shadow-amber-500/30 transition-shadow text-sm lg:text-base px-3 lg:px-4"
         >
-          Get Started
+          Let's Talk
         </Button>
       </div>
     </>

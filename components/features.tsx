@@ -7,7 +7,7 @@ import { Zap, Users, Shield, BarChart3 } from "lucide-react"
 import { useIsMobile } from "@/hooks/use-mobile"
 
 export default function ModernFeatures() {
-  const [activeTab, setActiveTab] = useState("analytics")
+  const [activeTab, setActiveTab] = useState("residential")
   const isMobile = useIsMobile()
   const [mounted, setMounted] = useState(false)
 
@@ -18,59 +18,59 @@ export default function ModernFeatures() {
 
   const features = [
     {
-      id: "analytics",
-      icon: <BarChart3 className="h-5 w-5" />,
-      title: "Advanced Analytics",
-      description:
-        "Gain deep insights with our powerful analytics tools. Track performance, identify trends, and make data-driven decisions.",
-      benefits: [
-        "Real-time data visualization",
-        "Custom reporting dashboards",
-        "Predictive analytics with AI",
-        "Automated insights generation",
-      ],
-      image: "/images/hero1.webp",
-    },
-    {
-      id: "automation",
+      id: "residential",
       icon: <Zap className="h-5 w-5" />,
-      title: "Intelligent Automation",
+      title: "Residential Solutions",
       description:
-        "Streamline your workflows with smart automation. Reduce manual tasks and focus on what matters most.",
+        "Transform your home into a smart haven with our comprehensive residential automation solutions.",
       benefits: [
-        "Workflow automation builder",
-        "Trigger-based actions",
-        "Integration with 100+ tools",
-        "AI-powered suggestions",
+        "Wired Lighting Automation (KNX)",
+        "Wireless Lighting Automation (IoT)",
+        "Smart switches and controls",
+        "Home entertainment systems",
       ],
-      image: "https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=2070&auto=format&fit=crop",
+      image: "/tanti/residential image.jpg",
     },
     {
-      id: "collaboration",
-      icon: <Users className="h-5 w-5" />,
-      title: "Team Collaboration",
+      id: "commercial",
+      icon: <BarChart3 className="h-5 w-5" />,
+      title: "Commercial Solutions",
       description:
-        "Work seamlessly with your team in real-time. Share, edit, and collaborate on projects from anywhere.",
+        "Smart and energy efficient buildings with advanced building management systems and lighting control.",
       benefits: [
-        "Real-time document editing",
-        "Project management tools",
-        "Team chat and video calls",
-        "Permission controls",
+        "Lighting Management System (LMS)",
+        "Building Management System (BMS)",
+        "Emergency exit signage lighting",
+        "Energy optimization solutions",
       ],
-      image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070&auto=format&fit=crop",
+      image: "/tanti/commercial.jpg",
     },
     {
       id: "security",
       icon: <Shield className="h-5 w-5" />,
-      title: "Enterprise Security",
-      description: "Protect your data with enterprise-grade security. Ensure compliance and maintain privacy.",
+      title: "Security Solutions",
+      description:
+        "Comprehensive security solutions to protect your home and business with advanced surveillance and access control.",
       benefits: [
-        "End-to-end encryption",
-        "Role-based access control",
-        "Compliance monitoring",
-        "Audit logs and reporting",
+        "IP CCTV with face recognition",
+        "Intrusion alarm systems",
+        "Video door phone systems",
+        "Access control and digital locks",
       ],
-      image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=2070&auto=format&fit=crop",
+      image: "/tanti/security.jpg",
+    },
+    {
+      id: "entertainment",
+      icon: <Users className="h-5 w-5" />,
+      title: "Home Entertainment",
+      description: "Experience world-class cinema and audio solutions tailored to your needs and preferences.",
+      benefits: [
+        "Home theater systems",
+        "Zonal audio distribution",
+        "Commercial AV solutions",
+        "Conference room setups",
+      ],
+      image: "/tanti/home entertainment.jpg",
     },
   ]
 
@@ -131,13 +131,13 @@ export default function ModernFeatures() {
           transition={{ duration: 0.5 }}
           className="text-center mb-8 sm:mb-12"
         >
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3">Powerful Features</h2>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3">Our Solutions</h2>
           <p className="text-sm sm:text-base md:text-lg text-white/70 max-w-2xl mx-auto">
-            Everything you need to streamline your workflow
+            Comprehensive automation solutions for residential, commercial, and security needs
           </p>
         </motion.div>
 
-        <Tabs defaultValue="analytics" value={activeTab} onValueChange={handleTabChange} className="w-full">
+        <Tabs defaultValue="residential" value={activeTab} onValueChange={handleTabChange} className="w-full">
           <div className="flex justify-center mb-6 sm:mb-8 overflow-x-auto pb-3 sm:pb-0 scrollbar-hide">
             <TabsList className="bg-white/5 backdrop-blur-sm border border-white/10 p-1 rounded-xl flex-nowrap">
               {features.map((feature) => (

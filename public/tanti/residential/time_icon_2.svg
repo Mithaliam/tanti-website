@@ -1,0 +1,13 @@
+<svg id="Group_374" data-name="Group 374" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="65" height="65" viewBox="0 0 65 65">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Rectangle_329" data-name="Rectangle 329" width="65" height="65" fill="none" stroke="#a78a6a" stroke-width="3"/>
+    </clipPath>
+  </defs>
+  <g id="Group_373" data-name="Group 373" transform="translate(0 0)" clip-path="url(#clip-path)">
+    <ellipse id="Ellipse_31" data-name="Ellipse 31" cx="1.946" cy="1.834" rx="1.946" ry="1.834" transform="translate(30.553 28.793)" fill="none" stroke="#a78a6a" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+    <path id="Path_396" data-name="Path 396" d="M27.078,63.555l-.109-.093-7.836-6.77.052-.045,7.893-6.819v3.746H32.2c13.557,0,24.586-10.394,24.586-23.169S45.759,7.234,32.2,7.234,7.617,17.628,7.617,30.4h-.13C7.487,17.562,18.575,7.113,32.2,7.113S56.918,17.562,56.918,30.4,45.831,53.7,32.2,53.7H26.948v-3.59l-7.624,6.586,7.624,6.585v-3.59H32.2c17.134,0,31.073-13.136,31.073-29.283S49.336,1.121,32.2,1.121,1.13,14.258,1.13,30.4a28.265,28.265,0,0,0,9.1,20.706l-.092.087A28.385,28.385,0,0,1,1,30.4C1,14.191,15,1,32.2,1s31.2,13.191,31.2,29.4-14,29.4-31.2,29.4H27.078Z" transform="translate(0.297 0.223)" fill="none" stroke="#a78a6a" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+    <rect id="Rectangle_327" data-name="Rectangle 327" width="0.13" height="14.061" transform="translate(32.435 14.733)" fill="none" stroke="#a78a6a" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+    <rect id="Rectangle_328" data-name="Rectangle 328" width="9.731" height="0.122" transform="translate(34.446 30.565)" fill="none" stroke="#a78a6a" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+  </g>
+</svg>

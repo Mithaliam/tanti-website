@@ -10,50 +10,48 @@ export default function ModernPricing() {
 
   const plans = [
     {
-      name: "Starter",
-      description: "Perfect for individuals and small teams",
-      price: annual ? 29 : 39,
+      name: "Residential",
+      description: "Transform your home into a smart haven",
+      price: "Custom",
       features: [
-        "5 Team Members",
-        "10GB Storage",
-        "Basic Analytics",
-        "Email Support",
-        "2 Projects",
+        "Wired Lighting Automation (KNX)",
+        "Wireless Lighting Automation (IoT)",
+        "Smart Switches & Controls",
+        "Home Entertainment Systems",
+        "Video Door Phone",
       ],
-      cta: "Get Started",
+      cta: "Get Quote",
       popular: false,
     },
     {
-      name: "Professional",
-      description: "Ideal for growing businesses",
-      price: annual ? 79 : 99,
+      name: "Commercial",
+      description: "Smart and energy efficient buildings",
+      price: "Custom",
       features: [
-        "15 Team Members",
-        "50GB Storage",
-        "Advanced Analytics",
-        "Priority Support",
-        "API Access",
-        "Custom Integrations",
-        "Unlimited Projects",
+        "Lighting Management System (LMS)",
+        "Building Management System (BMS)",
+        "Emergency Exit Signage Lighting",
+        "Energy Optimization Solutions",
+        "Commercial AV Solutions",
+        "Conference Room Setups",
+        "24/7 Support",
       ],
-      cta: "Get Started",
+      cta: "Get Quote",
       popular: true,
     },
     {
-      name: "Enterprise",
-      description: "For large organizations with complex needs",
-      price: annual ? 149 : 199,
+      name: "Security",
+      description: "Comprehensive security solutions",
+      price: "Custom",
       features: [
-        "Unlimited Team Members",
-        "500GB Storage",
-        "Enterprise Analytics",
-        "24/7 Dedicated Support",
-        "Advanced Security",
-        "Custom Development",
-        "Onboarding Assistance",
-        "SLA Guarantee",
+        "IP CCTV with Face Recognition",
+        "Intrusion Alarm Systems",
+        "Access Control & Digital Locks",
+        "Video Door Phone Systems",
+        "Motorized Shutters",
+        "Remote Monitoring",
       ],
-      cta: "Contact Sales",
+      cta: "Get Quote",
       popular: false,
     },
   ];
@@ -82,56 +80,11 @@ export default function ModernPricing() {
             id="pricing-heading"
             className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4"
           >
-            Simple, Transparent Pricing
+            Our Service Packages
           </h2>
           <p className="text-base sm:text-lg md:text-xl text-white/70 max-w-2xl mx-auto">
-            Choose the plan that works best for your business. All plans include
-            our core features.
+            Customized automation solutions tailored to your specific needs and requirements.
           </p>
-
-          <div className="relative flex items-center justify-center mt-6 sm:mt-8">
-            <fieldset className="bg-white/5 backdrop-blur-sm border border-white/10 p-1 rounded-full">
-              <legend className="sr-only">Billing Frequency</legend>
-              <div className="relative flex">
-                <button
-                  onClick={() => setAnnual(true)}
-                  className={`relative z-10 px-4 sm:px-6 py-1.5 sm:py-2 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-white ${
-                    annual ? "text-white" : "text-white/70"
-                  }`}
-                  aria-pressed={annual}
-                  aria-label="Annual billing"
-                >
-                  Annual
-                </button>
-                <button
-                  onClick={() => setAnnual(false)}
-                  className={`relative z-10 px-4 sm:px-6 py-1.5 sm:py-2 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-white ${
-                    !annual ? "text-white" : "text-white/70"
-                  }`}
-                  aria-pressed={!annual}
-                  aria-label="Monthly billing"
-                >
-                  Monthly
-                </button>
-                <div
-                  className={`absolute top-1 left-1 ${
-                    annual ? "w-[calc(50%-12px)]" : "w-[calc(50%-3px)]"
-                  } h-[calc(100%-8px)] bg-gradient-to-r from-red-500 to-amber-500 rounded-full transition-transform duration-300 ${
-                    annual
-                      ? "transform translate-x-0"
-                      : "transform translate-x-full"
-                  }`}
-                  aria-hidden="true"
-                ></div>
-              </div>
-            </fieldset>
-
-            {annual && (
-              <div className="absolute sm:relative -bottom-8 sm:bottom-auto ml-3 bg-gradient-to-r from-red-500 to-amber-500 text-white text-xs font-bold px-2 py-1 rounded-full">
-                Save 20%
-              </div>
-            )}
-          </div>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8" role="list">

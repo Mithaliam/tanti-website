@@ -3,6 +3,7 @@
 import { useEffect, useState, useRef } from "react";
 import dynamic from "next/dynamic";
 import Hero from "@/components/hero";
+import Header from "@/components/header";
 
 // Scroll restoration component
 const ScrollRestoration = () => {
@@ -65,6 +66,14 @@ const Cta = dynamic(() => import("@/components/cta"), {
   ssr: false,
 });
 
+const TantiGallery = dynamic(() => import("@/components/tanti-gallery"), {
+  ssr: false,
+});
+
+const SuccessStories = dynamic(() => import("@/components/success-stories"), {
+  ssr: false,
+});
+
 // LazyLoad wrapper component
 function LazyLoad({ children }: { children: React.ReactNode }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -90,6 +99,7 @@ function LazyLoad({ children }: { children: React.ReactNode }) {
 export default function Home() {
   return (
     <div className="min-h-screen bg-black px-0 sm:px-4 text-white">
+      <Header />
       <ScrollRestoration />
       <Hero />
       <LazyLoad>
@@ -115,6 +125,12 @@ export default function Home() {
       </LazyLoad>
       <LazyLoad>
         <FaqSection />
+      </LazyLoad>
+      <LazyLoad>
+        <SuccessStories />
+      </LazyLoad>
+      <LazyLoad>
+        <TantiGallery />
       </LazyLoad>
       <LazyLoad>
         <Cta />
