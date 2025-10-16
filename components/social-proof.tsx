@@ -30,6 +30,8 @@ export default function SocialProof() {
       },
     },
   }
+}
+
   import { cubicBezier
 
    } from "framer-motion";
