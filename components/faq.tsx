@@ -43,11 +43,11 @@ export default function FaqSection() {
   ]
 
   return (
-    <section className="py-4 sm:py-20 md:py-24 bg-black relative overflow-hidden">
+    <section className="py-4 sm:py-20 md:py-24 relative overflow-hidden" style={{ backgroundColor: '#F5F5F0' }}>
       {/* Background elements */}
       <div className="absolute inset-0 z-0">
         <div className="absolute bottom-0 right-0 w-1/3 h-1/3 bg-amber-500/10 rounded-full blur-[100px]"></div>
-        <div className="absolute top-0 left-0 w-1/3 h-1/3 bg-red-500/10 rounded-full blur-[100px]"></div>
+        <div className="absolute top-0 left-0 w-1/3 h-1/3 bg-blue-500/10 rounded-full blur-[100px]"></div>
       </div>
 
       <div className="container mx-auto px-4 relative z-10">

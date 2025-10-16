@@ -28,13 +28,13 @@ export default function ModernHero() {
   }, [])
 
   return (
-    <section className="relative min-h-[100svh] flex items-center pt-16 sm:pt-20 overflow-hidden bg-black">
+    <section className="relative min-h-[100svh] flex items-center pt-16 sm:pt-20 overflow-hidden" style={{ backgroundColor: '#F5F5F0' }}>
       {/* Background elements */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-black via-black to-black/90"></div>
+        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-[#F5F5F0] via-[#F5F5F0] to-[#F0F0EB]"></div>
 
         {/* Animated gradient orbs - adjusted for mobile */}
-        <div className="absolute top-1/3 left-1/3 w-[300px] sm:w-[500px] h-[300px] sm:h-[500px] rounded-full bg-red-500/20 blur-[100px] animate-pulse-slow"></div>
+        <div className="absolute top-1/3 left-1/3 w-[300px] sm:w-[500px] h-[300px] sm:h-[500px] rounded-full bg-blue-500/20 blur-[100px] animate-pulse-slow"></div>
         <div className="absolute bottom-1/3 right-1/3 w-[250px] sm:w-[400px] h-[250px] sm:h-[400px] rounded-full bg-amber-500/20 blur-[100px] animate-pulse-slow delay-1000"></div>
 
         {/* Grid pattern */}
@@ -62,7 +62,7 @@ export default function ModernHero() {
               className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 sm:mb-6 leading-tight"
             >
               <span className="block">Intelligent Building</span>
-              <span className="bg-gradient-to-r from-red-500 to-amber-500 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-blue-500 to-cyan-500 bg-clip-text text-transparent">
                 Systems & LMS
               </span>
             </motion.h1>
@@ -71,7 +71,7 @@ export default function ModernHero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="text-base sm:text-lg lg:text-xl text-white/70 mb-6 sm:mb-8 max-w-xl mx-auto lg:mx-0"
+              className="text-base sm:text-lg lg:text-xl text-black mb-6 sm:mb-8 max-w-xl mx-auto lg:mx-0"
             >
               for Comfortable Living Spaces. We offer a comprehensive range of solutions to enhance your home automation experience.
             </motion.p>
@@ -82,7 +82,7 @@ export default function ModernHero() {
               transition={{ duration: 0.5, delay: 0.3 }}
               className="flex flex-col max-w-[80%] mx-auto sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start"
             >
-              <Button className="bg-gradient-to-r from-red-500 to-amber-500 hover:from-red-600 hover:to-amber-600 text-white border-0 h-10 sm:h-12 px-6 sm:px-8 text-sm sm:text-base">
+              <Button className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white border-0 h-10 sm:h-12 px-6 sm:px-8 text-sm sm:text-base">
                 Contact Us Today
                 <ArrowRight className="ml-2 h-3.5 w-3.5 sm:h-4 sm:w-4" />
               </Button>
@@ -108,8 +108,8 @@ export default function ModernHero() {
                 ))}
               </div>
               <div className="text-xs sm:text-sm">
-                <span className="text-white/70">Trusted by</span> <span className="font-bold">100+</span>{" "}
-                <span className="text-white/70">clients</span>
+                <span className="text-black/70">Trusted by</span> <span className="font-bold">100+</span>{" "}
+                <span className="text-black/70">clients</span>
               </div>
               <div className="flex items-center gap-0.5 sm:gap-1">
                 <Star className="h-3 w-3 sm:h-4 sm:w-4 fill-amber-400 text-amber-400" />
@@ -130,19 +130,23 @@ export default function ModernHero() {
               className="relative z-10"
             >
               <div className="relative">
-                <div className="absolute -inset-1 bg-gradient-to-r from-red-500 to-amber-500 rounded-2xl blur-lg opacity-70"></div>
+                <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-2xl blur-lg opacity-70"></div>
                 <div
                   ref={parallaxRef}
                   className="relative bg-black/80 backdrop-blur-sm border border-white/10 rounded-xl overflow-hidden"
                 >
                   <video
-                    src="/tanti/tanti vid.mp4"
+                    src="/tanti/tanti%20vid.mp4"
                     autoPlay
                     muted
                     loop
                     playsInline
+                    preload="auto"
                     className="w-full h-auto rounded-lg"
-                  />
+                  >
+                    <source src="/tanti/tanti%20vid.mp4" type="video/mp4" />
+                    <source src="/tanti/tanti%20vid.webm" type="video/webm" />
+                  </video>
 
                   {/* Floating UI elements - hidden on smallest screens */}
                   <motion.div

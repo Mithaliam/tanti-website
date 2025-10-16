@@ -27,10 +27,10 @@ export default function SuccessStories() {
   ]
 
   return (
-    <section className="py-12 sm:py-16 bg-black relative">
+    <section className="py-12 sm:py-16 relative" style={{ backgroundColor: '#F5F5F0' }}>
       {/* Background elements */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute top-0 left-0 w-1/3 h-1/3 bg-red-500/10 rounded-full blur-[100px]"></div>
+        <div className="absolute top-0 left-0 w-1/3 h-1/3 bg-blue-500/10 rounded-full blur-[100px]"></div>
         <div className="absolute bottom-0 right-0 w-1/3 h-1/3 bg-amber-500/10 rounded-full blur-[100px]"></div>
       </div>
 
@@ -87,7 +87,7 @@ export default function SuccessStories() {
           transition={{ duration: 0.5, delay: 0.3 }}
           className="text-center mt-8 sm:mt-12"
         >
-          <Button className="bg-gradient-to-r from-red-500 to-amber-500 hover:from-red-600 hover:to-amber-600 text-white border-0">
+          <Button className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white border-0">
             View All Success Stories
           </Button>
         </motion.div>

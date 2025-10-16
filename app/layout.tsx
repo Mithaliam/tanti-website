@@ -1,11 +1,11 @@
 import type { Metadata } from "next"
-import { Inter } from "next/font/google"
+import { Roboto } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import ModernHeader from "@/components/header"
 import ModernFooter from "@/components/footer"
 
-const inter = Inter({ subsets: ["latin"] })
+const roboto = Roboto({ subsets: ["latin"], weight: ["400", "500", "700"] })
 
 export const metadata: Metadata = {
   title: "Nova - Elevate Your Digital Experience",
@@ -42,10 +42,10 @@ export default function RootLayout({
       <head>
         {/* Add any other head tags if needed, metadata object handles common ones */}
       </head>
-      <body className={`${inter.className} bg-black text-white`}>
+      <body className={`${roboto.className} text-black`} style={{ backgroundColor: '#F5F5F0' }}>
         <ThemeProvider
           attribute="class"
-          defaultTheme="dark"
+          defaultTheme="light"
           enableSystem
           disableTransitionOnChange
         >

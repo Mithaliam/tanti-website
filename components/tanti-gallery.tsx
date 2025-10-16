@@ -42,7 +42,7 @@ export default function TantiGallery() {
   }, [items])
 
   return (
-    <section className="relative py-12 sm:py-16 bg-black">
+    <section className="relative py-12 sm:py-16" style={{ backgroundColor: '#F5F5F0' }}>
       <div className="container mx-auto px-4">
         <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 text-white">
           Tanti Portfolio

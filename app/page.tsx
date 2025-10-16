@@ -3,7 +3,6 @@
 import { useEffect, useState, useRef } from "react";
 import dynamic from "next/dynamic";
 import Hero from "@/components/hero";
-import Header from "@/components/header";
 
 // Scroll restoration component
 const ScrollRestoration = () => {
@@ -30,10 +29,6 @@ const ScrollRestoration = () => {
 };
 
 // Lazy load components
-const SocialProof = dynamic(() => import("@/components/social-proof"), {
-  ssr: false,
-});
-
 const Features = dynamic(() => import("@/components/features"), {
   ssr: false,
 });
@@ -98,13 +93,9 @@ function LazyLoad({ children }: { children: React.ReactNode }) {
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-black px-0 sm:px-4 text-white">
-      <Header />
+    <div className="min-h-screen px-0 sm:px-4 text-black" style={{ backgroundColor: '#F5F5F0' }}>
       <ScrollRestoration />
       <Hero />
-      <LazyLoad>
-        <SocialProof />
-      </LazyLoad>
       <LazyLoad>
         <HowItWorks />
       </LazyLoad>

@@ -50,7 +50,7 @@ export default function SocialProof() {
     >
       {/* Background elements */}
       <div className="absolute inset-0 z-0 opacity-50" aria-hidden="true">
-        <div className="absolute top-0 left-0 w-1/2 h-1/2 bg-red-500/10 rounded-full blur-[120px]"></div>
+        <div className="absolute top-0 left-0 w-1/2 h-1/2 bg-blue-500/10 rounded-full blur-[120px]"></div>
         <div className="absolute bottom-0 right-0 w-1/2 h-1/2 bg-amber-500/10 rounded-full blur-[120px]"></div>
         <div className="absolute inset-0 bg-[url('/images/grid.svg')] bg-repeat opacity-5"></div>
       </div>
@@ -109,7 +109,7 @@ export default function SocialProof() {
             <motion.div key={index} className="text-center h-full" variants={itemVariants}>
               <div className="relative group h-full">
                 <div 
-                  className="absolute -inset-0.5 bg-gradient-to-r from-red-500 to-amber-500 rounded-lg blur opacity-30 group-hover:opacity-60 transition duration-300"
+                  className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-lg blur opacity-30 group-hover:opacity-60 transition duration-300"
                   aria-hidden="true"
                 ></div>
                 <div 
@@ -117,7 +117,7 @@ export default function SocialProof() {
                   role="presentation"
                 >
                   <div 
-                    className="text-2xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r from-red-400 to-amber-400 bg-clip-text text-transparent mb-1 sm:mb-2 truncate"
+                    className="text-2xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent mb-1 sm:mb-2 truncate"
                     aria-hidden="true"
                   >
                     {stat.value}

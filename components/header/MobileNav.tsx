@@ -57,7 +57,7 @@ export default function MobileNav({ isOpen }: MobileNavProps) {
             Log in
           </Button>
           <Button
-            className="bg-gradient-to-r from-red-500 to-amber-500 hover:from-red-600 hover:to-amber-600 text-white border-0 h-10 shadow-lg shadow-amber-500/20 active:opacity-90"
+            className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white border-0 h-10 shadow-lg shadow-cyan-500/20 active:opacity-90"
           >
             Get Started
           </Button>

@@ -1,4 +1,5 @@
 import Link from "next/link"
+import Image from "next/image"
 import { Twitter, Facebook, Instagram, Linkedin, Github } from "lucide-react"
 
 export default function ModernFooter() {
@@ -8,15 +9,13 @@ export default function ModernFooter() {
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-12">
           <div>
             <Link href="/" className="flex items-center gap-2 mb-6">
-              <div className="relative w-10 h-10">
-                <div className="absolute inset-0 bg-gradient-to-tr from-red-500 to-amber-500 rounded-lg rotate-45 transform origin-center"></div>
-                <div className="absolute inset-[3px] bg-black rounded-lg flex items-center justify-center text-white font-bold">
-                  N
-                </div>
+              <div className="relative w-32 h-8 sm:w-40 sm:h-10">
+                <img
+                  src="/tanti-automatics-logo.png"
+                  alt="Tanti Automatics Pvt. Ltd. Logo"
+                  className="w-full h-full object-contain"
+                />
               </div>
-              <span className="text-2xl font-bold bg-gradient-to-r from-red-500 to-amber-500 bg-clip-text text-transparent">
-                Nova
-              </span>
             </Link>
             <p className="text-white/70 mb-6">
               Empowering businesses with AI-powered solutions that drive growth and efficiency.

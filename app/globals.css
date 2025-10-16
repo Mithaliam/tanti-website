@@ -10,6 +10,9 @@
   --tanti-primary: #4066e6;
   --tanti-secondary: #e68d40;
   --tanti-accent: #f5c645;
+  /* Bootstrap-like primary variables for requested nav color */
+  --bs-primary-rgb: 6, 182, 212; /* #06b6d4 */
+  --bs-bg-opacity: 1;
 }
 
 @layer base {

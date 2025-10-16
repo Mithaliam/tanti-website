@@ -2,8 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Zap, Users, Shield, BarChart3 } from "lucide-react"
+// Tabs removed in favor of a static 2x2 card grid
 import { useIsMobile } from "@/hooks/use-mobile"
 
 export default function ModernFeatures() {
@@ -19,8 +18,7 @@ export default function ModernFeatures() {
   const features = [
     {
       id: "residential",
-      icon: <Zap className="h-5 w-5" />,
-      title: "Residential Solutions",
+      title: "ABB F@H",
       description:
         "Transform your home into a smart haven with our comprehensive residential automation solutions.",
       benefits: [
@@ -29,12 +27,11 @@ export default function ModernFeatures() {
         "Smart switches and controls",
         "Home entertainment systems",
       ],
-      image: "/tanti/residential image.jpg",
+      image: "/ABB%20F%40H.jpeg",
     },
     {
       id: "commercial",
-      icon: <BarChart3 className="h-5 w-5" />,
-      title: "Commercial Solutions",
+      title: "Switching",
       description:
         "Smart and energy efficient buildings with advanced building management systems and lighting control.",
       benefits: [
@@ -43,12 +40,11 @@ export default function ModernFeatures() {
         "Emergency exit signage lighting",
         "Energy optimization solutions",
       ],
-      image: "/tanti/commercial.jpg",
+      image: "/Switching.jpg",
     },
     {
       id: "security",
-      icon: <Shield className="h-5 w-5" />,
-      title: "Security Solutions",
+      title: "Video Door Phone",
       description:
         "Comprehensive security solutions to protect your home and business with advanced surveillance and access control.",
       benefits: [
@@ -57,12 +53,11 @@ export default function ModernFeatures() {
         "Video door phone systems",
         "Access control and digital locks",
       ],
-      image: "/tanti/security.jpg",
+      image: "/video%20door%20phone.jpg",
     },
     {
       id: "entertainment",
-      icon: <Users className="h-5 w-5" />,
-      title: "Home Entertainment",
+      title: "IOT",
       description: "Experience world-class cinema and audio solutions tailored to your needs and preferences.",
       benefits: [
         "Home theater systems",
@@ -70,7 +65,7 @@ export default function ModernFeatures() {
         "Commercial AV solutions",
         "Conference room setups",
       ],
-      image: "/tanti/home entertainment.jpg",
+      image: "/IOT.jpg",
     },
   ]
 
@@ -93,33 +88,16 @@ export default function ModernFeatures() {
     },
   }
 
-  // Automatically update activeTab when a user selects a new tab
-  const handleTabChange = (value: string) => {
-    setActiveTab(value)
-    
-    // Only scroll on mobile devices - fixed scrolling UX issue
-    if (isMobile && mounted) {
-      setTimeout(() => {
-        const element = document.getElementById(`${value}-content`)
-        if (element) {
-          const yOffset = -80 // Adjust for header height
-          const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset
-          window.scrollTo({ top: y, behavior: 'smooth' })
-        }
-      }, 100)
-    }
-  }
+  // Tabs removed; keep component stable
 
   // Prepare stable dimensions for content to prevent layout shifts
-  const contentStyle = {
-    minHeight: mounted ? "400px" : "auto", // Reduced height for mobile
-  }
+  const contentStyle = { minHeight: "auto" }
 
   return (
-    <section id="features" className="py-12 px-4 sm:py-16 md:py-24 bg-black relative">
+    <section id="features" className="py-2 px-4 sm:py-3 md:py-4 relative" style={{ backgroundColor: '#F5F5F0' }}>
       {/* Background elements */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-red-500/10 rounded-full blur-[100px]"></div>
+        <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-blue-500/10 rounded-full blur-[100px]"></div>
         <div className="absolute bottom-0 left-0 w-1/3 h-1/3 bg-amber-500/10 rounded-full blur-[100px]"></div>
       </div>
 
@@ -129,99 +107,42 @@ export default function ModernFeatures() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-8 sm:mb-12"
+          className="text-center mb-0 sm:mb-1"
         >
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3">Our Solutions</h2>
-          <p className="text-sm sm:text-base md:text-lg text-white/70 max-w-2xl mx-auto">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 text-[#06b6d4]">Our Solutions</h2>
+          <p className="text-sm sm:text-base md:text-lg text-black/70 max-w-2xl mx-auto">
             Comprehensive automation solutions for residential, commercial, and security needs
           </p>
         </motion.div>
 
-        <Tabs defaultValue="residential" value={activeTab} onValueChange={handleTabChange} className="w-full">
-          <div className="flex justify-center mb-6 sm:mb-8 overflow-x-auto pb-3 sm:pb-0 scrollbar-hide">
-            <TabsList className="bg-white/5 backdrop-blur-sm border border-white/10 p-1 rounded-xl flex-nowrap">
-              {features.map((feature) => (
-                <TabsTrigger
-                  key={feature.id}
-                  value={feature.id}
-                  className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-red-500 data-[state=active]:to-amber-500 data-[state=active]:text-white rounded-lg p-2 sm:px-3 sm:py-1.5 whitespace-nowrap"
-                >
-                  <div className="flex items-center gap-1.5 sm:gap-2">
-                    <span className="flex items-center justify-center">{feature.icon}</span>
-                    <span className="hidden sm:inline text-sm md:text-base">{feature.title}</span>
+        {/* 2x2 four-card grid replacing tabs */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+          {features.slice(0, 4).map((feature, idx) => (
+            <motion.div
+              key={feature.id}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: idx * 0.05 }}
+              className="group relative"
+            >
+              <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-2xl blur-lg opacity-60 group-hover:opacity-90 transition-opacity"></div>
+              <div className="relative rounded-2xl overflow-hidden border border-gray-200 bg-white/90 shadow-lg">
+                <div className="relative h-64 sm:h-72 md:h-[360px]">
+                  <img src={feature.image} alt={feature.title} className="absolute inset-0 h-full w-full object-cover" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
+                  <div className="absolute inset-x-0 bottom-0 p-5 sm:p-6">
+                    <h3 className="text-2xl sm:text-3xl font-bold text-white drop-shadow">{feature.title}</h3>
+                    <p className="mt-1 text-white/90 max-w-xl hidden sm:block">{feature.description}</p>
+                    <button className="mt-4 inline-flex items-center justify-center rounded-lg bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 shadow-md group-hover:shadow-xl transition-all">
+                      Discover More
+                    </button>
                   </div>
-                </TabsTrigger>
-              ))}
-            </TabsList>
-          </div>
-
-          {/* Mobile feature title display - only visible on mobile */}
-          <div className="sm:hidden text-center mb-4">
-            <h3 className="text-lg font-bold">{features.find(f => f.id === activeTab)?.title}</h3>
-          </div>
-
-          <div style={contentStyle} className="relative">
-            {features.map((feature) => (
-              <TabsContent
-                key={feature.id}
-                value={feature.id}
-                className="focus-visible:outline-none focus-visible:ring-0 scroll-mt-20 absolute top-0 left-0 w-full transition-opacity"
-              >
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-center">
-                  <motion.div
-                    initial={{ opacity: 0, x: -30 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.5 }}
-                  >
-                    {/* Image shown first on mobile and a simpler feature display */}
-                    <div className="relative order-first mb-4 md:hidden min-h-[185px]">
-                      <div className="absolute -inset-1 bg-gradient-to-r from-red-500 to-amber-500 rounded-2xl blur-md opacity-70"></div>
-                      <div className="relative bg-black/80 backdrop-blur-sm border border-white/10 rounded-xl overflow-hidden p-1">
-                        <img
-                          src={feature.image || "/placeholder.svg"}
-                          alt={feature.title}
-                          className="w-full h-auto rounded-lg"
-                           
-                        />
-                      </div>
-                    </div>
-                    
-                    <p className="text-white/70 text-sm sm:text-base mb-4 mt-8 sm:mb-6">{feature.description}</p>
-
-                    {/* More simplified list for mobile */}
-                    <ul className="space-y-2 sm:space-y-3">
-                      {feature.benefits.slice(0, 3).map((benefit, index) => (
-                        <li key={index} className="flex items-center gap-2 text-sm sm:text-base">
-                          <div className="h-4 w-4 sm:h-5 sm:w-5 rounded-full bg-gradient-to-r from-red-500 to-amber-500 flex items-center justify-center text-xs font-bold">
-                            ✓
-                          </div>
-                          <span>{benefit}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </motion.div>
-
-                  {/* Desktop image view */}
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.5 }}
-                    className="relative hidden md:block"
-                  >
-                    <div className="absolute -inset-1 bg-gradient-to-r from-red-500 to-amber-500 rounded-2xl blur-lg opacity-70"></div>
-                    <div className="relative bg-black/80 backdrop-blur-sm border border-white/10 rounded-xl overflow-hidden p-1 ">
-                      <img
-                        src={feature.image || "/placeholder.svg"}
-                        alt={feature.title} 
-                        className="w-full h-auto rounded-lg"
-                      />
-                    </div>
-                  </motion.div>
                 </div>
-              </TabsContent>
-            ))}
-          </div>
-        </Tabs>
+              </div>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   )
