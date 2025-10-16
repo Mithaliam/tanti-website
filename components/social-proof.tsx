@@ -30,6 +30,9 @@ export default function SocialProof() {
       },
     },
   }
+  import { cubicBezier
+
+   } from "framer-motion";
 
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
@@ -38,7 +41,7 @@ export default function SocialProof() {
       y: 0,
       transition: {
         duration: 0.5,
-        ease: [0.16, 1, 0.3, 1],   // ✅ same as easeOut curve
+        ease: cubicBezier(0.42, 0, 0.58, 1),   // ✅ same as easeOut curve
       },
     },
   };
