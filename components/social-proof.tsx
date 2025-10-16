@@ -1,7 +1,7 @@
 "use client"
 
 import Image from "next/image"
-import { motion } from "framer-motion"
+import { motion, type Variants, cubicBezier } from "framer-motion"
 
 export default function SocialProof() {
   const companies = [
@@ -11,7 +11,7 @@ export default function SocialProof() {
     { name: "Google", logo: "https://cdn.simpleicons.org/google" },
     { name: "Figma", logo: "https://cdn.simpleicons.org/figma" },
     { name: "Stripe", logo: "https://cdn.simpleicons.org/stripe" },
-  ];
+  ]
 
   const stats = [
     { value: "10k+", label: "Active Users" },
@@ -20,7 +20,7 @@ export default function SocialProof() {
     { value: "24/7", label: "Dedicated Support" },
   ]
 
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -30,26 +30,21 @@ export default function SocialProof() {
       },
     },
   }
-}
 
-  import { cubicBezier
-
-   } from "framer-motion";
-
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
         duration: 0.5,
-        ease: cubicBezier(0.42, 0, 0.58, 1),   // ✅ same as easeOut curve
+        ease: cubicBezier(0.42, 0, 0.58, 1), // ✅ proper easing
       },
     },
-  };
+  }
 
   return (
-    <section 
+    <section
       className="relative py-12 sm:py-16 md:py-20 overflow-hidden bg-black"
       aria-labelledby="social-proof-heading"
     >
@@ -68,8 +63,15 @@ export default function SocialProof() {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          <p className="text-base sm:text-lg text-amber-400 font-medium mb-2">Trusted by industry leaders</p>
-          <h2 id="social-proof-heading" className="text-xl sm:text-2xl md:text-3xl font-bold text-white">Join thousands of satisfied customers</h2>
+          <p className="text-base sm:text-lg text-amber-400 font-medium mb-2">
+            Trusted by industry leaders
+          </p>
+          <h2
+            id="social-proof-heading"
+            className="text-xl sm:text-2xl md:text-3xl font-bold text-white"
+          >
+            Join thousands of satisfied customers
+          </h2>
         </motion.div>
 
         {/* Company logos */}
@@ -87,13 +89,12 @@ export default function SocialProof() {
               className="opacity-60 hover:opacity-100 transition-all duration-300"
               variants={itemVariants}
             >
-              {/* Use a placeholder or actual logo */}
               <div className="w-[30px] h-[30px] sm:w-[80px] sm:h-[80px] md:h-[40px] flex items-center justify-center">
-                <Image 
-                  src={company.logo} 
+                <Image
+                  src={company.logo}
                   alt={`${company.name} logo`}
-                  width={60} 
-                  height={60} 
+                  width={60}
+                  height={60}
                   className="object-contain filter brightness-0 invert"
                 />
               </div>
@@ -113,21 +114,21 @@ export default function SocialProof() {
           {stats.map((stat, index) => (
             <motion.div key={index} className="text-center h-full" variants={itemVariants}>
               <div className="relative group h-full">
-                <div 
+                <div
                   className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-lg blur opacity-30 group-hover:opacity-60 transition duration-300"
                   aria-hidden="true"
                 ></div>
-                <div 
+                <div
                   className="relative bg-black/70 backdrop-blur-sm rounded-lg p-4 sm:p-6 border border-white/10 h-full flex flex-col justify-center"
                   role="presentation"
                 >
-                  <div 
+                  <div
                     className="text-2xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent mb-1 sm:mb-2 truncate"
                     aria-hidden="true"
                   >
                     {stat.value}
                   </div>
-                  <p 
+                  <p
                     className="text-white/70 text-sm sm:text-base truncate"
                     aria-label={`${stat.value} ${stat.label}`}
                   >
