@@ -1,11 +1,11 @@
  
 ---
 
-# NOVA – Business Case Studies Template (Next.js + Tailwind CSS)
+# Tanti – Business Case Studies Template (Next.js + Tailwind CSS)
 
-**NOVA** is a professional and elegant template built with **Next.js** and **Tailwind CSS**, designed to showcase detailed business case studies, client success stories, and project highlights. Perfect for consultancies, agencies, and SaaS businesses.
+**Tanti** is a professional and elegant template built with **Next.js** and **Tailwind CSS**, designed to showcase detailed business case studies, client success stories, and project highlights. Perfect for consultancies, agencies, and SaaS businesses.
 
-🔗 **Live Demo & More Info:** [aniq-ui.com NOVA Template](https://www.aniq-ui.com/en/templates/business-case-studies-nextjs-template)
+🔗 **Live Demo & More Info:** [aniq-ui.com Tanti Template](https://www.aniq-ui.com/en/templates/business-case-studies-nextjs-template)
 
 ## 🚀 Getting Started
 

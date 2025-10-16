@@ -8,7 +8,7 @@ import ModernFooter from "@/components/footer"
 const roboto = Roboto({ subsets: ["latin"], weight: ["400", "500", "700"] })
 
 export const metadata: Metadata = {
-  title: "Nova - Elevate Your Digital Experience",
+  title: "Tanti - Elevate Your Digital Experience",
   description: "Transform how you work with our AI-powered platform. Automate workflows, gain insights, and boost productivity.",
   icons: {
     icon: "/favicon.svg",
@@ -18,14 +18,14 @@ export const metadata: Metadata = {
   manifest: "/site.webmanifest",
   generator: "Mohamed Djoudir",
   openGraph: {
-    title: "Nova - Elevate Your Digital Experience",
+    title: "Tanti - Elevate Your Digital Experience",
     description: "Transform how you work with our AI-powered platform. Automate workflows, gain insights, and boost productivity.",
     images: [
       {
         url: "/image.png",
         width: 1200,
         height: 630,
-        alt: "Nova - AI-powered platform",
+        alt: "Tanti - AI-powered platform",
       },
     ],
     type: "website",

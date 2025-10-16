@@ -3142,9 +3142,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nova@workspace:.":
+"Tanti@workspace:.":
   version: 0.0.0-use.local
-  resolution: "nova@workspace:."
+  resolution: "Tanti@workspace:."
   dependencies:
     "@emotion/is-prop-valid": "npm:latest"
     "@hookform/resolvers": "npm:^3.9.1"

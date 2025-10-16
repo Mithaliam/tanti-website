@@ -17,7 +17,7 @@ export default function BlogPreview() {
     },
     {
       title: "The Future of Remote Collaboration Tools",
-      excerpt: "See how the latest innovations in team collaboration software are making remote work more efficient than ever.",
+      excerpt: "See how the latest inTantitions in team collaboration software are making remote work more efficient than ever.",
       image: "https://images.unsplash.com/photo-1553877522-43269d4ea984?q=80&w=2070&auto=format&fit=crop",
       date: "April 28, 2023",
       readTime: "4 min read",
