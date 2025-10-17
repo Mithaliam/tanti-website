@@ -12,8 +12,47 @@ type MobileNavProps = {
 
 export default function MobileNav({ isOpen }: MobileNavProps) {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
-  const productItems = ["Analytics", "Automation", "Collaboration", "Security"]
-  const solutionItems = ["For Startups", "For Enterprise", "For Teams", "For Developers"]
+  const productItems = ["Residential", "Commercial", "Security", "Home Entertainment"]
+  const solutionItems = [
+    "Residential",
+    "Commercial", 
+    "Security",
+    "Home Entertainment",
+    "Commercial AV",
+    "Energy Management",
+    "Central Management Server",
+  ]
+  // Sub-items to show on hover inside Solutions dropdown
+  const solutionSubItems: Record<string, string[]> = {
+    Residential: [
+      "Wired Lighting Automation",
+      "Wireless Lighting Automation",
+    ],
+    Commercial: [
+      "Wired Lighting Automation", 
+      "Wireless Lighting Automation",
+    ],
+    Security: [
+      "CCTV & Surveillance",
+      "Access Control",
+    ],
+    "Home Entertainment": [
+      "Multi-room Audio",
+      "Home Theater",
+    ],
+    "Commercial AV": [
+      "Conference Solutions",
+      "Digital Signage",
+    ],
+    "Energy Management": [
+      "Smart Meters",
+      "Energy Analytics",
+    ],
+    "Central Management Server": [
+      "On-Prem Server",
+      "Cloud Server",
+    ],
+  }
   
   return (
     <div 
@@ -39,6 +78,7 @@ export default function MobileNav({ isOpen }: MobileNavProps) {
           id="mobileSolutions"
           label="Solutions" 
           items={solutionItems}
+          subItems={solutionSubItems}
           isMobile={true}
           activeDropdown={activeDropdown}
           setActiveDropdown={setActiveDropdown}

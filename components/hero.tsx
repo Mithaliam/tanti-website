@@ -28,31 +28,40 @@ export default function ModernHero() {
   }, [])
 
   return (
-    <section className="relative min-h-[100svh] flex items-center pt-16 sm:pt-20 overflow-hidden" style={{ backgroundColor: '#F5F5F0' }}>
-      {/* Background elements */}
+    <section className="relative min-h-[100svh] flex items-center overflow-hidden">
+      {/* Background video */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-[#F5F5F0] via-[#F5F5F0] to-[#F0F0EB]"></div>
-
-        {/* Animated gradient orbs - adjusted for mobile */}
-        <div className="absolute top-1/3 left-1/3 w-[300px] sm:w-[500px] h-[300px] sm:h-[500px] rounded-full bg-blue-500/20 blur-[100px] animate-pulse-slow"></div>
-        <div className="absolute bottom-1/3 right-1/3 w-[250px] sm:w-[400px] h-[250px] sm:h-[400px] rounded-full bg-amber-500/20 blur-[100px] animate-pulse-slow delay-1000"></div>
-
-        {/* Grid pattern */}
-        <div className="absolute inset-0 bg-[url('/images/grid.svg')] bg-repeat opacity-10"></div>
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          className="absolute inset-0 w-full h-full object-cover"
+        >
+          <source src="/tanti home background.mp4" type="video/mp4" />
+          <source src="/tanti web background.mp4" type="video/mp4" />
+        </video>
+        
+        {/* Dark overlay for better text readability */}
+        <div className="absolute inset-0 bg-black/40"></div>
+        
+        {/* Subtle gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/30"></div>
       </div>
 
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12 py-8 sm:py-0">
+      <div className="container mx-auto px-4 relative z-10 w-full">
+        <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12 py-2 sm:py-0">
           {/* Hero content */}
-          <div className="flex-1 text-center lg:text-left">
+          <div className="flex-1 text-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-3 sm:px-4 py-1.5 sm:py-2 rounded-full mb-4 sm:mb-6 text-xs sm:text-sm"
+              className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm px-3 sm:px-4 py-1.5 sm:py-2 rounded-full mb-4 sm:mb-6 text-xs sm:text-sm"
             >
               <Sparkles className="h-3 w-3 sm:h-4 sm:w-4 text-amber-400" />
-              <span className="font-medium">Your one-stop home automation experience partner</span>
+              <span className="font-medium text-white">The Future of Living, Wired Today.</span>
             </motion.div>
 
             <motion.h1
@@ -61,8 +70,8 @@ export default function ModernHero() {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 sm:mb-6 leading-tight"
             >
-              <span className="block">Intelligent Building</span>
-              <span className="bg-gradient-to-r from-blue-500 to-cyan-500 bg-clip-text text-transparent">
+              <span className="block text-white">Intelligent Building</span>
+              <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
                 Systems & LMS
               </span>
             </motion.h1>
@@ -71,7 +80,7 @@ export default function ModernHero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="text-base sm:text-lg lg:text-xl text-black mb-6 sm:mb-8 max-w-xl mx-auto lg:mx-0"
+              className="text-base sm:text-lg lg:text-xl text-white/90 mb-6 sm:mb-8 max-w-xl mx-auto"
             >
               for Comfortable Living Spaces. We offer a comprehensive range of solutions to enhance your home automation experience.
             </motion.p>
@@ -80,106 +89,21 @@ export default function ModernHero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
-              className="flex flex-col max-w-[80%] mx-auto sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start"
+              className="flex flex-col max-w-[80%] mx-auto sm:flex-row gap-3 sm:gap-4 justify-center"
             >
               <Button className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white border-0 h-10 sm:h-12 px-6 sm:px-8 text-sm sm:text-base">
                 Contact Us Today
                 <ArrowRight className="ml-2 h-3.5 w-3.5 sm:h-4 sm:w-4" />
               </Button>
-              <Button variant="outline" className="border-white/20 text-white hover:bg-white/10 h-10 sm:h-12 px-6 sm:px-8 text-sm sm:text-base">
+              <Button className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white border-0 h-10 sm:h-12 px-6 sm:px-8 text-sm sm:text-base">
                 Know More
+                <ArrowRight className="ml-2 h-3.5 w-3.5 sm:h-4 sm:w-4" />
               </Button>
             </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-              className="mt-6 sm:mt-8 flex items-center justify-center lg:justify-start gap-2 sm:gap-4 flex-wrap sm:flex-nowrap"
-            >
-              <div className="flex -space-x-2">
-                {[1, 2, 3, 4].map((i) => (
-                  <div
-                    key={i}
-                    className="w-6 h-6 sm:w-8 sm:h-8 rounded-full border-2 border-black bg-gray-800 flex items-center justify-center text-xs"
-                  >
-                    {i}
-                  </div>
-                ))}
-              </div>
-              <div className="text-xs sm:text-sm">
-                <span className="text-black/70">Trusted by</span> <span className="font-bold">100+</span>{" "}
-                <span className="text-black/70">clients</span>
-              </div>
-              <div className="flex items-center gap-0.5 sm:gap-1">
-                <Star className="h-3 w-3 sm:h-4 sm:w-4 fill-amber-400 text-amber-400" />
-                <Star className="h-3 w-3 sm:h-4 sm:w-4 fill-amber-400 text-amber-400" />
-                <Star className="h-3 w-3 sm:h-4 sm:w-4 fill-amber-400 text-amber-400" />
-                <Star className="h-3 w-3 sm:h-4 sm:w-4 fill-amber-400 text-amber-400" />
-                <Star className="h-3 w-3 sm:h-4 sm:w-4 fill-amber-400 text-amber-400" />
-              </div>
-            </motion.div>
+            {/* Removed trust/ratings strip as requested */}
           </div>
 
-          {/* Hero image */}
-          <div className="flex-1 relative mt-8 lg:mt-0 max-w-[90%] sm:max-w-[80%] md:max-w-[70%] lg:max-w-full mx-auto">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.7, delay: 0.2 }}
-              className="relative z-10"
-            >
-              <div className="relative">
-                <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-2xl blur-lg opacity-70"></div>
-                <div
-                  ref={parallaxRef}
-                  className="relative bg-black/80 backdrop-blur-sm border border-white/10 rounded-xl overflow-hidden"
-                >
-                  <video
-                    src="/tanti/tanti%20vid.mp4"
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    preload="auto"
-                    className="w-full h-auto rounded-lg"
-                  >
-                    <source src="/tanti/tanti%20vid.mp4" type="video/mp4" />
-                    <source src="/tanti/tanti%20vid.webm" type="video/webm" />
-                  </video>
-
-                  {/* Floating UI elements - hidden on smallest screens */}
-                  <motion.div
-                    initial={{ y: 20, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{ delay: 0.6, duration: 0.5 }}
-                    className="absolute top-2 sm:top-4 right-2 sm:right-4 bg-black/50 backdrop-blur-md border border-white/10 rounded-lg p-2 sm:p-3 shadow-lg hidden xs:flex"
-                  >
-                    <div className="flex items-center gap-1 sm:gap-2">
-                      <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-green-500"></div>
-                      <span className="text-xs sm:text-sm font-medium">System Online</span>
-                    </div>
-                  </motion.div>
-
-                  <motion.div
-                    initial={{ y: 20, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{ delay: 0.8, duration: 0.5 }}
-                    className="absolute bottom-2 sm:bottom-4 left-2 sm:left-4 bg-black/50 backdrop-blur-md border border-white/10 rounded-lg p-2 sm:p-3 shadow-lg hidden xs:flex"
-                  >
-                    <div className="flex items-center gap-1 sm:gap-2">
-                      <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-amber-500 animate-pulse"></div>
-                      <span className="text-xs">Processing data...</span>
-                    </div>
-                  </motion.div>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Decorative elements - reduced on mobile */}
-            <div className="absolute -top-5 sm:-top-10 -right-5 sm:-right-10 w-10 h-10 sm:w-20 sm:h-20 border border-white/10 rounded-full hidden sm:block"></div>
-            <div className="absolute -bottom-3 sm:-bottom-5 -left-3 sm:-left-5 w-6 h-6 sm:w-10 sm:h-10 border border-white/10 rounded-full hidden sm:block"></div>
-          </div>
         </div>
       </div>
     </section>

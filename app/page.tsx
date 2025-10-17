@@ -3,6 +3,7 @@
 import { useEffect, useState, useRef } from "react";
 import dynamic from "next/dynamic";
 import Hero from "@/components/hero";
+import ErrorBoundary from "@/components/error-boundary";
 
 // Scroll restoration component
 const ScrollRestoration = () => {
@@ -28,45 +29,50 @@ const ScrollRestoration = () => {
   return null;
 };
 
-// Lazy load components
+// Lazy load components with proper error handling
 const Features = dynamic(() => import("@/components/features"), {
   ssr: false,
+  loading: () => <div className="h-96 bg-gray-100 animate-pulse rounded-lg" />
 });
 
 const HowItWorks = dynamic(() => import("@/components/how-it-works"), {
   ssr: false,
+  loading: () => <div className="h-96 bg-gray-100 animate-pulse rounded-lg" />
 });
 
 const Testimonials = dynamic(() => import("@/components/testimonials"), {
   ssr: false,
+  loading: () => <div className="h-96 bg-gray-100 animate-pulse rounded-lg" />
 });
 
 const Pricing = dynamic(() => import("@/components/pricing"), {
   ssr: false,
+  loading: () => <div className="h-96 bg-gray-100 animate-pulse rounded-lg" />
 });
 
 const Integrations = dynamic(() => import("@/components/integrations"), {
   ssr: false,
+  loading: () => <div className="h-96 bg-gray-100 animate-pulse rounded-lg" />
 });
 
 const BlogPreview = dynamic(() => import("@/components/blog-preview"), {
   ssr: false,
+  loading: () => <div className="h-96 bg-gray-100 animate-pulse rounded-lg" />
 });
 
 const FaqSection = dynamic(() => import("@/components/faq"), {
   ssr: false,
+  loading: () => <div className="h-96 bg-gray-100 animate-pulse rounded-lg" />
 });
 
 const Cta = dynamic(() => import("@/components/cta"), {
   ssr: false,
+  loading: () => <div className="h-96 bg-gray-100 animate-pulse rounded-lg" />
 });
 
 const TantiGallery = dynamic(() => import("@/components/tanti-gallery"), {
   ssr: false,
-});
-
-const SuccessStories = dynamic(() => import("@/components/success-stories"), {
-  ssr: false,
+  loading: () => <div className="h-96 bg-gray-100 animate-pulse rounded-lg" />
 });
 
 // LazyLoad wrapper component
@@ -96,36 +102,51 @@ export default function Home() {
     <div className="min-h-screen px-0 sm:px-4 text-black" style={{ backgroundColor: '#F5F5F0' }}>
       <ScrollRestoration />
       <Hero />
-      <LazyLoad>
-        <HowItWorks />
-      </LazyLoad>
-      <LazyLoad>
-        <Features />
-      </LazyLoad>
-      <LazyLoad>
-        <Integrations />
-      </LazyLoad>
-      <LazyLoad>
-        <Testimonials />
-      </LazyLoad>
-      <LazyLoad>
-        <BlogPreview />
-      </LazyLoad>
-      <LazyLoad>
-        <Pricing />
-      </LazyLoad>
-      <LazyLoad>
-        <FaqSection />
-      </LazyLoad>
-      <LazyLoad>
-        <SuccessStories />
-      </LazyLoad>
-      <LazyLoad>
-        <TantiGallery />
-      </LazyLoad>
-      <LazyLoad>
-        <Cta />
-      </LazyLoad>
+      <ErrorBoundary>
+        <LazyLoad>
+          <HowItWorks />
+        </LazyLoad>
+      </ErrorBoundary>
+      <ErrorBoundary>
+        <LazyLoad>
+          <Features />
+        </LazyLoad>
+      </ErrorBoundary>
+      <ErrorBoundary>
+        <LazyLoad>
+          <Integrations />
+        </LazyLoad>
+      </ErrorBoundary>
+      <ErrorBoundary>
+        <LazyLoad>
+          <Testimonials />
+        </LazyLoad>
+      </ErrorBoundary>
+      <ErrorBoundary>
+        <LazyLoad>
+          <BlogPreview />
+        </LazyLoad>
+      </ErrorBoundary>
+      <ErrorBoundary>
+        <LazyLoad>
+          <Pricing />
+        </LazyLoad>
+      </ErrorBoundary>
+      <ErrorBoundary>
+        <LazyLoad>
+          <FaqSection />
+        </LazyLoad>
+      </ErrorBoundary>
+      <ErrorBoundary>
+        <LazyLoad>
+          <TantiGallery />
+        </LazyLoad>
+      </ErrorBoundary>
+      <ErrorBoundary>
+        <LazyLoad>
+          <Cta />
+        </LazyLoad>
+      </ErrorBoundary>
     </div>
   );
 }

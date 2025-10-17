@@ -2,32 +2,34 @@
 
 import { motion } from "framer-motion"
 import Image from "next/image"
+import { Button } from "@/components/ui/button"
 
 export default function Integrations() {
-  // These would typically be actual logos in a real implementation
-  const integrations = [
-    { name: "Slack", category: "Communication", logo: "https://cdn.simpleicons.org/slack" },
-    { name: "GitHub", category: "Development", logo: "https://cdn.simpleicons.org/github" },
-    { name: "Notion", category: "Productivity", logo: "https://cdn.simpleicons.org/notion" },
-    { name: "Google", category: "Workspace", logo: "https://cdn.simpleicons.org/google" },
-    { name: "Figma", category: "Design", logo: "https://cdn.simpleicons.org/figma" },
-    { name: "Salesforce", category: "CRM", logo: "https://cdn.simpleicons.org/salesforce" },
-    { name: "Zapier", category: "Automation", logo: "https://cdn.simpleicons.org/zapier" },
-    { name: "Stripe", category: "Payments", logo: "https://cdn.simpleicons.org/stripe" },
-    { name: "Hubspot", category: "Marketing", logo: "https://cdn.simpleicons.org/hubspot" },
-    { name: "Zoom", category: "Meetings", logo: "https://cdn.simpleicons.org/zoom" },
-    { name: "Jira", category: "Project Management", logo: "https://cdn.simpleicons.org/jira" },
-    { name: "Zendesk", category: "Support", logo: "https://cdn.simpleicons.org/zendesk" },
-  ];
+  const stories = [
+    {
+      title: "ABB AIC",
+      location: "Bengaluru",
+      image: "/tanti/ABB_AIC/ABB_AIC_Cover.jpg",
+      description: "Complete KNX automation system for luxury residential project"
+    },
+    {
+      title: "Javaji",
+      location: "Mysore", 
+      image: "/tanti/Javaji/Javaji_cover.jpg",
+      description: "Smart home automation with advanced switching solutions"
+    },
+    {
+      title: "Shivakumar",
+      location: "Tumkur",
+      image: "/tanti/Shivakumar/Shivakumar_Cover.jpg", 
+      description: "Video door phone and security system installation"
+    }
+  ]
 
   return (
-    <section 
-      className="py-12 sm:py-16 md:py-24 relative overflow-hidden"
-      style={{ backgroundColor: '#F5F5F0' }}
-      aria-labelledby="integrations-heading"
-    >
+    <section className="py-12 sm:py-16 relative" style={{ backgroundColor: '#F5F5F0' }}>
       {/* Background elements */}
-      <div className="absolute inset-0 z-0" aria-hidden="true">
+      <div className="absolute inset-0 z-0">
         <div className="absolute top-0 left-0 w-1/3 h-1/3 bg-blue-500/10 rounded-full blur-[100px]"></div>
         <div className="absolute bottom-0 right-0 w-1/3 h-1/3 bg-amber-500/10 rounded-full blur-[100px]"></div>
       </div>
@@ -38,47 +40,42 @@ export default function Integrations() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-8 sm:mb-10 md:mb-16"
+          className="text-center mb-8 sm:mb-12"
         >
-          <h2 id="integrations-heading" className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4">Seamless Integrations</h2>
-          <p className="text-base sm:text-lg text-white/70 max-w-2xl mx-auto">
-            Connect with your favorite tools and services
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 text-[#06b6d4]">Success Stories</h2>
+          <p className="text-sm sm:text-base md:text-lg text-black/70 max-w-2xl mx-auto">
+            Discover how we've transformed homes and businesses with our automation solutions
           </p>
         </motion.div>
 
-        {/* Simplified grid for mobile */}
-        <div 
-          className="grid grid-cols-3 gap-2 sm:grid-cols-4 md:grid-cols-6 sm:gap-4"
-          role="list"
-          aria-label="Available integrations"
-        >
-          {integrations.map((integration, index) => (
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+          {stories.map((story, index) => (
             <motion.div
-              key={index}
+              key={story.title}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.3, delay: index * 0.05 }}
-              className="group"
-              role="listitem"
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="group relative transform transition-all duration-300 hover:-translate-y-1 hover:scale-[1.02]"
             >
-              <div 
-                className="bg-white/5 hover:bg-white/10 backdrop-blur-sm border border-white/10 rounded-lg p-2 sm:p-3 md:p-4 flex flex-col items-center justify-center h-full transition-colors focus-within:ring-2 focus-within:ring-white"
-                tabIndex={0}
-              >
-                <div 
-                  className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-r from-blue-500/20 to-cyan-500/20 flex items-center justify-center mb-1 sm:mb-2"
-                  aria-hidden="true"
-                >
-                  <img 
-                    src={integration.logo} 
-                    alt=""
-                    className="w-4 h-4 sm:w-5 sm:h-5 object-contain filter brightness-0 invert"
+              <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-xl blur-sm opacity-70 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div className="relative overflow-hidden rounded-xl bg-white/90 border border-gray-200 backdrop-blur-sm shadow-lg group-hover:shadow-xl h-full flex flex-col">
+                <div className="aspect-[4/3] relative overflow-hidden">
+                  <Image
+                    src={story.image}
+                    alt={story.title}
+                    fill
+                    className="object-cover transition-transform duration-300 group-hover:scale-105"
+                    unoptimized
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
                 </div>
-                <h3 className="font-medium text-center text-xs sm:text-sm">{integration.name}</h3>
-                {/* Remove category text on mobile */}
-                <p className="hidden sm:block text-xs text-white/50 mt-0.5" aria-label={`${integration.category} integration`}>{integration.category}</p>
+                
+                <div className="p-4 sm:p-6 flex flex-col flex-grow">
+                  <h3 className="text-lg sm:text-xl font-bold mb-1">{story.title}</h3>
+                  <p className="text-amber-400 mb-2">{story.location}</p>
+                  <p className="text-black text-sm sm:text-base flex-grow">{story.description}</p>
+                </div>
               </div>
             </motion.div>
           ))}
@@ -89,18 +86,11 @@ export default function Integrations() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="text-center mt-6 sm:mt-8"
+          className="text-center mt-8 sm:mt-12"
         >
-          <p className="text-xs sm:text-sm text-white/70">
-            Don't see what you need? {" "}
-            <a 
-              href="#contact" 
-              className="text-amber-400 hover:text-amber-300 underline underline-offset-2 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:ring-offset-2 focus:ring-offset-black"
-              aria-label="Request a custom integration"
-            >
-              Request an integration
-            </a>
-          </p>
+          <Button className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white border-0">
+            View All Success Stories
+          </Button>
         </motion.div>
       </div>
     </section>

@@ -132,7 +132,7 @@ export default function HowItWorks() {
                   <h3 className="text-lg sm:text-xl font-bold mb-2 text-black">
                     {step.title}
                   </h3>
-                  <p className="text-sm sm:text-base text-black/70 mb-4 flex-grow">
+                  <p className="text-sm sm:text-base text-black mb-4 flex-grow">
                     {step.description}
                   </p>
 
@@ -181,7 +181,7 @@ export default function HowItWorks() {
                     <h3 className="text-base font-bold mb-1 text-black">
                       {step.title}
                     </h3>
-                    <p className="text-xs text-black/70">
+                    <p className="text-xs text-black">
                       {step.description}
                     </p>
                   </div>

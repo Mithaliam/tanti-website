@@ -20,6 +20,11 @@ const hashOnlyIdent = (context, _, exportName) =>
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  // Add better error handling
+  onDemandEntries: {
+    maxInactiveAge: 25 * 1000,
+    pagesBufferLength: 2,
+  },
   // Add image optimization configuration
   images: {
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048],
@@ -70,6 +75,12 @@ const nextConfig = {
             moduleLoader.options.modules.getLocalIdent = hashOnlyIdent;
         });
       });
+
+    // Fix intermittent ENOENT errors from webpack PackFileCacheStrategy on Windows
+    // by disabling filesystem cache in dev (use in-memory instead)
+    if (dev) {
+      config.cache = { type: 'memory' };
+    }
 
     return config;
   },

@@ -8,7 +8,46 @@ import NavDropdown from "./NavDropdown"
 export default function DesktopNav() {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
   const productItems = ["Residential", "Commercial", "Security", "Home Entertainment"]
-  const solutionItems = ["Lighting Automation", "BMS Control", "Energy Management", "Central Management"]
+  const solutionItems = [
+    "Residential",
+    "Commercial",
+    "Security",
+    "Home Entertainment",
+    "Commercial AV",
+    "Energy Management",
+    "Central Management Server",
+  ]
+  // Sub-items to show on hover inside Solutions dropdown
+  const solutionSubItems: Record<string, string[]> = {
+    Residential: [
+      "Wired Lighting Automation",
+      "Wireless Lighting Automation",
+    ],
+    Commercial: [
+      "Wired Lighting Automation",
+      "Wireless Lighting Automation",
+    ],
+    Security: [
+      "CCTV & Surveillance",
+      "Access Control",
+    ],
+    "Home Entertainment": [
+      "Multi-room Audio",
+      "Home Theater",
+    ],
+    "Commercial AV": [
+      "Conference Solutions",
+      "Digital Signage",
+    ],
+    "Energy Management": [
+      "Smart Meters",
+      "Energy Analytics",
+    ],
+    "Central Management Server": [
+      "On-Prem Server",
+      "Cloud Server",
+    ],
+  }
   const companyItems = ["About Us", "Career", "Success Story", "Reviews"]
   const supportItems = ["Support Request", "Contact"]
   const projectItems = ["Success Stories"]
@@ -49,6 +88,7 @@ export default function DesktopNav() {
           items={solutionItems}
           activeDropdown={activeDropdown}
           setActiveDropdown={handleActiveDropdown}
+          subItems={solutionSubItems}
         />
 
         <NavDropdown 
