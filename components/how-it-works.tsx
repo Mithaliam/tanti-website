@@ -6,10 +6,12 @@ import Image from "next/image";
 import useEmblaCarousel from "embla-carousel-react";
 import { ArrowRight } from "lucide-react";
 import { Roboto } from "next/font/google";
+import { useRouter } from "next/navigation";
 
 const roboto = Roboto({ subsets: ["latin"], weight: ["400", "500", "700"] });
 
 export default function HowItWorks() {
+  const router = useRouter();
   const [emblaRef, emblaApi] = useEmblaCarousel({
     loop: false,
     align: "start",
@@ -70,6 +72,17 @@ export default function HowItWorks() {
   // Navigation helper
   const scrollTo = (index: number) => emblaApi?.scrollTo(index);
 
+  // Handle card click
+  const handleCardClick = (step: any) => {
+    if (step.title === "Residential") {
+      router.push("/residential");
+    } else if (step.title === "Commercial") {
+      router.push("/commercial");
+    } else if (step.title === "Solar") {
+      router.push("/solar");
+    }
+  };
+
   return (
     <section className="py-2 sm:py-3 md:py-4 relative overflow-hidden" style={{ backgroundColor: '#F5F5F0' }}>
       {/* Background elements */}
@@ -107,7 +120,10 @@ export default function HowItWorks() {
               className="group relative h-full"
             >
               <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-xl blur-sm opacity-70 group-hover:opacity-100 transition-opacity duration-300"></div>
-              <div className={`relative bg-white/90 backdrop-blur-sm border border-gray-200 rounded-lg overflow-hidden h-full flex flex-col shadow-lg transition-transform duration-300 ease-out group-hover:scale-[1.02] group-hover:-translate-y-1 group-hover:shadow-2xl ${roboto.className}`}>
+              <div 
+                className={`relative bg-white/90 backdrop-blur-sm border border-gray-200 rounded-lg overflow-hidden h-full flex flex-col shadow-lg transition-transform duration-300 ease-out group-hover:scale-[1.02] group-hover:-translate-y-1 group-hover:shadow-2xl ${roboto.className} ${step.title === "Residential" || step.title === "Commercial" || step.title === "Solar" ? "cursor-pointer" : ""}`}
+                onClick={() => handleCardClick(step)}
+              >
                 <div className="relative h-40 sm:h-48 overflow-hidden">
                   <img
                     src={`${step.image}?v=${assetVersion}`}
@@ -155,7 +171,8 @@ export default function HowItWorks() {
               {steps.map((step, index) => (
                 <div
                   key={index}
-                  className="flex-[0_0_85%] min-w-0 ml-4 first:ml-4"
+                  className={`flex-[0_0_85%] min-w-0 ml-4 first:ml-4 ${step.title === "Residential" || step.title === "Commercial" || step.title === "Solar" ? "cursor-pointer" : ""}`}
+                  onClick={() => handleCardClick(step)}
                 >
                   <div className="relative h-32 overflow-hidden">
                     <img

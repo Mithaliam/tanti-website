@@ -45,32 +45,7 @@ const Testimonials = dynamic(() => import("@/components/testimonials"), {
   loading: () => <div className="h-96 bg-gray-100 animate-pulse rounded-lg" />
 });
 
-const Pricing = dynamic(() => import("@/components/pricing"), {
-  ssr: false,
-  loading: () => <div className="h-96 bg-gray-100 animate-pulse rounded-lg" />
-});
-
 const Integrations = dynamic(() => import("@/components/integrations"), {
-  ssr: false,
-  loading: () => <div className="h-96 bg-gray-100 animate-pulse rounded-lg" />
-});
-
-const BlogPreview = dynamic(() => import("@/components/blog-preview"), {
-  ssr: false,
-  loading: () => <div className="h-96 bg-gray-100 animate-pulse rounded-lg" />
-});
-
-const FaqSection = dynamic(() => import("@/components/faq"), {
-  ssr: false,
-  loading: () => <div className="h-96 bg-gray-100 animate-pulse rounded-lg" />
-});
-
-const Cta = dynamic(() => import("@/components/cta"), {
-  ssr: false,
-  loading: () => <div className="h-96 bg-gray-100 animate-pulse rounded-lg" />
-});
-
-const TantiGallery = dynamic(() => import("@/components/tanti-gallery"), {
   ssr: false,
   loading: () => <div className="h-96 bg-gray-100 animate-pulse rounded-lg" />
 });
@@ -120,31 +95,6 @@ export default function Home() {
       <ErrorBoundary>
         <LazyLoad>
           <Testimonials />
-        </LazyLoad>
-      </ErrorBoundary>
-      <ErrorBoundary>
-        <LazyLoad>
-          <BlogPreview />
-        </LazyLoad>
-      </ErrorBoundary>
-      <ErrorBoundary>
-        <LazyLoad>
-          <Pricing />
-        </LazyLoad>
-      </ErrorBoundary>
-      <ErrorBoundary>
-        <LazyLoad>
-          <FaqSection />
-        </LazyLoad>
-      </ErrorBoundary>
-      <ErrorBoundary>
-        <LazyLoad>
-          <TantiGallery />
-        </LazyLoad>
-      </ErrorBoundary>
-      <ErrorBoundary>
-        <LazyLoad>
-          <Cta />
         </LazyLoad>
       </ErrorBoundary>
     </div>

@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Load styles for the GSAP roof-structure stack */
+@import "../components/SolarSections.css";
+
 /* Tanti Branding Styles */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,400;1,500;1,700;1,900&display=swap');
 
@@ -67,7 +70,7 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-white text-foreground;
     font-family: Arial, Helvetica, sans-serif;
   }
 }
@@ -206,6 +209,20 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Prevent horizontal scroll on all pages except solutions */
+body {
+  overflow-x: hidden;
+}
+
+/* Allow horizontal scroll only on solutions page */
+main {
+  overflow-x: hidden;
+}
+
+.solutions-page-container {
+  overflow-x: auto !important;
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
@@ -237,4 +254,125 @@ html {
 
 .scrollbar-hide::-webkit-scrollbar {
   display: none;  /* Chrome, Safari and Opera */
+}
+
+/* Smooth scrolling for mobile information cards */
+.mobile-scroll-container {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch; /* iOS smooth scrolling */
+}
+
+/* Custom scrollbar for mobile cards when needed */
+.mobile-scroll-container::-webkit-scrollbar {
+  width: 4px;
+}
+
+.mobile-scroll-container::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+}
+
+.mobile-scroll-container::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 2px;
+}
+
+/* Hide Next.js development indicators specifically */
+[data-nextjs-toast],
+[data-nextjs-dialog],
+[data-nextjs-portal],
+.nextjs-toast,
+.nextjs-dialog,
+.nextjs-portal {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Hide Next.js development overlay and error boundaries */
+div[data-nextjs-scroll-focus-boundary],
+div[data-nextjs-portal],
+div[data-nextjs-dialog-overlay] {
+  display: none !important;
+}
+
+/* Hide specific Next.js development UI elements */
+div[style*="position: fixed"][style*="z-index: 9999"],
+div[style*="position: fixed"][style*="z-index: 10000"],
+div[style*="position: fixed"][style*="z-index: 2147483647"] {
+  display: none !important;
+}
+
+/* Hide circular floating elements that might be the N icon */
+div[style*="border-radius: 50%"][style*="position: fixed"],
+div[class*="rounded-full"][style*="position: fixed"] {
+  display: none !important;
+}
+
+/* Custom scrollbar for KNX information cards */
+.scrollbar-thin {
+  scrollbar-width: thin;
+}
+
+.scrollbar-thin::-webkit-scrollbar {
+  width: 6px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* Horizontal scroll snap styles */
+.snap-x {
+  scroll-snap-type: x mandatory;
+}
+
+.snap-center {
+  scroll-snap-align: center;
+}
+
+.scroll-smooth {
+  scroll-behavior: smooth;
+}
+
+/* Force horizontal scrolling */
+.overflow-x-auto {
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+}
+
+/* Hide scrollbars but keep functionality */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Ensure scroll snap works */
+.snap-x {
+  scroll-snap-type: x mandatory;
+}
+
+.snap-center {
+  scroll-snap-align: center;
+}
+
+.scroll-smooth {
+  scroll-behavior: smooth;
 }

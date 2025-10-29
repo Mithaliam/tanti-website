@@ -1,9 +1,7 @@
 "use client"
 
-import { useState } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import NavDropdown from "./NavDropdown"
 import { cn } from "@/lib/utils"
 
 type MobileNavProps = {
@@ -11,48 +9,6 @@ type MobileNavProps = {
 }
 
 export default function MobileNav({ isOpen }: MobileNavProps) {
-  const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
-  const productItems = ["Residential", "Commercial", "Security", "Home Entertainment"]
-  const solutionItems = [
-    "Residential",
-    "Commercial", 
-    "Security",
-    "Home Entertainment",
-    "Commercial AV",
-    "Energy Management",
-    "Central Management Server",
-  ]
-  // Sub-items to show on hover inside Solutions dropdown
-  const solutionSubItems: Record<string, string[]> = {
-    Residential: [
-      "Wired Lighting Automation",
-      "Wireless Lighting Automation",
-    ],
-    Commercial: [
-      "Wired Lighting Automation", 
-      "Wireless Lighting Automation",
-    ],
-    Security: [
-      "CCTV & Surveillance",
-      "Access Control",
-    ],
-    "Home Entertainment": [
-      "Multi-room Audio",
-      "Home Theater",
-    ],
-    "Commercial AV": [
-      "Conference Solutions",
-      "Digital Signage",
-    ],
-    "Energy Management": [
-      "Smart Meters",
-      "Energy Analytics",
-    ],
-    "Central Management Server": [
-      "On-Prem Server",
-      "Cloud Server",
-    ],
-  }
   
   return (
     <div 
@@ -65,30 +21,31 @@ export default function MobileNav({ isOpen }: MobileNavProps) {
         "container mx-auto px-3 py-4 flex flex-col gap-2 transition-all duration-300 overflow-y-auto",
         isOpen ? "translate-y-0" : "-translate-y-4"
       )}>
-        <NavDropdown 
-          id="mobileProducts"
-          label="Products" 
-          items={productItems}
-          isMobile={true}
-          activeDropdown={activeDropdown}
-          setActiveDropdown={setActiveDropdown}
-        />
+        <Link href="/residential" className="py-2 px-2 border-b border-white/10 hover:bg-white/5 rounded-md transition-colors active:bg-white/10 text-blue-400">
+          Products
+        </Link>
 
-        <NavDropdown 
-          id="mobileSolutions"
-          label="Solutions" 
-          items={solutionItems}
-          subItems={solutionSubItems}
-          isMobile={true}
-          activeDropdown={activeDropdown}
-          setActiveDropdown={setActiveDropdown}
-        />
+        <Link href="/solutions" className="py-2 px-2 border-b border-white/10 hover:bg-white/5 rounded-md transition-colors active:bg-white/10 text-blue-400">
+          Solutions
+        </Link>
 
-        <Link href="#pricing" className="py-2 px-2 border-b border-white/10 hover:bg-white/5 rounded-md transition-colors active:bg-white/10">
+        <Link href="#about" className="py-2 px-2 border-b border-white/10 hover:bg-white/5 rounded-md transition-colors active:bg-white/10 text-blue-400">
+          Company
+        </Link>
+
+        <Link href="#contact" className="py-2 px-2 border-b border-white/10 hover:bg-white/5 rounded-md transition-colors active:bg-white/10 text-blue-400">
+          Support
+        </Link>
+
+        <Link href="#projects" className="py-2 px-2 border-b border-white/10 hover:bg-white/5 rounded-md transition-colors active:bg-white/10 text-blue-400">
+          Projects
+        </Link>
+
+        <Link href="#pricing" className="py-2 px-2 border-b border-white/10 hover:bg-white/5 rounded-md transition-colors active:bg-white/10 text-blue-400">
           Pricing
         </Link>
 
-        <Link href="#testimonials" className="py-2 px-2 border-b border-white/10 hover:bg-white/5 rounded-md transition-colors active:bg-white/10">
+        <Link href="#testimonials" className="py-2 px-2 border-b border-white/10 hover:bg-white/5 rounded-md transition-colors active:bg-white/10 text-blue-400">
           Testimonials
         </Link>
 

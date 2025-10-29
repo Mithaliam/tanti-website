@@ -20,6 +20,8 @@ const hashOnlyIdent = (context, _, exportName) =>
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  // Set output file tracing root to fix multiple lockfiles warning
+  outputFileTracingRoot: path.join(__dirname),
   // Add better error handling
   onDemandEntries: {
     maxInactiveAge: 25 * 1000,

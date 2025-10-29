@@ -42,7 +42,7 @@ export default function RootLayout({
       <head>
         {/* Add any other head tags if needed, metadata object handles common ones */}
       </head>
-      <body className={`${roboto.className} text-black`} style={{ backgroundColor: '#F5F5F0' }}>
+      <body className={`${roboto.className} text-black`} style={{ backgroundColor: '#FFFFFF' }}>
         <ThemeProvider
           attribute="class"
           defaultTheme="light"
@@ -53,6 +53,35 @@ export default function RootLayout({
           <main>{children}</main>
           <ModernFooter />
         </ThemeProvider>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              // Only run on client side to avoid hydration issues
+              if (typeof window !== 'undefined') {
+                function hideNextJSIndicators() {
+                  // Hide Next.js development indicators
+                  const indicators = document.querySelectorAll('[data-nextjs-toast], [data-nextjs-dialog], [data-nextjs-portal]');
+                  indicators.forEach(el => el.style.display = 'none');
+                  
+                  // Hide elements with high z-index that are likely Next.js overlays
+                  const overlays = document.querySelectorAll('div[style*="z-index: 9999"], div[style*="z-index: 10000"], div[style*="z-index: 2147483647"]');
+                  overlays.forEach(el => el.style.display = 'none');
+                  
+                  // Hide circular floating elements
+                  const circular = document.querySelectorAll('div[style*="border-radius: 50%"][style*="position: fixed"], div[class*="rounded-full"][style*="position: fixed"]');
+                  circular.forEach(el => el.style.display = 'none');
+                }
+                
+                // Run after DOM is ready
+                document.addEventListener('DOMContentLoaded', hideNextJSIndicators);
+                
+                // Run after a short delay to catch dynamically added elements
+                setTimeout(hideNextJSIndicators, 100);
+                setTimeout(hideNextJSIndicators, 500);
+              }
+            `,
+          }}
+        />
       </body>
     </html>
   )
