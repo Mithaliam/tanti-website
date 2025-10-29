@@ -376,3 +376,25 @@ div[class*="rounded-full"][style*="position: fixed"] {
 .scroll-smooth {
   scroll-behavior: smooth;
 }
+
+/* Custom gradient for Solar Installation cards hover effect */
+.installation-card-hover-gradient {
+  background: linear-gradient(to right, #60A5FA, #1E40AF);
+}
+
+/* Blue glow card style for installation cards */
+.glow-card {
+  border-radius: 16px; /* match card rounding */
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.06),             /* soft drop shadow */
+    0 0 0 2px rgba(59, 130, 246, 0.25),          /* subtle blue ring */
+    0 0 28px rgba(59, 130, 246, 0.40);           /* outer blue glow */
+  transition: box-shadow 200ms ease;
+}
+
+.glow-card:hover {
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.10),            /* stronger drop shadow */
+    0 0 0 2px rgba(59, 130, 246, 0.35),          /* stronger ring */
+    0 0 40px rgba(59, 130, 246, 0.55);           /* stronger glow */
+}

@@ -3,6 +3,8 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { Button } from "@/components/ui/button";
+import Image from "next/image";
 import "./SolarSections.css";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -48,13 +50,28 @@ export default function SolarSections() {
 			<section ref={(el) => setRef(el, 0)} className="section section-1 bg-one">
 				<div className="section-inner">
 					<div className="col col-text">
-						<h1>Sleeping Structure</h1>
+						<h2>Sleeping Structure</h2>
 						<p>
-							Placeholder description for Sleeping Structure. Replace with your content.
+							Ideal for sloped roofs with traditional construction methods. Our solar solutions are perfectly suited for traditional homes that require careful aesthetic integration.
 						</p>
+						<ul>
+							<li>Easy installation without damaging roof structure</li>
+							<li>Optimal tilt angle for maximum efficiency</li>
+							<li>Traditional home aesthetic preservation</li>
+						</ul>
+						<Button className="bg-gradient-to-r from-blue-400 to-blue-600 hover:from-blue-500 hover:to-blue-700 text-white border-0 shadow-lg transition-shadow mt-4">
+							Learn More
+						</Button>
 					</div>
 					<div className="col col-visual">
-						<div className="illustration">🏠</div>
+						<div className="illustration">
+							<Image
+								src="/sleeping%20structure.jpeg"
+								alt="Sleeping Structure"
+								fill
+								className="object-cover rounded-2xl"
+							/>
+						</div>
 					</div>
 				</div>
 			</section>
@@ -62,13 +79,28 @@ export default function SolarSections() {
 			<section ref={(el) => setRef(el, 1)} className="section section-2 bg-two">
 				<div className="section-inner">
 					<div className="col col-text">
-						<h1>High Rise Structure</h1>
+						<h2>High Rise Structure</h2>
 						<p>
-							Placeholder description for High Rise Structure. Replace with your content.
+							Solar solutions for modern high-rise buildings and apartments. Maximize your energy generation potential with our specialized commercial systems designed for urban environments.
 						</p>
+						<ul>
+							<li>Flat roof compatible with heavy-duty mounting</li>
+							<li>Advanced weight distribution technology</li>
+							<li>Large-scale commercial installations</li>
+						</ul>
+						<Button className="bg-gradient-to-r from-blue-400 to-blue-600 hover:from-blue-500 hover:to-blue-700 text-white border-0 shadow-lg transition-shadow mt-4">
+							Learn More
+						</Button>
 					</div>
 					<div className="col col-visual">
-						<div className="illustration">🏢</div>
+						<div className="illustration">
+							<Image
+								src="/high%20rise.jpeg"
+								alt="High Rise Structure"
+								fill
+								className="object-cover rounded-2xl"
+							/>
+						</div>
 					</div>
 				</div>
 			</section>
@@ -76,13 +108,28 @@ export default function SolarSections() {
 			<section ref={(el) => setRef(el, 2)} className="section section-3 bg-three">
 				<div className="section-inner">
 					<div className="col col-text">
-						<h1>GI Roof</h1>
+						<h2>GI Roof</h2>
 						<p>
-							Placeholder description for GI Roof. Replace with your content.
+							Galvanized Iron sheet roofs perfect for industrial and commercial use. Our specialized mounting systems ensure optimal performance in harsh industrial environments.
 						</p>
+						<ul>
+							<li>Weather resistant mounting technology</li>
+							<li>Durable and long-lasting installation</li>
+							<li>Perfect for industrial applications</li>
+						</ul>
+						<Button className="bg-gradient-to-r from-blue-400 to-blue-600 hover:from-blue-500 hover:to-blue-700 text-white border-0 shadow-lg transition-shadow mt-4">
+							Learn More
+						</Button>
 					</div>
 					<div className="col col-visual">
-						<div className="illustration">🏭</div>
+						<div className="illustration">
+							<Image
+								src="/GI%20roof.jpeg"
+								alt="GI Roof"
+								fill
+								className="object-cover rounded-2xl"
+							/>
+						</div>
 					</div>
 				</div>
 			</section>
@@ -90,13 +137,28 @@ export default function SolarSections() {
 			<section ref={(el) => setRef(el, 3)} className="section section-4 bg-four">
 				<div className="section-inner">
 					<div className="col col-text">
-						<h1>Industrial Roof (Placeholder)</h1>
+						<h2>Tiles Roof</h2>
 						<p>
-							Placeholder description for Industrial Roof. Replace with your content.
+							Elegant solar solutions for tile-roofed homes and heritage buildings. We preserve the beauty and character of your property while delivering maximum solar efficiency.
 						</p>
+						<ul>
+							<li>Non-invasive mounting preserves roof integrity</li>
+							<li>Maintains traditional aesthetic appeal</li>
+							<li>Heritage-friendly installation process</li>
+						</ul>
+						<Button className="bg-gradient-to-r from-blue-400 to-blue-600 hover:from-blue-500 hover:to-blue-700 text-white border-0 shadow-lg transition-shadow mt-4">
+							Learn More
+						</Button>
 					</div>
 					<div className="col col-visual">
-						<div className="illustration">🏗️</div>
+						<div className="illustration">
+							<Image
+								src="/tiles%20roof.jpeg"
+								alt="Tiles Roof"
+								fill
+								className="object-cover rounded-2xl"
+							/>
+						</div>
 					</div>
 				</div>
 			</section>

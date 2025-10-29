@@ -53,7 +53,7 @@ export default function SolarPage() {
             animate="visible"
             className="text-center max-w-4xl mx-auto"
           >
-            <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
+            <h1 className="text-4xl md:text-6xl font-bold text-[#3B82F6] mb-6">
               Solar Energy Solutions
             </h1>
             <p className="text-lg md:text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
@@ -91,7 +91,7 @@ export default function SolarPage() {
             viewport={{ once: true }}
             className="text-center mb-12"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Types of Installation</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-[#3B82F6] mb-4">Types of Installation</h2>
             <p className="text-lg text-gray-600 max-w-3xl mx-auto">ON-Grid, OFF-Grid, and Hybrid configurations to match your needs.</p>
           </motion.div>
 
@@ -103,18 +103,20 @@ export default function SolarPage() {
               whileInView="visible"
               viewport={{ once: true }}
             >
-              <Card className="h-full hover:shadow-lg transition-shadow duration-300 group cursor-pointer">
+              <Card className="h-full transition-shadow duration-300 group cursor-pointer glow-card">
                 <CardHeader>
                   <div className="w-full h-96 bg-gray-100 rounded-lg overflow-hidden mb-4 relative">
+                    <div className="absolute inset-x-0 top-1 z-30 bg-white/90 border border-white/70 text-[#3B82F6] font-semibold px-4 py-2 rounded-xl shadow-sm text-center w-full">
+                      ON-Grid
+                    </div>
                     <Image
                       src="/on%20grid.png"
                       alt="ON-Grid Installation"
                       fill
                       className="object-cover transition-transform duration-500 group-hover:scale-110"
                     />
-                    <div className="absolute inset-0 bg-blue-600 opacity-0 group-hover:opacity-90 transition-all duration-500 transform translate-y-full group-hover:translate-y-0 flex items-center justify-center">
+                    <div className="absolute inset-0 installation-card-hover-gradient opacity-0 group-hover:opacity-90 transition-all duration-500 transform translate-y-full group-hover:translate-y-0 flex items-center justify-center z-20">
                       <div className="text-white text-center p-6">
-                        <h3 className="text-2xl font-bold mb-3">ON-Grid</h3>
                         <ul className="text-left space-y-2 mb-4">
                           <li>✓ Net metering enabled</li>
                           <li>✓ No batteries required</li>
@@ -137,18 +139,20 @@ export default function SolarPage() {
               whileInView="visible"
               viewport={{ once: true }}
             >
-              <Card className="h-full hover:shadow-lg transition-shadow duration-300 group cursor-pointer">
+              <Card className="h-full transition-shadow duration-300 group cursor-pointer glow-card">
                 <CardHeader>
                   <div className="w-full h-96 bg-gray-100 rounded-lg overflow-hidden mb-4 relative">
+                    <div className="absolute inset-x-0 top-1 z-30 bg-white/90 border border-white/70 text-[#3B82F6] font-semibold px-4 py-2 rounded-xl shadow-sm text-center w-full">
+                      OFF-Grid
+                    </div>
                     <Image
                       src="/off%20grid.png"
                       alt="OFF-Grid Installation"
                       fill
                       className="object-cover transition-transform duration-500 group-hover:scale-110"
                     />
-                    <div className="absolute inset-0 bg-blue-600 opacity-0 group-hover:opacity-90 transition-all duration-500 transform translate-y-full group-hover:translate-y-0 flex items-center justify-center">
+                    <div className="absolute inset-0 installation-card-hover-gradient opacity-0 group-hover:opacity-90 transition-all duration-500 transform translate-y-full group-hover:translate-y-0 flex items-center justify-center z-20">
                       <div className="text-white text-center p-6">
-                        <h3 className="text-2xl font-bold mb-3">OFF-Grid</h3>
                         <ul className="text-left space-y-2 mb-4">
                           <li>✓ Works without grid</li>
                           <li>✓ Battery bank required</li>
@@ -171,18 +175,20 @@ export default function SolarPage() {
               whileInView="visible"
               viewport={{ once: true }}
             >
-              <Card className="h-full hover:shadow-lg transition-shadow duration-300 group cursor-pointer">
+              <Card className="h-full transition-shadow duration-300 group cursor-pointer glow-card">
                 <CardHeader>
                   <div className="w-full h-96 bg-gray-100 rounded-lg overflow-hidden mb-4 relative">
+                    <div className="absolute inset-x-0 top-1 z-30 bg-white/90 border border-white/70 text-[#3B82F6] font-semibold px-4 py-2 rounded-xl shadow-sm text-center w-full">
+                      Hybrid
+                    </div>
                     <Image
                       src="/hybrid.png"
                       alt="Hybrid Installation"
                       fill
                       className="object-cover transition-transform duration-500 group-hover:scale-110"
                     />
-                    <div className="absolute inset-0 bg-blue-600 opacity-0 group-hover:opacity-90 transition-all duration-500 transform translate-y-full group-hover:translate-y-0 flex items-center justify-center">
+                    <div className="absolute inset-0 installation-card-hover-gradient opacity-0 group-hover:opacity-90 transition-all duration-500 transform translate-y-full group-hover:translate-y-0 flex items-center justify-center z-20">
                       <div className="text-white text-center p-6">
-                        <h3 className="text-2xl font-bold mb-3">Hybrid</h3>
                         <ul className="text-left space-y-2 mb-4">
                           <li>✓ Battery backup during outages</li>
                           <li>✓ Export excess to grid</li>
@@ -211,7 +217,7 @@ export default function SolarPage() {
             viewport={{ once: true }}
             className="text-center mb-16 relative z-10"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-[#3B82F6] mb-4">
               Types of Roof Structure
             </h2>
             <p className="text-lg text-gray-600 max-w-3xl mx-auto">
@@ -236,7 +242,7 @@ export default function SolarPage() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-[#3B82F6] mb-4">
               Solar Technology Solutions
             </h2>
             <p className="text-lg text-gray-600 max-w-3xl mx-auto">
