@@ -50,7 +50,7 @@ export default function SolarSections() {
 			<section ref={(el) => setRef(el, 0)} className="section section-1 bg-one">
 				<div className="section-inner">
 					<div className="col col-text">
-						<h2>Sleeping Structure</h2>
+						<h2><span className="pill-label">Sleeping Structure</span></h2>
 						<p>
 							Ideal for sloped roofs with traditional construction methods. Our solar solutions are perfectly suited for traditional homes that require careful aesthetic integration.
 						</p>
@@ -79,7 +79,7 @@ export default function SolarSections() {
 			<section ref={(el) => setRef(el, 1)} className="section section-2 bg-two">
 				<div className="section-inner">
 					<div className="col col-text">
-						<h2>High Rise Structure</h2>
+						<h2><span className="pill-label">High Rise Structure</span></h2>
 						<p>
 							Solar solutions for modern high-rise buildings and apartments. Maximize your energy generation potential with our specialized commercial systems designed for urban environments.
 						</p>
@@ -108,7 +108,7 @@ export default function SolarSections() {
 			<section ref={(el) => setRef(el, 2)} className="section section-3 bg-three">
 				<div className="section-inner">
 					<div className="col col-text">
-						<h2>GI Roof</h2>
+						<h2><span className="pill-label">GI Roof</span></h2>
 						<p>
 							Galvanized Iron sheet roofs perfect for industrial and commercial use. Our specialized mounting systems ensure optimal performance in harsh industrial environments.
 						</p>
@@ -137,7 +137,7 @@ export default function SolarSections() {
 			<section ref={(el) => setRef(el, 3)} className="section section-4 bg-four">
 				<div className="section-inner">
 					<div className="col col-text">
-						<h2>Tiles Roof</h2>
+						<h2><span className="pill-label">Tiles Roof</span></h2>
 						<p>
 							Elegant solar solutions for tile-roofed homes and heritage buildings. We preserve the beauty and character of your property while delivering maximum solar efficiency.
 						</p>

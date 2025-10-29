@@ -23,11 +23,11 @@
 .section-3 { z-index: 3; }
 .section-4 { z-index: 4; }
 
-/* Distinct backgrounds so overlap is obvious */
-.bg-one  { background: linear-gradient(to right, #93C5FD, #3B82F6); }
-.bg-two  { background: linear-gradient(to right, #93C5FD, #3B82F6); }
-.bg-three{ background: linear-gradient(to right, #93C5FD, #3B82F6); }
-.bg-four { background: linear-gradient(to right, #93C5FD, #3B82F6); }
+/* Distinct backgrounds so overlap is obvious - transparent blue in #60A5FA → #1E40AF shade */
+.bg-one  { background: linear-gradient(to right, rgba(96,165,250,0.32), rgba(30,64,175,0.18)); }
+.bg-two  { background: linear-gradient(to right, rgba(96,165,250,0.32), rgba(30,64,175,0.18)); }
+.bg-three{ background: linear-gradient(to right, rgba(96,165,250,0.32), rgba(30,64,175,0.18)); }
+.bg-four { background: linear-gradient(to right, rgba(96,165,250,0.32), rgba(30,64,175,0.18)); }
 
 .section-inner {
 	max-width: 1200px;
@@ -54,8 +54,20 @@
     margin: 0 0 12px 0;
     font-size: clamp(24px, 3.2vw, 36px); /* h2 size */
     line-height: 1.15;
-    color: #3B82F6; /* blue */
+    color: #1E3A8A; /* darker blue for better contrast on pill */
     font-weight: 700; /* bold */
+}
+
+/* Transparent blue pill label for panel headers */
+.pill-label {
+    display: inline-block;
+    padding: 8px 16px;
+    border-radius: 9999px; /* full pill */
+    color: #1E40AF;
+    background: linear-gradient(to right, rgba(96,165,250,0.35), rgba(30,64,175,0.28));
+    border: 1px solid rgba(255,255,255,0.5);
+    box-shadow: 0 4px 14px rgba(59,130,246,0.25);
+    backdrop-filter: blur(2px);
 }
 
 .col-text p {
@@ -98,19 +110,17 @@
 	overflow: hidden;
 	user-select: none;
 	box-shadow:
-		0 12px 26px rgba(0, 0, 0, 0.10),            /* stronger drop shadow */
-		0 0 0 3px rgba(59, 130, 246, 0.45),          /* brighter blue ring */
-		0 0 60px rgba(59, 130, 246, 0.55),           /* larger outer glow */
-		0 0 120px rgba(59, 130, 246, 0.35);          /* extended soft halo */
-	transition: box-shadow 200ms ease;
+		0 12px 28px rgba(0, 0, 0, 0.08),            /* stronger drop shadow */
+		0 0 0 3px rgba(59, 130, 246, 0.35),         /* brighter blue ring */
+		0 0 48px rgba(59, 130, 246, 0.60);          /* stronger outer glow */
+	transition: box-shadow 250ms ease;
 }
 
 .illustration:hover {
 	box-shadow:
-		0 16px 36px rgba(0, 0, 0, 0.14),
-		0 0 0 4px rgba(59, 130, 246, 0.55),
-		0 0 80px rgba(59, 130, 246, 0.70),
-		0 0 160px rgba(59, 130, 246, 0.45);
+		0 18px 40px rgba(0, 0, 0, 0.12),           /* deeper shadow on hover */
+		0 0 0 4px rgba(59, 130, 246, 0.45),         /* stronger blue ring */
+		0 0 64px rgba(59, 130, 246, 0.75);          /* brighter outer glow */
 }
 
 @media (max-width: 900px) {
