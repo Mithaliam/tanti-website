@@ -461,7 +461,7 @@ export default function SolutionsPage() {
                       {service.services.map((item, index) => (
                         <li 
                           key={index}
-                          className="text-blue-700 hover:text-blue-600 cursor-pointer transition-colors duration-200 flex items-center"
+                          className="text-blue-700 hover:text-blue-800 cursor-pointer transition-colors duration-200 flex items-center"
                           onClick={() => handleServiceClick(service.id, item)}
                         >
                           <div className="w-2 h-2 bg-blue-500 rounded-full mr-3"></div>

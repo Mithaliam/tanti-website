@@ -3,7 +3,6 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import "./SolarSections.css";
 
@@ -59,9 +58,7 @@ export default function SolarSections() {
 							<li>Optimal tilt angle for maximum efficiency</li>
 							<li>Traditional home aesthetic preservation</li>
 						</ul>
-						<Button className="bg-gradient-to-r from-blue-400 to-blue-600 hover:from-blue-500 hover:to-blue-700 text-white border-0 shadow-lg transition-shadow mt-4">
-							Learn More
-						</Button>
+						{/* Learn More button removed per request */}
 					</div>
 					<div className="col col-visual">
 						<div className="illustration">
@@ -88,9 +85,7 @@ export default function SolarSections() {
 							<li>Advanced weight distribution technology</li>
 							<li>Large-scale commercial installations</li>
 						</ul>
-						<Button className="bg-gradient-to-r from-blue-400 to-blue-600 hover:from-blue-500 hover:to-blue-700 text-white border-0 shadow-lg transition-shadow mt-4">
-							Learn More
-						</Button>
+						{/* Learn More button removed per request */}
 					</div>
 					<div className="col col-visual">
 						<div className="illustration">
@@ -117,9 +112,7 @@ export default function SolarSections() {
 							<li>Durable and long-lasting installation</li>
 							<li>Perfect for industrial applications</li>
 						</ul>
-						<Button className="bg-gradient-to-r from-blue-400 to-blue-600 hover:from-blue-500 hover:to-blue-700 text-white border-0 shadow-lg transition-shadow mt-4">
-							Learn More
-						</Button>
+						{/* Learn More button removed per request */}
 					</div>
 					<div className="col col-visual">
 						<div className="illustration">
@@ -146,9 +139,7 @@ export default function SolarSections() {
 							<li>Maintains traditional aesthetic appeal</li>
 							<li>Heritage-friendly installation process</li>
 						</ul>
-						<Button className="bg-gradient-to-r from-blue-400 to-blue-600 hover:from-blue-500 hover:to-blue-700 text-white border-0 shadow-lg transition-shadow mt-4">
-							Learn More
-						</Button>
+						{/* Learn More button removed per request */}
 					</div>
 					<div className="col col-visual">
 						<div className="illustration">

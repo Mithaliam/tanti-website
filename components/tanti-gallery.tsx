@@ -16,7 +16,17 @@ export default function TantiGallery() {
   useEffect(() => {
     let cancelled = false
     fetch("/api/tanti-media")
-      .then((r) => r.json())
+      .then(async (r) => {
+        // Safely read body to avoid JSON parse errors on empty/invalid payloads
+        const text = await r.text().catch(() => "")
+        let data: unknown = {}
+        try {
+          data = text ? JSON.parse(text) : {}
+        } catch {
+          data = {}
+        }
+        return data as any
+      })
       .then((data) => {
         if (cancelled) return
         const list = Array.isArray(data?.items) ? (data.items as MediaItem[]) : []

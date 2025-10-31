@@ -1,6 +1,8 @@
 "use client"
 
 import { motion } from "framer-motion"
+import { PiggyBank, Leaf, TrendingUp, Shield } from "lucide-react"
+import { useEffect, useRef } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -8,9 +10,20 @@ import dynamic from "next/dynamic"
 const SolarSections = dynamic(() => import("@/components/SolarSections"), { ssr: false })
 import { useRouter } from "next/navigation"
 import Image from "next/image"
+import Link from "next/link"
 
 export default function SolarPage() {
   const router = useRouter()
+  const heroVideoRef = useRef<HTMLVideoElement | null>(null)
+  useEffect(() => {
+    const v = heroVideoRef.current
+    if (!v) return
+    // Ensure autoplay on some browsers
+    v.muted = true
+    const play = () => v.play().catch(() => {})
+    if (v.readyState >= 2) play()
+    else v.addEventListener("loadeddata", play, { once: true })
+  }, [])
   
   const heroVariants = {
     hidden: { opacity: 0, y: 30 },
@@ -20,6 +33,16 @@ export default function SolarPage() {
   const cardVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+  }
+
+  // Slide-in animations for alternating image/text panels
+  const slideInLeft = {
+    hidden: { opacity: 0, x: -48 },
+    visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: "easeOut" } },
+  }
+  const slideInRight = {
+    hidden: { opacity: 0, x: 48 },
+    visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: "easeOut" } },
   }
 
   // Handle feature button click
@@ -45,18 +68,32 @@ export default function SolarPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="relative py-20 lg:py-32 bg-gradient-to-br from-blue-50 via-white to-yellow-50">
+      <section className="relative py-20 lg:py-32 min-h-[85vh] md:min-h-screen bg-gradient-to-br from-blue-50 via-white to-yellow-50 overflow-hidden">
+        {/* Background video */}
+        <video
+          className="absolute inset-0 w-full h-full object-cover z-0"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          ref={heroVideoRef}
+          poster="/images/hero.webp"
+        >
+          <source src="/solar%20video.mp4" type="video/mp4" />
+        </video>
+        {/* Overlay removed per request to show original video */}
         <div className="container mx-auto px-4">
           <motion.div
             variants={heroVariants}
             initial="hidden"
             animate="visible"
-            className="text-center max-w-4xl mx-auto"
+            className="relative z-20 text-center max-w-4xl mx-auto"
           >
             <h1 className="text-4xl md:text-6xl font-bold text-[#3B82F6] mb-6">
               Solar Energy Solutions
             </h1>
-            <p className="text-lg md:text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
+            <p className="text-lg md:text-xl text-white mb-8 max-w-3xl mx-auto">
               Harness the power of the sun with our comprehensive solar energy solutions. 
               From residential installations to commercial projects, we provide sustainable 
               energy solutions that reduce costs and environmental impact.
@@ -259,10 +296,15 @@ export default function SolarPage() {
               whileInView="visible"
               viewport={{ once: true }}
             >
-              <Card className="h-full hover:shadow-lg transition-shadow duration-300">
+              <Card className="h-full transition-all duration-300 group hover:-translate-y-1 hover:shadow-xl ring-1 ring-transparent hover:ring-blue-200 glow-card">
                 <CardHeader>
-                  <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mb-4">
-                    <span className="text-2xl">☀️</span>
+                  <div className="w-full h-56 md:h-64 rounded-xl overflow-hidden mb-4 relative">
+                    <Image
+                      src="/solar%20panel.jpeg"
+                      alt="Solar Panels"
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
                   </div>
                   <CardTitle className="text-xl font-bold text-gray-900">Solar Panels</CardTitle>
                   <CardDescription className="text-gray-600">
@@ -288,12 +330,11 @@ export default function SolarPage() {
                       <span className="text-sm text-gray-600">Easy Installation</span>
                     </div>
                   </div>
-                  <Button 
-                    className="w-full mt-6 bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white"
-                    onClick={() => handleFeatureClick("Solar Panels")}
-                  >
+                  <Link href="/solar-panels" className="block mt-6">
+                    <Button className="w-full bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white">
                     Explore Solar Panels
                   </Button>
+                  </Link>
                 </CardContent>
               </Card>
             </motion.div>
@@ -305,10 +346,15 @@ export default function SolarPage() {
               whileInView="visible"
               viewport={{ once: true }}
             >
-              <Card className="h-full hover:shadow-lg transition-shadow duration-300">
+              <Card className="h-full transition-all duration-300 group hover:-translate-y-1 hover:shadow-xl ring-1 ring-transparent hover:ring-blue-200 glow-card">
                 <CardHeader>
-                  <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
-                    <span className="text-2xl">⚡</span>
+                  <div className="w-full h-56 md:h-64 rounded-xl overflow-hidden mb-4 relative">
+                    <Image
+                      src="/solar%20inverter.jpeg"
+                      alt="Solar Inverter"
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
                   </div>
                   <CardTitle className="text-xl font-bold text-gray-900">Solar Inverters</CardTitle>
                   <CardDescription className="text-gray-600">
@@ -334,12 +380,11 @@ export default function SolarPage() {
                       <span className="text-sm text-gray-600">Smart Monitoring</span>
                     </div>
                   </div>
-                  <Button 
-                    className="w-full mt-6 bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white"
-                    onClick={() => handleFeatureClick("Inverters")}
-                  >
+                  <Link href="/solar-inverters" className="block mt-6">
+                    <Button className="w-full bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white">
                     Explore Inverters
                   </Button>
+                  </Link>
                 </CardContent>
               </Card>
             </motion.div>
@@ -351,10 +396,15 @@ export default function SolarPage() {
               whileInView="visible"
               viewport={{ once: true }}
             >
-              <Card className="h-full hover:shadow-lg transition-shadow duration-300">
+              <Card className="h-full transition-all duration-300 group hover:-translate-y-1 hover:shadow-xl ring-1 ring-transparent hover:ring-blue-200 glow-card">
                 <CardHeader>
-                  <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
-                    <span className="text-2xl">🔋</span>
+                  <div className="w-full h-56 md:h-64 rounded-xl overflow-hidden mb-4 relative">
+                    <Image
+                      src="/lithum%20battery.png"
+                      alt="Battery Storage"
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
                   </div>
                   <CardTitle className="text-xl font-bold text-gray-900">Battery Storage</CardTitle>
                   <CardDescription className="text-gray-600">
@@ -412,27 +462,37 @@ export default function SolarPage() {
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 gap-8">
-            {/* Residential Solar */}
+          <div className="grid gap-8">
+            {/* Residential Solar - image left, content right */}
             <motion.div
               variants={cardVariants}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
             >
-              <Card className="h-full hover:shadow-lg transition-shadow duration-300">
-                <CardHeader>
-                  <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl flex items-center justify-center mb-4">
-                    <span className="text-3xl text-white">🏠</span>
+              <div className="glow-card rounded-2xl overflow-hidden bg-white">
+                <div className="grid md:grid-cols-2 items-stretch">
+                  <motion.div
+                    className="p-6 md:p-8"
+                    variants={slideInLeft}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: false, amount: 0.2 }}
+                  >
+                    <div className="relative h-56 md:h-full min-h-[260px] bg-white rounded-xl">
+                      <Image src="/resi%20solar.jpeg" alt="Residential solar" fill className="object-contain" />
                   </div>
-                  <CardTitle className="text-2xl font-bold text-gray-900">Residential Solar</CardTitle>
-                  <CardDescription className="text-gray-600 text-lg">
-                    Power your home with clean, renewable solar energy. Reduce your electricity bills 
-                    and increase your property value.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-4 mb-6">
+                  </motion.div>
+                  <motion.div
+                    className="p-6 md:p-8 flex flex-col justify-center"
+                    variants={slideInRight}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: false, amount: 0.2 }}
+                  >
+                    <h3 className="text-2xl font-bold text-gray-900 mb-2">Residential Solar</h3>
+                    <p className="text-gray-600 text-lg mb-6">Power your home with clean, renewable solar energy. Reduce your electricity bills and increase your property value.</p>
+                    <div className="space-y-3 mb-6">
                     <div className="flex items-center space-x-3">
                       <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
                       <span className="text-gray-700">Custom System Design</span>
@@ -455,36 +515,31 @@ export default function SolarPage() {
                     <Badge variant="secondary" className="bg-green-100 text-green-800">Net Metering</Badge>
                     <Badge variant="secondary" className="bg-yellow-100 text-yellow-800">Tax Credits</Badge>
                   </div>
-                  <Button 
-                    className="w-full bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white"
-                    onClick={() => handleDiscoverMoreClick("Solar Installation")}
-                  >
-                    Get Residential Quote
-                  </Button>
-                </CardContent>
-              </Card>
+                    <Button className="w-full bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white" onClick={() => handleDiscoverMoreClick("Solar Installation")}>Get Residential Quote</Button>
+                  </motion.div>
+                </div>
+              </div>
             </motion.div>
 
-            {/* Commercial Solar */}
+            {/* Commercial Solar - image right, content left */}
             <motion.div
               variants={cardVariants}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
             >
-              <Card className="h-full hover:shadow-lg transition-shadow duration-300">
-                <CardHeader>
-                  <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-500 rounded-xl flex items-center justify-center mb-4">
-                    <span className="text-3xl text-white">🏢</span>
-                  </div>
-                  <CardTitle className="text-2xl font-bold text-gray-900">Commercial Solar</CardTitle>
-                  <CardDescription className="text-gray-600 text-lg">
-                    Large-scale solar installations for businesses, factories, and commercial properties. 
-                    Maximize your ROI with our commercial solar solutions.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-4 mb-6">
+              <div className="glow-card rounded-2xl overflow-hidden bg-white">
+                <div className="grid md:grid-cols-2 items-stretch">
+                  <motion.div
+                    className="p-6 md:p-8 flex flex-col justify-center order-2 md:order-1"
+                    variants={slideInLeft}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: false, amount: 0.2 }}
+                  >
+                    <h3 className="text-2xl font-bold text-gray-900 mb-2">Commercial Solar</h3>
+                    <p className="text-gray-600 text-lg mb-6">Large-scale solar installations for businesses, factories, and commercial properties. Maximize your ROI with our commercial solar solutions.</p>
+                    <div className="space-y-3 mb-6">
                     <div className="flex items-center space-x-3">
                       <div className="w-2 h-2 bg-green-500 rounded-full"></div>
                       <span className="text-gray-700">Scalable System Design</span>
@@ -507,14 +562,21 @@ export default function SolarPage() {
                     <Badge variant="secondary" className="bg-blue-100 text-blue-800">PPA Options</Badge>
                     <Badge variant="secondary" className="bg-purple-100 text-purple-800">ROI Analysis</Badge>
                   </div>
-                  <Button 
-                    className="w-full bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white"
-                    onClick={() => handleDiscoverMoreClick("Solar Installation")}
+                    <Button className="w-full bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white" onClick={() => handleDiscoverMoreClick("Solar Installation")}>Get Commercial Quote</Button>
+                  </motion.div>
+                  <motion.div
+                    className="order-1 md:order-2 p-6 md:p-8"
+                    variants={slideInRight}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: false, amount: 0.2 }}
                   >
-                    Get Commercial Quote
-                  </Button>
-                </CardContent>
-              </Card>
+                    <div className="relative h-56 md:h-full min-h-[260px] bg-white rounded-xl">
+                      <Image src="/commercial%20solar.jpeg" alt="Commercial solar" fill className="object-contain" />
+                    </div>
+                  </motion.div>
+                </div>
+              </div>
             </motion.div>
           </div>
         </div>
@@ -549,8 +611,8 @@ export default function SolarPage() {
               viewport={{ once: true }}
               className="text-center"
             >
-              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-3xl">💰</span>
+              <div className="w-16 h-16 bg-white rounded-full ring-2 ring-blue-200 flex items-center justify-center mx-auto mb-4">
+                <PiggyBank className="w-8 h-8 text-[#3B82F6]" />
               </div>
               <h3 className="text-xl font-bold text-gray-900 mb-2">Cost Savings</h3>
               <p className="text-gray-600">
@@ -566,8 +628,8 @@ export default function SolarPage() {
               viewport={{ once: true }}
               className="text-center"
             >
-              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-3xl">🌱</span>
+              <div className="w-16 h-16 bg-white rounded-full ring-2 ring-blue-200 flex items-center justify-center mx-auto mb-4">
+                <Leaf className="w-8 h-8 text-[#3B82F6]" />
               </div>
               <h3 className="text-xl font-bold text-gray-900 mb-2">Environmental Impact</h3>
               <p className="text-gray-600">
@@ -583,8 +645,8 @@ export default function SolarPage() {
               viewport={{ once: true }}
               className="text-center"
             >
-              <div className="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-3xl">📈</span>
+              <div className="w-16 h-16 bg-white rounded-full ring-2 ring-blue-200 flex items-center justify-center mx-auto mb-4">
+                <TrendingUp className="w-8 h-8 text-[#3B82F6]" />
               </div>
               <h3 className="text-xl font-bold text-gray-900 mb-2">Property Value</h3>
               <p className="text-gray-600">
@@ -600,8 +662,8 @@ export default function SolarPage() {
               viewport={{ once: true }}
               className="text-center"
             >
-              <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-3xl">🔒</span>
+              <div className="w-16 h-16 bg-white rounded-full ring-2 ring-blue-200 flex items-center justify-center mx-auto mb-4">
+                <Shield className="w-8 h-8 text-[#3B82F6]" />
               </div>
               <h3 className="text-xl font-bold text-gray-900 mb-2">Energy Independence</h3>
               <p className="text-gray-600">
