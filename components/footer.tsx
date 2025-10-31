@@ -4,9 +4,9 @@ import { Twitter, Facebook, Instagram, Linkedin, Github } from "lucide-react"
 
 export default function ModernFooter() {
   return (
-    <footer className="bg-black border-t border-white/10 py-8  sm:py-16  px-3 sm:px-6 lg:px-8">
-      <div className="container mx-auto px-4">
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-12">
+    <footer className="bg-black border-t border-white/10 py-6 sm:py-10 px-3 sm:px-6 lg:px-8">
+      <div className="mx-auto px-4 max-w-6xl">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-8">
           <div>
             <Link href="/" className="flex items-center gap-2 mb-6">
               <div className="relative w-32 h-8 sm:w-40 sm:h-10">
@@ -138,7 +138,7 @@ export default function ModernFooter() {
           </div>
         </div>
 
-        <div className="mt-16 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center">
+        <div className="mt-8 pt-6 border-t border-white/10 flex flex-col md:flex-row justify-between items-center">
           <p className="text-white/50 text-sm mb-4 md:mb-0">© {new Date().getFullYear()} Tanti. All rights reserved.</p>
           <div className="flex gap-6">
             <Link href="#" className="text-white/50 hover:text-white text-sm transition-colors">

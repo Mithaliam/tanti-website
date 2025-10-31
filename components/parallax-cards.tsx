@@ -49,7 +49,7 @@ export default function ParallaxCards() {
               transition={{ type: "spring", stiffness: 200, damping: 20 }}
             >
               <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-2xl blur-md opacity-60"></div>
-              <div className="relative rounded-2xl overflow-hidden border border-gray-200 bg-white/90 shadow-lg">
+              <div className="relative rounded-2xl overflow-hidden border border-gray-200 bg-white/90 shadow-lg glow-card">
                 <div className="relative h-56 sm:h-64 md:h-72">
                   <img src={card.image} alt={card.title} className="absolute inset-0 h-full w-full object-cover" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />

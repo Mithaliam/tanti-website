@@ -398,3 +398,26 @@ div[class*="rounded-full"][style*="position: fixed"] {
     0 0 0 2px rgba(59, 130, 246, 0.35),          /* stronger ring */
     0 0 40px rgba(59, 130, 246, 0.55);           /* stronger glow */
 }
+
+/* Prevent background flash on page load */
+html, body {
+  background-color: #FFFFFF !important;
+}
+
+/* White overlay to prevent flash before hydration - auto-fades with CSS animation */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: #FFFFFF;
+  z-index: 9998;
+  pointer-events: none;
+  opacity: 1;
+  animation: fadeOutOverlay 0.3s ease 0.5s forwards;
+}
+
+@keyframes fadeOutOverlay {
+  to {
+    opacity: 0;
+  }
+}

@@ -1,16 +1,14 @@
 "use client"
 
-import { useState, useEffect } from "react"
 import Image from "next/image"
-import { motion, AnimatePresence } from "framer-motion"
-import { ChevronLeft, ChevronRight, Quote } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { motion, useMotionValue, useSpring, useTransform, useScroll } from "framer-motion"
+import { Quote, UserRound } from "lucide-react"
 
 export default function ModernTestimonials() {
   const testimonials = [
     {
       quote:
-        "Tanti's automation has truly changed our life. Now, we have complete freedom to control any device from anywhere. You can always trust Tanti's services. 100% recommended from my side. In fact, i personally referred about their services to three of my friends. Tanti's service is more than reliable!",
+        "Tanti's automation has truly changed our life. Now, we have complete freedom to control any device from anywhere. You can always trust Tanti's services. 100% recommended from my side.",
       author: "Veena Ashok",
       role: "Client",
       avatar: "/tanti/clientspeak1.png",
@@ -19,16 +17,16 @@ export default function ModernTestimonials() {
     },
     {
       quote:
-        "The team at Tanti has been exceptional in delivering our smart home project. Their expertise in KNX and automation systems is unmatched. The installation was flawless and the support has been outstanding.",
+        "Exceptional execution on our smart home. Installation was flawless and support is outstanding.",
       author: "Rajesh Kumar",
       role: "Homeowner",
       avatar: "/placeholder-user.jpg",
-      company: "Bangalore",
+      company: "Bengaluru",
       rating: 5,
     },
     {
       quote:
-        "We've been using Tanti's commercial automation solutions for over 2 years now. The energy savings and efficiency improvements have been remarkable. Highly professional team with excellent technical knowledge.",
+        "Energy savings and efficiency improvements have been remarkable. Highly professional team.",
       author: "Priya Sharma",
       role: "Facilities Manager",
       avatar: "/placeholder-user.jpg",
@@ -37,41 +35,21 @@ export default function ModernTestimonials() {
     },
   ]
 
-  const [current, setCurrent] = useState(0)
-  const [autoplay, setAutoplay] = useState(true)
-
-  useEffect(() => {
-    if (!autoplay) return
-
-    const interval = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % testimonials.length)
-    }, 5000)
-
-    return () => clearInterval(interval)
-  }, [autoplay, testimonials.length])
-
-  const next = () => {
-    setAutoplay(false)
-    setCurrent((prev) => (prev + 1) % testimonials.length)
-  }
-
-  const prev = () => {
-    setAutoplay(false)
-    setCurrent((prev) => (prev - 1 + testimonials.length) % testimonials.length)
-  }
+  // Parallax values
+  const { scrollYProgress } = useScroll()
+  const yBackLeft = useTransform(scrollYProgress, [0, 1], [0, -120])
+  const yBackRight = useTransform(scrollYProgress, [0, 1], [0, 120])
 
   return (
-    <section 
-      id="testimonials" 
+    <section
+      id="testimonials"
       className="py-16 sm:py-20 md:py-24 relative overflow-hidden"
       aria-labelledby="testimonials-heading"
       style={{ backgroundColor: '#F5F5F0' }}
     >
-      {/* Background elements */}
-      <div className="absolute inset-0 z-0" aria-hidden="true">
-        <div className="absolute top-0 left-0 w-1/3 h-1/3 bg-blue-500/10 rounded-full blur-[100px]"></div>
-        <div className="absolute bottom-0 right-0 w-1/3 h-1/3 bg-amber-500/10 rounded-full blur-[100px]"></div>
-      </div>
+      {/* Parallax background blobs */}
+      <motion.div className="absolute top-0 left-0 w-1/3 h-1/3 bg-blue-500/10 rounded-full blur-[100px]" style={{ y: yBackLeft }} aria-hidden="true" />
+      <motion.div className="absolute bottom-0 right-0 w-1/3 h-1/3 bg-amber-500/10 rounded-full blur-[100px]" style={{ y: yBackRight }} aria-hidden="true" />
 
       <div className="container mx-auto px-5 sm:px-6 md:px-8 relative z-10">
         <motion.div
@@ -79,119 +57,110 @@ export default function ModernTestimonials() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-8 sm:mb-12 md:mb-16"
+          className="text-center mb-10 md:mb-14"
         >
-          <h2 id="testimonials-heading" className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4 text-black">What Our Customers Say</h2>
-          <p className="text-base sm:text-lg text-black/70 max-w-2xl mx-auto">
-            Don't just take our word for it - hear from our satisfied customers.
-          </p>
+          <h2 id="testimonials-heading" className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 text-[#3B82F6]">What Our Customers Say</h2>
+          <p className="text-base sm:text-lg text-black/70 max-w-2xl mx-auto">Real stories from our clients about the impact of our solutions.</p>
         </motion.div>
 
-        <div className="relative max-w-4xl mx-auto">
-          <div className="absolute -top-12 -left-12 text-red-500/20 hidden sm:block" aria-hidden="true">
-            <Quote size={80} />
-          </div>
-          
-          {/* Mobile quote icon - smaller and centered */}
-          <div className="sm:hidden flex justify-center mb-4" aria-hidden="true">
-            <Quote className="h-10 w-10 text-red-500/20" />
-          </div>
-
-          <div 
-            className="min-h[400px] flex items-center"
-            role="region" 
-            aria-roledescription="testimonial carousel" 
-            aria-label="Customer testimonials"
-          >
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={current}
-                initial={{ opacity: 0, x: 100 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -100 }}
-                transition={{ duration: 0.5 }}
-                className="border rounded-2xl p-5 sm:p-8 md:p-12 bg-white/90 border-gray-200 backdrop-blur-sm"
-                aria-live="polite"
-                role="group"
-                aria-roledescription="slide"
-                aria-label={`Testimonial ${current + 1} of ${testimonials.length}`}
-              >
-                <div className="flex flex-col md:flex-row gap-6 md:gap-8 items-center">
-                  <div className="md:w-1/3 w-full">
-                    <div className="relative max-w[160px] mx-auto">
-                      <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full blur-sm" aria-hidden="true"></div>
-                      <div className="relative h-20 w-20 sm:h-24 sm:w-24 mx-auto">
-                        <Image
-                          src={testimonials[current].avatar || "/placeholder.svg"}
-                          alt={`Portrait of ${testimonials[current].author}`}
-                          fill
-                          className="object-cover rounded-full"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="text-center mt-4">
-                      <h4 className="font-bold text-black">{testimonials[current].author}</h4>
-                      <p className="text-black/70 text-sm">{testimonials[current].role}</p>
-                      <div className="flex justify-center mt-2" aria-label={`Rated ${testimonials[current].rating} out of 5 stars`}>
-                        {[...Array(testimonials[current].rating)].map((_, i) => (
-                          <svg key={i} className="w-4 h-4 sm:w-5 sm:h-5 text-amber-400 fill-current" viewBox="0 0 24 24" aria-hidden="true">
-                            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
-                          </svg>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="md:w-2/3 w-full">
-                    <p className="text-base sm:text-lg md:text-xl italic mb-4 sm:mb-6 text-center md:text-left text-black">"{testimonials[current].quote}"</p>
-                    <div className="h-px w-16 bg-gradient-to-r from-blue-500 to-cyan-500 mx-auto md:mx-0" aria-hidden="true"></div>
-                  </div>
-                </div>
-              </motion.div>
-            </AnimatePresence>
-          </div>
-
-          {/* Navigation controls - made more compact on mobile */}
-          <div className="flex justify-center mt-6 sm:mt-8 gap-3 sm:gap-4" aria-label="Testimonial navigation">
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={prev}
-              className="h-8 w-8 sm:h-10 sm:w-10 rounded-full border-gray-300 text-black hover:bg-gray-100 focus:ring-2 focus:ring-amber-500 focus:outline-none"
-              aria-label="Previous testimonial"
-            >
-              <ChevronLeft className="h-4 w-4 sm:h-5 sm:w-5" aria-hidden="true" />
-            </Button>
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={next}
-              className="h-8 w-8 sm:h-10 sm:w-10 rounded-full border-gray-300 text-black hover:bg-gray-100 focus:ring-2 focus:ring-amber-500 focus:outline-none"
-              aria-label="Next testimonial"
-            >
-              <ChevronRight className="h-4 w-4 sm:h-5 sm:w-5" aria-hidden="true" />
-            </Button>
-          </div>
-
-          <div className="flex justify-center mt-4 sm:mt-6">
-            {testimonials.map((_, idx) => (
-              <button
-                key={idx}
-                onClick={() => {
-                  setAutoplay(false)
-                  setCurrent(idx)
-                }}
-                className={`w-1.5 h-1.5 sm:w-2 sm:h-2 mx-1 rounded-full focus:outline-none focus:ring-2 focus:ring-amber-500 ${
-                  current === idx ? "bg-gradient-to-r from-blue-500 to-cyan-500" : "bg-gray-300"
-                }`}
-                aria-label={`Go to testimonial ${idx + 1}`}
-                aria-current={current === idx ? "true" : "false"}
-              />
-            ))}
-          </div>
+        {/* Grid layout */}
+        <div className="grid md:grid-cols-3 gap-6 md:gap-8">
+          {testimonials.map((t, idx) => (
+            <TiltGlowCard key={t.author} idx={idx} yBackLeft={yBackLeft} data={t} />
+          ))}
         </div>
       </div>
     </section>
+  )
+}
+
+type Testimonial = {
+  quote: string
+  author: string
+  role: string
+  avatar: string
+  company: string
+  rating: number
+}
+
+import { useState } from "react"
+
+function TiltGlowCard({ data, idx, yBackLeft }: { data: Testimonial; idx: number; yBackLeft: any }) {
+  const cardX = useMotionValue(0)
+  const cardY = useMotionValue(0)
+  const springX = useSpring(cardX, { stiffness: 300, damping: 30 })
+  const springY = useSpring(cardY, { stiffness: 300, damping: 30 })
+
+  const rotateX = useTransform(springY, [-80, 80], [15, -15])
+  const rotateY = useTransform(springX, [-80, 80], [-15, 15])
+
+  const handleMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect()
+    const relX = e.clientX - rect.left - rect.width / 2
+    const relY = e.clientY - rect.top - rect.height / 2
+    cardX.set(Math.max(-80, Math.min(80, relX / 3)))
+    cardY.set(Math.max(-80, Math.min(80, relY / 3)))
+  }
+
+  const handleLeave = () => {
+    cardX.set(0)
+    cardY.set(0)
+  }
+
+  return (
+    <motion.article
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.3 }}
+      transition={{ duration: 0.5, delay: idx * 0.1 }}
+      onMouseMove={handleMove}
+      onMouseLeave={handleLeave}
+      style={{ rotateX, rotateY, transformStyle: "preserve-3d" as any }}
+      className="relative group rounded-2xl border border-gray-200 bg-white/90 backdrop-blur-sm p-6 overflow-hidden will-change-transform glow-card"
+    >
+      {/* Floating quote mark */}
+      <motion.div className="absolute -top-6 -left-2 text-red-500/20" style={{ y: yBackLeft }} aria-hidden="true">
+        <Quote size={56} />
+      </motion.div>
+
+      {/* Cursor-follow glow (scoped to card) */}
+      <motion.div
+        style={{ x: springX, y: springY }}
+        className="pointer-events-none absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 h-48 w-48 rounded-full bg-gradient-to-br from-blue-500/15 to-cyan-500/10 blur-2xl"
+        aria-hidden="true"
+      />
+
+      {/* Avatar */}
+      <div className="flex items-center gap-4 mb-4" style={{ transform: "translateZ(30px)" }}>
+        <Avatar src={data.avatar} alt={`Portrait of ${data.author}`} />
+        <div>
+          <h4 className="font-semibold text-black leading-tight">{data.author}</h4>
+          <p className="text-sm text-black/60">{data.role} • {data.company}</p>
+        </div>
+      </div>
+
+      <p className="text-black/90" style={{ transform: "translateZ(20px)" }}>“{data.quote}”</p>
+
+      {/* Underline accent */}
+      <div className="mt-4 h-px w-16 bg-gradient-to-r from-blue-500 to-cyan-500" aria-hidden="true" />
+
+      {/* Hover ring */}
+      <div className="pointer-events-none absolute inset-0 rounded-2xl ring-0 group-hover:ring-2 group-hover:ring-blue-300/60 transition-all" />
+    </motion.article>
+  )
+}
+
+function Avatar({ src, alt }: { src: string; alt: string }) {
+  const [failed, setFailed] = useState(false)
+  return (
+    <div className="relative w-14 h-14">
+      {failed ? (
+        <div className="w-full h-full rounded-full bg-gradient-to-br from-blue-500/20 to-cyan-500/20 flex items-center justify-center ring-1 ring-blue-300/40">
+          <UserRound className="text-blue-600" size={28} />
+        </div>
+      ) : (
+        <Image src={src} alt={alt} fill className="rounded-full object-cover" onError={() => setFailed(true)} />
+      )}
+    </div>
   )
 }

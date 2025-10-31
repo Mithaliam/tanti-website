@@ -1,6 +1,6 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { motion, type Variants } from "framer-motion"
 import { PiggyBank, Leaf, TrendingUp, Shield } from "lucide-react"
 import { useEffect, useRef } from "react"
 import { Button } from "@/components/ui/button"
@@ -36,13 +36,13 @@ export default function SolarPage() {
   }
 
   // Slide-in animations for alternating image/text panels
-  const slideInLeft = {
+  const slideInLeft: Variants = {
     hidden: { opacity: 0, x: -48 },
-    visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: "easeOut" } },
+    visible: { opacity: 1, x: 0, transition: { duration: 0.6 } },
   }
-  const slideInRight = {
+  const slideInRight: Variants = {
     hidden: { opacity: 0, x: 48 },
-    visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: "easeOut" } },
+    visible: { opacity: 1, x: 0, transition: { duration: 0.6 } },
   }
 
   // Handle feature button click
@@ -147,7 +147,7 @@ export default function SolarPage() {
                       ON-Grid
                     </div>
                     <Image
-                      src="/on%20grid.png"
+                      src="/on%20grid%20tanti.jpg"
                       alt="ON-Grid Installation"
                       fill
                       className="object-cover transition-transform duration-500 group-hover:scale-110"
@@ -183,7 +183,7 @@ export default function SolarPage() {
                       OFF-Grid
                     </div>
                     <Image
-                      src="/off%20grid.png"
+                      src="/off%20grid%20tanti.jpeg"
                       alt="OFF-Grid Installation"
                       fill
                       className="object-cover transition-transform duration-500 group-hover:scale-110"
@@ -195,9 +195,11 @@ export default function SolarPage() {
                           <li>✓ Battery bank required</li>
                           <li>✓ Optional generator backup</li>
                         </ul>
-                        <Button className="bg-white text-blue-600 hover:bg-gray-100">
-                          Explore OFF-Grid
-                        </Button>
+                        <Link href="/solar-off-grid">
+                          <Button className="bg-white text-blue-600 hover:bg-gray-100">
+                            Explore OFF-Grid
+                          </Button>
+                        </Link>
                       </div>
                     </div>
                   </div>
@@ -219,7 +221,7 @@ export default function SolarPage() {
                       Hybrid
                     </div>
                     <Image
-                      src="/hybrid.png"
+                      src="/Hybrid%20solar%20tanti.jpeg"
                       alt="Hybrid Installation"
                       fill
                       className="object-cover transition-transform duration-500 group-hover:scale-110"

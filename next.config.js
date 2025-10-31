@@ -20,6 +20,8 @@ const hashOnlyIdent = (context, _, exportName) =>
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  // Disable Next.js dev tools/indicators UI in development
+  devIndicators: false,
   // Set output file tracing root to fix multiple lockfiles warning
   outputFileTracingRoot: path.join(__dirname),
   // Add better error handling
