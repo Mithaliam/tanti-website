@@ -24,7 +24,7 @@ export default function HowItWorks() {
       number: "01",
       title: "Commercial",
       description:
-        "Create your account in seconds. No credit card required for the free trial.",
+        "Intelligent automation systems for commercial spaces. Enhance efficiency, safety, and sustainability with smart building solutions.",
       image: "/Industry%20-%20Commercial%20-%20Institutional%20%26%20Industrial%201.jpeg",
       fallbackImage: "/tanti/commercial.jpg",
     },
@@ -32,7 +32,7 @@ export default function HowItWorks() {
       number: "02",
       title: "Residential",
       description:
-        "Connect your existing tools and services with our one-click integrations.",
+        "Smart lighting and automation solutions for your home. Control your entire home seamlessly from anywhere.",
       image: "/Res.jpg",
       fallbackImage: "/tanti/residential%20image.jpg",
     },
@@ -40,7 +40,7 @@ export default function HowItWorks() {
       number: "03",
       title: "Solar",
       description:
-        "Configure your workspace and workflows to match your unique business needs.",
+        "Comprehensive solar energy solutions for residential and commercial projects. Reduce costs and environmental impact.",
       image: "/Solar.jpeg",
       fallbackImage: "/images/HowItWorks/step3.webp",
     },
@@ -48,7 +48,7 @@ export default function HowItWorks() {
       number: "04",
       title: "MEP",
       description:
-        "Go live with your optimized workflows and start seeing results immediately.",
+        "Expert mechanical, electrical, and plumbing engineering services. Optimal system design, installation, and maintenance.",
       image: "/MEP.jpeg",
       fallbackImage: "/tanti/security.jpg",
     },

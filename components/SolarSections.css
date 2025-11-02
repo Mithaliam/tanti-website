@@ -4,7 +4,7 @@
     height: 400vh; /* 4 sections * 100vh each */
     position: relative;
     width: 100%;
-    background: #f6f7fb;
+    background: #FFFFFF;
     z-index: 0;
 }
 
@@ -16,6 +16,7 @@
 	position: relative; /* for z-index + inner layout */
     width: 100%;
 	will-change: transform, opacity;
+	background-color: #FFFFFF !important; /* Prevent default/orange background flash */
 }
 
 .section-1 { z-index: 1; }
@@ -23,11 +24,23 @@
 .section-3 { z-index: 3; }
 .section-4 { z-index: 4; }
 
-/* Brand gradient: deep blue → cyan */
-.bg-one  { background: linear-gradient(90deg, #2563EB 0%, #06B6D4 100%); }
-.bg-two  { background: linear-gradient(90deg, #2563EB 0%, #06B6D4 100%); }
-.bg-three{ background: linear-gradient(90deg, #2563EB 0%, #06B6D4 100%); }
-.bg-four { background: linear-gradient(90deg, #2563EB 0%, #06B6D4 100%); }
+/* Brand gradient: deep blue → cyan - white base to prevent orange flash */
+.bg-one  { 
+	background-color: #FFFFFF; /* White base to prevent orange flash */
+	background-image: linear-gradient(90deg, #2563EB 0%, #06B6D4 100%); 
+}
+.bg-two  { 
+	background-color: #FFFFFF; /* White base to prevent orange flash */
+	background-image: linear-gradient(90deg, #2563EB 0%, #06B6D4 100%); 
+}
+.bg-three{ 
+	background-color: #FFFFFF; /* White base to prevent orange flash */
+	background-image: linear-gradient(90deg, #2563EB 0%, #06B6D4 100%); 
+}
+.bg-four { 
+	background-color: #FFFFFF; /* White base to prevent orange flash */
+	background-image: linear-gradient(90deg, #2563EB 0%, #06B6D4 100%); 
+}
 
 .section-inner {
 	max-width: 1200px;

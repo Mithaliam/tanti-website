@@ -7,7 +7,10 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import dynamic from "next/dynamic"
-const SolarSections = dynamic(() => import("@/components/SolarSections"), { ssr: false })
+const SolarSections = dynamic(() => import("@/components/SolarSections"), { 
+  ssr: false,
+  loading: () => null // No loading state - render immediately
+})
 import { useRouter } from "next/navigation"
 import Image from "next/image"
 import Link from "next/link"
@@ -15,14 +18,13 @@ import Link from "next/link"
 export default function SolarPage() {
   const router = useRouter()
   const heroVideoRef = useRef<HTMLVideoElement | null>(null)
+  
   useEffect(() => {
     const v = heroVideoRef.current
     if (!v) return
-    // Ensure autoplay on some browsers
+    // Ensure autoplay on some browsers - non-blocking
     v.muted = true
-    const play = () => v.play().catch(() => {})
-    if (v.readyState >= 2) play()
-    else v.addEventListener("loadeddata", play, { once: true })
+    v.play().catch(() => {})
   }, [])
   
   const heroVariants = {
@@ -66,7 +68,7 @@ export default function SolarPage() {
   }
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white" style={{ position: 'relative', zIndex: 1 }}>
       {/* Hero Section */}
       <section className="relative py-20 lg:py-32 min-h-[85vh] md:min-h-screen bg-gradient-to-br from-blue-50 via-white to-yellow-50 overflow-hidden">
         {/* Background video */}
@@ -76,7 +78,7 @@ export default function SolarPage() {
           muted
           loop
           playsInline
-          preload="auto"
+          preload="none"
           ref={heroVideoRef}
           poster="/images/hero.webp"
         >
@@ -150,6 +152,7 @@ export default function SolarPage() {
                       src="/on%20grid%20tanti.jpg"
                       alt="ON-Grid Installation"
                       fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       className="object-cover transition-transform duration-500 group-hover:scale-110"
                     />
                     <div className="absolute inset-0 installation-card-hover-gradient opacity-0 group-hover:opacity-90 transition-all duration-500 transform translate-y-full group-hover:translate-y-0 flex items-center justify-center z-20">
@@ -186,6 +189,7 @@ export default function SolarPage() {
                       src="/off%20grid%20tanti.jpeg"
                       alt="OFF-Grid Installation"
                       fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       className="object-cover transition-transform duration-500 group-hover:scale-110"
                     />
                     <div className="absolute inset-0 installation-card-hover-gradient opacity-0 group-hover:opacity-90 transition-all duration-500 transform translate-y-full group-hover:translate-y-0 flex items-center justify-center z-20">
@@ -224,6 +228,7 @@ export default function SolarPage() {
                       src="/Hybrid%20solar%20tanti.jpeg"
                       alt="Hybrid Installation"
                       fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       className="object-cover transition-transform duration-500 group-hover:scale-110"
                     />
                     <div className="absolute inset-0 installation-card-hover-gradient opacity-0 group-hover:opacity-90 transition-all duration-500 transform translate-y-full group-hover:translate-y-0 flex items-center justify-center z-20">
@@ -248,7 +253,7 @@ export default function SolarPage() {
 
       {/* Types of Roof Structure (GSAP overlap only here) */}
       <section className="py-20 bg-white relative z-0">
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-4 bg-white">
           <motion.div
             variants={cardVariants}
             initial="hidden"
@@ -265,7 +270,7 @@ export default function SolarPage() {
           </motion.div>
 
           {/* GSAP ScrollTrigger pinned overlap component - isolated */}
-          <div className="relative z-0">
+          <div className="relative z-0 bg-white">
             <SolarSections />
           </div>
         </div>
@@ -316,19 +321,19 @@ export default function SolarPage() {
                 <CardContent>
                   <div className="space-y-3">
                     <div className="flex items-center space-x-2">
-                      <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                      <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
                       <span className="text-sm text-gray-600">Monocrystalline Technology</span>
                     </div>
                     <div className="flex items-center space-x-2">
-                      <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                      <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
                       <span className="text-sm text-gray-600">25+ Year Warranty</span>
                     </div>
                     <div className="flex items-center space-x-2">
-                      <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                      <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
                       <span className="text-sm text-gray-600">Weather Resistant</span>
                     </div>
                     <div className="flex items-center space-x-2">
-                      <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                      <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
                       <span className="text-sm text-gray-600">Easy Installation</span>
                     </div>
                   </div>
@@ -416,19 +421,19 @@ export default function SolarPage() {
                 <CardContent>
                   <div className="space-y-3">
                     <div className="flex items-center space-x-2">
-                      <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                      <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
                       <span className="text-sm text-gray-600">Lithium-Ion Technology</span>
                     </div>
                     <div className="flex items-center space-x-2">
-                      <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                      <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
                       <span className="text-sm text-gray-600">10+ Year Lifespan</span>
                     </div>
                     <div className="flex items-center space-x-2">
-                      <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                      <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
                       <span className="text-sm text-gray-600">Backup Power</span>
                     </div>
                     <div className="flex items-center space-x-2">
-                      <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                      <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
                       <span className="text-sm text-gray-600">Smart Management</span>
                     </div>
                   </div>
@@ -456,7 +461,7 @@ export default function SolarPage() {
             className="text-center mb-16"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Complete Solar Solutions
+              Our Solar Projects
             </h2>
             <p className="text-lg text-gray-600 max-w-3xl mx-auto">
               From design to installation and maintenance, we provide comprehensive solar energy solutions 
@@ -465,7 +470,7 @@ export default function SolarPage() {
           </motion.div>
 
           <div className="grid gap-8">
-            {/* Residential Solar - image left, content right */}
+            {/* Solar Project - Sharan Gowda */}
             <motion.div
               variants={cardVariants}
               initial="hidden"
@@ -482,8 +487,8 @@ export default function SolarPage() {
                     viewport={{ once: false, amount: 0.2 }}
                   >
                     <div className="relative h-56 md:h-full min-h-[260px] bg-white rounded-xl">
-                      <Image src="/resi%20solar.jpeg" alt="Residential solar" fill className="object-contain" />
-                  </div>
+                      <Image src="/resi%20solar.jpeg" alt="Solar project - Sharan Gowda" fill className="object-contain" />
+                    </div>
                   </motion.div>
                   <motion.div
                     className="p-6 md:p-8 flex flex-col justify-center"
@@ -492,38 +497,39 @@ export default function SolarPage() {
                     whileInView="visible"
                     viewport={{ once: false, amount: 0.2 }}
                   >
-                    <h3 className="text-2xl font-bold text-gray-900 mb-2">Residential Solar</h3>
-                    <p className="text-gray-600 text-lg mb-6">Power your home with clean, renewable solar energy. Reduce your electricity bills and increase your property value.</p>
+                    <h3 className="text-2xl font-bold text-gray-900 mb-2">Sharan Gowda - Yadgiri Project</h3>
+                    <p className="text-gray-600 text-lg mb-6">
+                      A successful 20 KW solar installation in Yadgiri, utilizing Foxess Inverter technology for optimal energy generation and reliable performance.
+                    </p>
                     <div className="space-y-3 mb-6">
-                    <div className="flex items-center space-x-3">
-                      <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                      <span className="text-gray-700">Custom System Design</span>
+                      <div className="flex items-center space-x-3">
+                        <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                        <span className="text-gray-700"><strong>Client:</strong> Sharan Gowda</span>
+                      </div>
+                      <div className="flex items-center space-x-3">
+                        <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                        <span className="text-gray-700"><strong>Location:</strong> Yadgiri</span>
+                      </div>
+                      <div className="flex items-center space-x-3">
+                        <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                        <span className="text-gray-700"><strong>System Capacity:</strong> 20 KW</span>
+                      </div>
+                      <div className="flex items-center space-x-3">
+                        <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                        <span className="text-gray-700"><strong>Inverter:</strong> Foxess Inverter</span>
+                      </div>
                     </div>
-                    <div className="flex items-center space-x-3">
-                      <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                      <span className="text-gray-700">Professional Installation</span>
+                    <div className="flex flex-wrap gap-2 mb-6">
+                      <Badge variant="secondary" className="bg-blue-100 text-blue-800">20 KW System</Badge>
+                      <Badge variant="secondary" className="bg-green-100 text-green-800">Yadgiri</Badge>
+                      <Badge variant="secondary" className="bg-purple-100 text-purple-800">Foxess Inverter</Badge>
                     </div>
-                    <div className="flex items-center space-x-3">
-                      <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                      <span className="text-gray-700">25-Year Performance Guarantee</span>
-                    </div>
-                    <div className="flex items-center space-x-3">
-                      <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                      <span className="text-gray-700">Monitoring & Maintenance</span>
-                    </div>
-                  </div>
-                  <div className="flex flex-wrap gap-2 mb-6">
-                    <Badge variant="secondary" className="bg-blue-100 text-blue-800">3kW - 10kW Systems</Badge>
-                    <Badge variant="secondary" className="bg-green-100 text-green-800">Net Metering</Badge>
-                    <Badge variant="secondary" className="bg-yellow-100 text-yellow-800">Tax Credits</Badge>
-                  </div>
-                    <Button className="w-full bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white" onClick={() => handleDiscoverMoreClick("Solar Installation")}>Get Residential Quote</Button>
                   </motion.div>
                 </div>
               </div>
             </motion.div>
 
-            {/* Commercial Solar - image right, content left */}
+            {/* Solar Project - G B Suresh */}
             <motion.div
               variants={cardVariants}
               initial="hidden"
@@ -533,48 +539,49 @@ export default function SolarPage() {
               <div className="glow-card rounded-2xl overflow-hidden bg-white">
                 <div className="grid md:grid-cols-2 items-stretch">
                   <motion.div
-                    className="p-6 md:p-8 flex flex-col justify-center order-2 md:order-1"
+                    className="p-6 md:p-8 order-2 md:order-1"
                     variants={slideInLeft}
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: false, amount: 0.2 }}
                   >
-                    <h3 className="text-2xl font-bold text-gray-900 mb-2">Commercial Solar</h3>
-                    <p className="text-gray-600 text-lg mb-6">Large-scale solar installations for businesses, factories, and commercial properties. Maximize your ROI with our commercial solar solutions.</p>
+                    <h3 className="text-2xl font-bold text-gray-900 mb-2">G B Suresh - Davangere Project</h3>
+                    <p className="text-gray-600 text-lg mb-6">
+                      A successful 20 KW solar installation in Davangere, powered by Growatt Inverter technology for efficient energy conversion and sustainable power generation.
+                    </p>
                     <div className="space-y-3 mb-6">
-                    <div className="flex items-center space-x-3">
-                      <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                      <span className="text-gray-700">Scalable System Design</span>
+                      <div className="flex items-center space-x-3">
+                        <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                        <span className="text-gray-700"><strong>Client:</strong> G B Suresh</span>
+                      </div>
+                      <div className="flex items-center space-x-3">
+                        <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                        <span className="text-gray-700"><strong>Location:</strong> Davangere</span>
+                      </div>
+                      <div className="flex items-center space-x-3">
+                        <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                        <span className="text-gray-700"><strong>System Capacity:</strong> 20 KW</span>
+                      </div>
+                      <div className="flex items-center space-x-3">
+                        <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                        <span className="text-gray-700"><strong>Inverter:</strong> Growatt Inverter</span>
+                      </div>
                     </div>
-                    <div className="flex items-center space-x-3">
-                      <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                      <span className="text-gray-700">Fast Installation</span>
+                    <div className="flex flex-wrap gap-2 mb-6">
+                      <Badge variant="secondary" className="bg-blue-100 text-blue-800">20 KW System</Badge>
+                      <Badge variant="secondary" className="bg-green-100 text-green-800">Davangere</Badge>
+                      <Badge variant="secondary" className="bg-purple-100 text-purple-800">Growatt Inverter</Badge>
                     </div>
-                    <div className="flex items-center space-x-3">
-                      <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                      <span className="text-gray-700">Performance Monitoring</span>
-                    </div>
-                    <div className="flex items-center space-x-3">
-                      <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                      <span className="text-gray-700">O&M Services</span>
-                    </div>
-                  </div>
-                  <div className="flex flex-wrap gap-2 mb-6">
-                    <Badge variant="secondary" className="bg-green-100 text-green-800">10kW - 1MW+ Systems</Badge>
-                    <Badge variant="secondary" className="bg-blue-100 text-blue-800">PPA Options</Badge>
-                    <Badge variant="secondary" className="bg-purple-100 text-purple-800">ROI Analysis</Badge>
-                  </div>
-                    <Button className="w-full bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white" onClick={() => handleDiscoverMoreClick("Solar Installation")}>Get Commercial Quote</Button>
                   </motion.div>
                   <motion.div
-                    className="order-1 md:order-2 p-6 md:p-8"
+                    className="p-6 md:p-8 order-1 md:order-2"
                     variants={slideInRight}
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: false, amount: 0.2 }}
                   >
                     <div className="relative h-56 md:h-full min-h-[260px] bg-white rounded-xl">
-                      <Image src="/commercial%20solar.jpeg" alt="Commercial solar" fill className="object-contain" />
+                      <Image src="/commercial%20solar.jpeg" alt="Solar project - G B Suresh" fill className="object-contain" />
                     </div>
                   </motion.div>
                 </div>
@@ -674,43 +681,6 @@ export default function SolarPage() {
               </p>
             </motion.div>
           </div>
-        </div>
-      </section>
-
-      {/* Call to Action */}
-      <section className="py-20 bg-gradient-to-r from-blue-500 to-cyan-500">
-        <div className="container mx-auto px-4">
-          <motion.div
-            variants={cardVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="text-center text-white"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Ready to Go Solar?
-            </h2>
-            <p className="text-xl mb-8 max-w-3xl mx-auto opacity-90">
-              Join thousands of satisfied customers who have made the switch to solar energy. 
-              Get your free solar assessment today and start saving on your electricity bills.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button 
-                size="lg" 
-                variant="secondary"
-                className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-3 text-lg font-semibold"
-              >
-                Get Free Solar Assessment
-              </Button>
-              <Button 
-                size="lg" 
-                variant="outline"
-                className="border-white text-white hover:bg-white hover:text-blue-600 px-8 py-3 text-lg"
-              >
-                Call: +919606457175
-              </Button>
-            </div>
-          </motion.div>
         </div>
       </section>
     </div>

@@ -39,8 +39,7 @@ export default function ModernHero() {
           preload="auto"
           className="absolute inset-0 w-full h-full object-cover"
         >
-          <source src="/tanti home background.mp4" type="video/mp4" />
-          <source src="/tanti web background.mp4" type="video/mp4" />
+          <source src="/tanti Main background.mp4" type="video/mp4" />
         </video>
         
         {/* Dark overlay for better text readability */}

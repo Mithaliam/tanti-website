@@ -11,9 +11,9 @@ export const metadata: Metadata = {
   title: "Tanti - Elevate Your Digital Experience",
   description: "Transform how you work with our AI-powered platform. Automate workflows, gain insights, and boost productivity.",
   icons: {
-    icon: "/favicon.svg",
-    shortcut: "/favicon.svg",
-    apple: "/apple-touch-icon.png",
+    icon: "/tanti-automatics-logo.png",
+    shortcut: "/tanti-automatics-logo.png",
+    apple: "/tanti-automatics-logo.png",
   },
   manifest: "/site.webmanifest",
   generator: "Mohamed Djoudir",
@@ -38,50 +38,24 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <head>
+      <html lang="en" suppressHydrationWarning>
+        <head>
+        <meta name="theme-color" content="#FFFFFF" />
+        <meta name="msapplication-navbutton-color" content="#FFFFFF" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="white" />
         {/* Add any other head tags if needed, metadata object handles common ones */}
       </head>
-      <body className={`${roboto.className} text-black`} style={{ backgroundColor: '#FFFFFF' }}>
+      <body className={`${roboto.className} text-black bg-white`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="light"
-          enableSystem
+          enableSystem={false}
           disableTransitionOnChange
         >
           <ModernHeader />
-          <main>{children}</main>
+          <main className="bg-white">{children}</main>
           <ModernFooter />
         </ThemeProvider>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              // Only run on client side to avoid hydration issues
-              if (typeof window !== 'undefined') {
-                function hideNextJSIndicators() {
-                  // Hide Next.js development indicators
-                  const indicators = document.querySelectorAll('[data-nextjs-toast], [data-nextjs-dialog], [data-nextjs-portal]');
-                  indicators.forEach(el => el.style.display = 'none');
-                  
-                  // Hide elements with high z-index that are likely Next.js overlays
-                  const overlays = document.querySelectorAll('div[style*="z-index: 9999"], div[style*="z-index: 10000"], div[style*="z-index: 2147483647"]');
-                  overlays.forEach(el => el.style.display = 'none');
-                  
-                  // Hide circular floating elements
-                  const circular = document.querySelectorAll('div[style*="border-radius: 50%"][style*="position: fixed"], div[class*="rounded-full"][style*="position: fixed"]');
-                  circular.forEach(el => el.style.display = 'none');
-                }
-                
-                // Run after DOM is ready
-                document.addEventListener('DOMContentLoaded', hideNextJSIndicators);
-                
-                // Run after a short delay to catch dynamically added elements
-                setTimeout(hideNextJSIndicators, 100);
-                setTimeout(hideNextJSIndicators, 500);
-              }
-            `,
-          }}
-        />
       </body>
     </html>
   )

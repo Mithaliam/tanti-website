@@ -20,28 +20,47 @@ export default function SolarSections() {
 	};
 
 	useEffect(() => {
-		const ctx = gsap.context(() => {
-            sectionsRef.current.forEach((section) => {
-                // Keep all sections fully readable immediately; animate only slight settling while pinned.
-                gsap.fromTo(
-                    section,
-                    { opacity: 1, yPercent: 0 },
-                    { opacity: 1, yPercent: 0, ease: "none",
-						scrollTrigger: {
-							trigger: section,
-							start: "top top",
-							end: "+=100%",
-							pin: true,
-							pinSpacing: false,
-							scrub: true,
-							anticipatePin: 1,
-						},
-					}
-				);
-			});
-		}, containerRef);
+		let ctx;
+		let timeoutId;
+		
+		// Wait for DOM to be fully ready before initializing
+		timeoutId = setTimeout(() => {
+			if (!containerRef.current) return;
+			
+			ctx = gsap.context(() => {
+				sectionsRef.current.forEach((section) => {
+					if (!section) return;
+					
+					// Keep all sections fully readable immediately; animate only slight settling while pinned.
+					gsap.fromTo(
+						section,
+						{ opacity: 1, yPercent: 0 },
+						{ 
+							opacity: 1, 
+							yPercent: 0, 
+							ease: "none",
+							scrollTrigger: {
+								trigger: section,
+								start: "top top",
+								end: "+=100%",
+								pin: true,
+								pinSpacing: false,
+								scrub: true,
+								anticipatePin: 1,
+							},
+						}
+					);
+				});
+				
+				// Refresh ScrollTrigger to ensure proper setup
+				ScrollTrigger.refresh();
+			}, containerRef);
+		}, 100);
 
-		return () => ctx.revert();
+		return () => {
+			if (timeoutId) clearTimeout(timeoutId);
+			if (ctx) ctx.revert();
+		};
 	}, []);
 
 	return (
