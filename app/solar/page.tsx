@@ -80,7 +80,6 @@ export default function SolarPage() {
           playsInline
           preload="none"
           ref={heroVideoRef}
-          poster="/images/hero.webp"
         >
           <source src="/solar%20video.mp4" type="video/mp4" />
         </video>
@@ -145,7 +144,7 @@ export default function SolarPage() {
               <Card className="h-full transition-shadow duration-300 group cursor-pointer glow-card">
                 <CardHeader>
                   <div className="w-full h-96 bg-gray-100 rounded-lg overflow-hidden mb-4 relative">
-                    <div className="absolute inset-x-0 top-1 z-30 bg-white/90 border border-white/70 text-[#3B82F6] font-semibold px-4 py-2 rounded-xl shadow-sm text-center w-full">
+                    <div className="absolute inset-x-0 top-1 z-30 bg-gradient-to-r from-white/30 via-white/15 to-transparent backdrop-blur-sm border border-white/40 text-white font-semibold px-4 py-2 rounded-xl shadow-sm text-center w-full">
                       ON-Grid
                     </div>
                     <Image
@@ -154,6 +153,7 @@ export default function SolarPage() {
                       fill
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       className="object-cover transition-transform duration-500 group-hover:scale-110"
+                      style={{ objectPosition: 'center 65%' }}
                     />
                     <div className="absolute inset-0 installation-card-hover-gradient opacity-0 group-hover:opacity-90 transition-all duration-500 transform translate-y-full group-hover:translate-y-0 flex items-center justify-center z-20">
                       <div className="text-white text-center p-6">
@@ -162,9 +162,7 @@ export default function SolarPage() {
                           <li>✓ No batteries required</li>
                           <li>✓ Best return on investment</li>
                         </ul>
-                        <Button className="bg-white text-blue-600 hover:bg-gray-100">
-                          Explore ON-Grid
-                        </Button>
+                        {/* Explore button removed per request */}
                       </div>
                     </div>
                   </div>
@@ -182,7 +180,7 @@ export default function SolarPage() {
               <Card className="h-full transition-shadow duration-300 group cursor-pointer glow-card">
                 <CardHeader>
                   <div className="w-full h-96 bg-gray-100 rounded-lg overflow-hidden mb-4 relative">
-                    <div className="absolute inset-x-0 top-1 z-30 bg-white/90 border border-white/70 text-[#3B82F6] font-semibold px-4 py-2 rounded-xl shadow-sm text-center w-full">
+                    <div className="absolute inset-x-0 top-1 z-30 bg-gradient-to-r from-white/30 via-white/15 to-transparent backdrop-blur-sm border border-white/40 text-white font-semibold px-4 py-2 rounded-xl shadow-sm text-center w-full">
                       OFF-Grid
                     </div>
                     <Image
@@ -190,7 +188,7 @@ export default function SolarPage() {
                       alt="OFF-Grid Installation"
                       fill
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      className="object-cover transition-transform duration-500 group-hover:scale-110"
+                      className="object-cover object-top transition-transform duration-500 group-hover:scale-110"
                     />
                     <div className="absolute inset-0 installation-card-hover-gradient opacity-0 group-hover:opacity-90 transition-all duration-500 transform translate-y-full group-hover:translate-y-0 flex items-center justify-center z-20">
                       <div className="text-white text-center p-6">
@@ -199,11 +197,7 @@ export default function SolarPage() {
                           <li>✓ Battery bank required</li>
                           <li>✓ Optional generator backup</li>
                         </ul>
-                        <Link href="/solar-off-grid">
-                          <Button className="bg-white text-blue-600 hover:bg-gray-100">
-                            Explore OFF-Grid
-                          </Button>
-                        </Link>
+                        {/* Explore OFF-Grid button removed per request */}
                       </div>
                     </div>
                   </div>
@@ -221,7 +215,7 @@ export default function SolarPage() {
               <Card className="h-full transition-shadow duration-300 group cursor-pointer glow-card">
                 <CardHeader>
                   <div className="w-full h-96 bg-gray-100 rounded-lg overflow-hidden mb-4 relative">
-                    <div className="absolute inset-x-0 top-1 z-30 bg-white/90 border border-white/70 text-[#3B82F6] font-semibold px-4 py-2 rounded-xl shadow-sm text-center w-full">
+                    <div className="absolute inset-x-0 top-1 z-30 bg-gradient-to-r from-white/30 via-white/15 to-transparent backdrop-blur-sm border border-white/40 text-white font-semibold px-4 py-2 rounded-xl shadow-sm text-center w-full">
                       Hybrid
                     </div>
                     <Image
@@ -229,7 +223,7 @@ export default function SolarPage() {
                       alt="Hybrid Installation"
                       fill
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      className="object-cover transition-transform duration-500 group-hover:scale-110"
+                      className="object-cover object-top transition-transform duration-500 group-hover:scale-110"
                     />
                     <div className="absolute inset-0 installation-card-hover-gradient opacity-0 group-hover:opacity-90 transition-all duration-500 transform translate-y-full group-hover:translate-y-0 flex items-center justify-center z-20">
                       <div className="text-white text-center p-6">
@@ -238,9 +232,7 @@ export default function SolarPage() {
                           <li>✓ Export excess to grid</li>
                           <li>✓ Best of both worlds</li>
                         </ul>
-                        <Button className="bg-white text-blue-600 hover:bg-gray-100">
-                          Explore Hybrid
-                        </Button>
+                        {/* Explore Hybrid button removed per request */}
                       </div>
                     </div>
                   </div>

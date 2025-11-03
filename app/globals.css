@@ -435,6 +435,32 @@ main {
   background-color: #FFFFFF !important;
 }
 
+/* Block dashboard/AI interface images from showing anywhere */
+img[src*="image.png"],
+img[src*="dashboard"],
+img[src*="elevate"],
+img[src*="nova"],
+img[src*="AI"],
+*[style*="image.png"],
+*[style*="dashboard"],
+*[style*="elevate"],
+*[style*="nova"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+}
+
+/* Prevent background images matching dashboard patterns */
+html[style*="image.png"],
+body[style*="image.png"],
+main[style*="image.png"],
+html[style*="dashboard"],
+body[style*="dashboard"],
+main[style*="dashboard"] {
+  background-image: none !important;
+  background: #FFFFFF !important;
+}
+
 /* Ensure sections have white background before gradients apply - prevent orange flash */
 .section {
   background-color: #FFFFFF !important;

@@ -35,30 +35,30 @@ export default function SolarPanelsPage() {
 								systems are optimized for Indian climates with best‑in‑class warranties.
 							</p>
 							<div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-8">
-								<div className="rounded-2xl border border-blue-100 bg-white/70 p-4 glow-card">
+                                <div className="rounded-2xl border border-white/50 bg-gradient-to-br from-white/70 via-white/30 to-white/10 backdrop-blur-md shadow-md p-4 glow-card">
 									<p className="text-sm text-gray-500">Module Efficiency</p>
 									<p className="text-2xl font-bold text-[#3B82F6]">up to 22.5%</p>
 									<p className="text-gray-600 mt-1">More energy from the same roof area</p>
 								</div>
-								<div className="rounded-2xl border border-blue-100 bg-white/70 p-4 glow-card">
+                                <div className="rounded-2xl border border-white/50 bg-gradient-to-br from-white/70 via-white/30 to-white/10 backdrop-blur-md shadow-md p-4 glow-card">
 									<p className="text-sm text-gray-500">Warranty Coverage</p>
 									<p className="text-2xl font-bold text-[#3B82F6]">25 Years</p>
 									<p className="text-gray-600 mt-1">Performance and product assurance</p>
 								</div>
-								<div className="rounded-2xl border border-blue-100 bg-white/70 p-4 glow-card">
+                                <div className="rounded-2xl border border-white/50 bg-gradient-to-br from-white/70 via-white/30 to-white/10 backdrop-blur-md shadow-md p-4 glow-card">
 									<p className="text-sm text-gray-500">Standards</p>
 									<p className="text-2xl font-bold text-[#3B82F6]">BIS / ALMM</p>
 									<p className="text-gray-600 mt-1">Compliant for government subsidies</p>
 								</div>
 							</div>
 						</div>
-						<div className="relative h-64 md:h-80 lg:h-[28rem] rounded-2xl overflow-hidden glow-card">
+                        <div className="relative h-64 md:h-80 lg:h-[28rem] rounded-2xl overflow-hidden glow-card">
 							<Image
 								src="/solar%20panel.jpeg"
 								alt="Modern rooftop solar panel array at sunset"
 								fill
 								priority
-								className="object-cover"
+                                className="object-cover object-top"
 							/>
 							<div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-black/20 via-black/0 to-transparent" />
 						</div>
@@ -79,28 +79,34 @@ export default function SolarPanelsPage() {
 						Why Choose Our Solar Panels
 					</motion.h2>
 					<div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-						{[
-							{
-								title: "Monocrystalline Efficiency",
-								desc: "Premium cells with high conversion efficiency for maximum output in limited space.",
-								img: "/images/analytics.png",
-							},
-							{
-								title: "Durability & Weather Resistance",
-								desc: "Salt‑mist, ammonia, and PID resistant. Built to withstand heat, wind, and hail.",
-								img: "/images/automation.png",
-							},
-							{
-								title: "Smart Monitoring Ready",
-								desc: "Seamlessly integrates with inverters and apps for real‑time performance tracking.",
-								img: "/images/dashboard.png",
-							},
+                        {[
+                            {
+                                title: "Monocrystalline Efficiency",
+                                desc: "Premium cells with high conversion efficiency for maximum output in limited space.",
+                                img: "/monocrystalline.jpeg",
+                            },
+                            {
+                                title: "Durability & Weather Resistance",
+                                desc: "Salt‑mist, ammonia, and PID resistant. Built to withstand heat, wind, and hail.",
+                                img: "/weather%20resistance.jpeg",
+                            },
+                            {
+                                title: "Smart Monitoring Ready",
+                                desc: "Seamlessly integrates with inverters and apps for real‑time performance tracking.",
+                                img: "/smart%20monitoring.jpg",
+                            },
 						].map((f, idx) => (
 							<motion.div key={idx} variants={cardVariants} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-								<Card className="h-full glow-card">
+                                <Card className="h-full bg-gradient-to-br from-white/20 via-white/5 to-transparent backdrop-blur-sm border border-white/30 glow-card">
 									<CardHeader>
-										<div className="relative w-full h-40 rounded-xl overflow-hidden mb-4">
-											<Image src={f.img} alt={f.title} fill className="object-cover" />
+                                        <div className="relative w-full h-40 rounded-xl overflow-hidden mb-4">
+                                            <Image 
+                                              src={f.img} 
+                                              alt={f.title} 
+                                              fill 
+                                              className="object-cover" 
+                                              style={{ objectPosition: f.title === 'Durability & Weather Resistance' ? 'center 70%' : 'center top' }}
+                                            />
 										</div>
 										<CardTitle className="text-xl">{f.title}</CardTitle>
 										<CardDescription>{f.desc}</CardDescription>
@@ -132,16 +138,22 @@ export default function SolarPanelsPage() {
 						Popular Panel Types
 					</motion.h2>
 					<div className="grid md:grid-cols-3 gap-8">
-						{[
-							{ name: "Monocrystalline", img: "/solar%20panel.jpeg", points: ["Highest efficiency", "Sleek black look", "Great for limited roof area"] },
-							{ name: "Polycrystalline", img: "/images/hero2.png", points: ["Balanced price‑to‑performance", "Proven reliability", "Ideal for larger roofs"] },
-							{ name: "Thin‑Film", img: "/images/hero1.webp", points: ["Lightweight & flexible", "Performs well in heat", "Aesthetic integration"] },
+                        {[
+                            { name: "Monocrystalline", img: "/monocrystalline%20-1.jpeg", points: ["Highest efficiency", "Sleek black look", "Great for limited roof area"] },
+                            { name: "Polycrystalline", img: "/polycrystalline.jpeg", points: ["Balanced price‑to‑performance", "Proven reliability", "Ideal for larger roofs"] },
+                            { name: "Thin‑Film", img: "/thin%20film.jpeg", points: ["Lightweight & flexible", "Performs well in heat", "Aesthetic integration"] },
 						].map((t, idx) => (
 							<motion.div key={idx} variants={cardVariants} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-								<Card className="h-full group glow-card">
+                                <Card className="h-full group bg-gradient-to-br from-white/20 via-white/5 to-transparent backdrop-blur-sm border border-white/30 glow-card">
 									<CardHeader>
-										<div className="relative w-full h-44 rounded-xl overflow-hidden mb-4">
-											<Image src={t.img} alt={t.name} fill className="object-cover transition-transform duration-500 group-hover:scale-105" />
+                                        <div className="relative w-full h-44 rounded-xl overflow-hidden mb-4">
+                                            <Image 
+                                              src={t.img} 
+                                              alt={t.name} 
+                                              fill 
+                                              className={`object-cover transition-transform duration-500 group-hover:scale-105`} 
+                                              style={{ objectPosition: t.name === 'Thin‑Film' ? 'center 85%' : 'center top' }}
+                                            />
 										</div>
 										<CardTitle className="text-xl">{t.name}</CardTitle>
 										<CardDescription>Optimized for different budgets and aesthetics.</CardDescription>
@@ -161,26 +173,7 @@ export default function SolarPanelsPage() {
 				</div>
 			</section>
 
-			{/* CTA */}
-			<section className="py-20 bg-gradient-to-r from-blue-500 to-cyan-500">
-				<div className="container mx-auto px-4 text-center text-white">
-					<motion.h2
-						variants={cardVariants}
-						initial="hidden"
-						whileInView="visible"
-						viewport={{ once: true }}
-						className="text-3xl md:text-4xl font-bold mb-4"
-					>
-						Ready to power your home with solar?
-					</motion.h2>
-					<p className="text-lg opacity-90 max-w-3xl mx-auto mb-8">
-						Talk to our experts for site assessment, system sizing, and a transparent quote.
-					</p>
-					<Button size="lg" variant="secondary" className="bg-white text-blue-600 hover:bg-gray-100 font-semibold px-8">
-						Get My Solar Quote
-					</Button>
-				</div>
-			</section>
+			{/* CTA removed per request */}
 		</div>
 	)
 }

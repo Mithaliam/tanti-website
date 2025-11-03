@@ -8,8 +8,8 @@ import ModernFooter from "@/components/footer"
 const roboto = Roboto({ subsets: ["latin"], weight: ["400", "500", "700"] })
 
 export const metadata: Metadata = {
-  title: "Tanti - Elevate Your Digital Experience",
-  description: "Transform how you work with our AI-powered platform. Automate workflows, gain insights, and boost productivity.",
+  title: "Tanti - Intelligent Building Systems & LMS",
+  description: "Comprehensive automation solutions for residential, commercial, and security needs. Smart building systems and lighting management.",
   icons: {
     icon: "/tanti-automatics-logo.png",
     shortcut: "/tanti-automatics-logo.png",
@@ -18,16 +18,8 @@ export const metadata: Metadata = {
   manifest: "/site.webmanifest",
   generator: "Mohamed Djoudir",
   openGraph: {
-    title: "Tanti - Elevate Your Digital Experience",
-    description: "Transform how you work with our AI-powered platform. Automate workflows, gain insights, and boost productivity.",
-    images: [
-      {
-        url: "/image.png",
-        width: 1200,
-        height: 630,
-        alt: "Tanti - AI-powered platform",
-      },
-    ],
+    title: "Tanti - Intelligent Building Systems & LMS",
+    description: "Comprehensive automation solutions for residential, commercial, and security needs. Smart building systems and lighting management.",
     type: "website",
   },
 }

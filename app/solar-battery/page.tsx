@@ -80,7 +80,7 @@ export default function SolarBatteryPage() {
 					</motion.h2>
 					<div className="grid md:grid-cols-3 gap-8">
 						{[
-							{ name: "Backup During Outages", img: "/images/hero.webp", points: ["Instant switchover", "Critical loads support", "Quiet & clean"] },
+							{ name: "Backup During Outages", img: "/battery.jpg", points: ["Instant switchover", "Critical loads support", "Quiet & clean"] },
 							{ name: "Time‑of‑Use Savings", img: "/images/webinar.png", points: ["Charge off‑peak", "Use at peak tariff", "Lower bills"] },
 							{ name: "Self‑Consumption", img: "/solar%20panel.jpeg", points: ["Use more of your solar", "Reduce grid imports", "Increase ROI"] },
 						].map((t, idx) => (
