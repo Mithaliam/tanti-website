@@ -11,9 +11,12 @@ export const metadata: Metadata = {
   title: "Tanti - Intelligent Building Systems & LMS",
   description: "Comprehensive automation solutions for residential, commercial, and security needs. Smart building systems and lighting management.",
   icons: {
-    icon: "/tanti-automatics-logo.png",
-    shortcut: "/tanti-automatics-logo.png",
-    apple: "/tanti-automatics-logo.png",
+    icon: [
+      { url: "/tanti-favicon.svg", type: "image/svg+xml" },
+      { url: "/favicon-96x96.png", sizes: "96x96" },
+    ],
+    shortcut: "/tanti-favicon.svg",
+    apple: "/web-app-manifest-192x192.png",
   },
   manifest: "/site.webmanifest",
   generator: "Mohamed Djoudir",
@@ -32,8 +35,8 @@ export default function RootLayout({
   return (
       <html lang="en" suppressHydrationWarning>
         <head>
-        <meta name="theme-color" content="#FFFFFF" />
-        <meta name="msapplication-navbutton-color" content="#FFFFFF" />
+        <meta name="theme-color" content="#ffffff" />
+        <meta name="msapplication-TileColor" content="#ffffff" />
         <meta name="apple-mobile-web-app-status-bar-style" content="white" />
         {/* Add any other head tags if needed, metadata object handles common ones */}
       </head>

@@ -44,7 +44,7 @@ export default function ModernHeader() {
     <header
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300 h-[60px] flex items-center",
-        "bg-gradient-to-r from-white/95 to-white/80 backdrop-blur-lg shadow-lg shadow-gray-200 border-b border-gray-200"
+        "bg-white shadow-lg shadow-gray-200 border-b border-gray-200"
       )}
     >
       <div className="container mx-auto px-4 flex items-center justify-between">

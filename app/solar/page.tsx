@@ -155,7 +155,7 @@ export default function SolarPage() {
                       className="object-cover transition-transform duration-500 group-hover:scale-110"
                       style={{ objectPosition: 'center 65%' }}
                     />
-                    <div className="absolute inset-0 installation-card-hover-gradient opacity-0 group-hover:opacity-90 transition-all duration-500 transform translate-y-full group-hover:translate-y-0 flex items-center justify-center z-20">
+                    <div className="absolute inset-0 bg-blue-600 opacity-0 group-hover:opacity-90 transition-all duration-500 transform translate-y-full group-hover:translate-y-0 flex items-center justify-center z-20">
                       <div className="text-white text-center p-6">
                         <ul className="text-left space-y-2 mb-4">
                           <li>✓ Net metering enabled</li>
@@ -190,7 +190,7 @@ export default function SolarPage() {
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       className="object-cover object-top transition-transform duration-500 group-hover:scale-110"
                     />
-                    <div className="absolute inset-0 installation-card-hover-gradient opacity-0 group-hover:opacity-90 transition-all duration-500 transform translate-y-full group-hover:translate-y-0 flex items-center justify-center z-20">
+                    <div className="absolute inset-0 bg-blue-600 opacity-0 group-hover:opacity-90 transition-all duration-500 transform translate-y-full group-hover:translate-y-0 flex items-center justify-center z-20">
                       <div className="text-white text-center p-6">
                         <ul className="text-left space-y-2 mb-4">
                           <li>✓ Works without grid</li>
@@ -225,7 +225,7 @@ export default function SolarPage() {
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       className="object-cover object-top transition-transform duration-500 group-hover:scale-110"
                     />
-                    <div className="absolute inset-0 installation-card-hover-gradient opacity-0 group-hover:opacity-90 transition-all duration-500 transform translate-y-full group-hover:translate-y-0 flex items-center justify-center z-20">
+                    <div className="absolute inset-0 bg-blue-600 opacity-0 group-hover:opacity-90 transition-all duration-500 transform translate-y-full group-hover:translate-y-0 flex items-center justify-center z-20">
                       <div className="text-white text-center p-6">
                         <ul className="text-left space-y-2 mb-4">
                           <li>✓ Battery backup during outages</li>

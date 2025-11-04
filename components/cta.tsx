@@ -34,9 +34,11 @@ export default function ModernCta() {
                   Get a Quote
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
-                <Button variant="outline" className="border-white/20 text-white hover:bg-white/10 h-10 sm:h-12 px-6 sm:px-8 text-sm sm:text-base">
-                  Contact Us
-                </Button>
+                <a href="/contact">
+                  <Button variant="outline" className="border-white/20 text-white hover:bg-white/10 h-10 sm:h-12 px-6 sm:px-8 text-sm sm:text-base">
+                    Contact Us
+                  </Button>
+                </a>
               </div>
 
               <p className="mt-4 sm:mt-6 text-white/50 text-xs sm:text-sm">Need Help? Talk to an Expert: +919606457175</p>

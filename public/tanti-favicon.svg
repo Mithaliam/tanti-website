@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <style>
+      .bg{fill:#ffffff}
+    </style>
+  </defs>
+  <!-- White circular background -->
+  <circle class="bg" cx="256" cy="256" r="256"/>
+  <!-- Centered Tanti logo image, maximized within safe inset for clarity -->
+  <image href="/tanti-automatics-logo.png" x="32" y="128" width="448" height="256" preserveAspectRatio="xMidYMid meet"/>
+</svg>
+

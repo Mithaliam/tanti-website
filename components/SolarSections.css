@@ -50,9 +50,10 @@
 	display: grid;
 	grid-template-columns: 1.2fr 1fr; /* text left, visual right */
 	gap: clamp(24px, 4vw, 48px);
-	/* Light grey panel with solid blue frame */
+    /* Light grey panel with gradient blue frame */
 	background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
-	border: 3px solid #3B82F6; /* solid blue frame */
+    border: 3px solid transparent;
+    border-image: linear-gradient(90deg, #2563EB 0%, #06B6D4 100%) 1;
 	backdrop-filter: blur(4px);
 	border-radius: 24px;
 	box-shadow: 0 30px 80px rgba(0,0,0,0.08);
@@ -123,8 +124,9 @@
 	position: relative;
 	overflow: hidden;
 	user-select: none;
-	/* Solid blue frame */
-	border: 3px solid #3B82F6; /* solid blue */
+    /* Gradient blue frame */
+    border: 3px solid transparent;
+    border-image: linear-gradient(90deg, #2563EB 0%, #06B6D4 100%) 1;
 	box-shadow:
 		0 12px 28px rgba(0, 0, 0, 0.08);            /* subtle drop shadow only */
 	transition: box-shadow 250ms ease;

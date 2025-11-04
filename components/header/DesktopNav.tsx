@@ -20,7 +20,7 @@ export default function DesktopNav() {
           Company
         </Link>
 
-        <Link href="#contact" className="text-blue-600 hover:text-blue-700 transition-colors text-sm lg:text-base">
+        <Link href="/contact" className="text-blue-600 hover:text-blue-700 transition-colors text-sm lg:text-base">
           Support
         </Link>
 
@@ -30,17 +30,16 @@ export default function DesktopNav() {
       </nav>
 
       <div className="hidden md:flex items-center gap-2 lg:gap-4">
-        <Button 
-          variant="ghost" 
-          className="text-blue-600 hover:bg-blue-50 focus-visible:ring-2 focus-visible:ring-amber-500/70 text-sm lg:text-base"
-        >
+        <Link href="/contact" className="text-blue-600 hover:bg-blue-50 focus-visible:ring-2 focus-visible:ring-amber-500/70 text-sm lg:text-base px-2 py-1 rounded-md">
           Need Help? +919606457175
-        </Button>
-        <Button 
-          className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white border-0 shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/30 transition-shadow text-sm lg:text-base px-3 lg:px-4"
-        >
-          Let's Talk
-        </Button>
+        </Link>
+        <Link href="/contact">
+          <Button 
+            className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white border-0 shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/30 transition-shadow text-sm lg:text-base px-3 lg:px-4"
+          >
+            Let's Talk
+          </Button>
+        </Link>
       </div>
     </>
   )

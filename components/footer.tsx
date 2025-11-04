@@ -25,15 +25,15 @@ export default function ModernFooter() {
                 <Twitter className="h-5 w-5" />
                 <span className="sr-only">Twitter</span>
               </Link>
-              <Link href="#" className="text-white/50 hover:text-white transition-colors">
+              <Link href="https://www.facebook.com/Tantiautomation/" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-white transition-colors shadow-[0_0_16px_rgba(59,130,246,0.35)] hover:shadow-[0_0_24px_rgba(59,130,246,0.55)] rounded-full p-2">
                 <Facebook className="h-5 w-5" />
                 <span className="sr-only">Facebook</span>
               </Link>
-              <Link href="#" className="text-white/50 hover:text-white transition-colors">
+              <Link href="https://www.instagram.com/tanti_automation/?hl=en" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-white transition-colors shadow-[0_0_16px_rgba(59,130,246,0.35)] hover:shadow-[0_0_24px_rgba(59,130,246,0.55)] rounded-full p-2">
                 <Instagram className="h-5 w-5" />
                 <span className="sr-only">Instagram</span>
               </Link>
-              <Link href="#" className="text-white/50 hover:text-white transition-colors">
+              <Link href="https://www.linkedin.com/uas/login?session_redirect=https%3A%2F%2Fwww.linkedin.com%2Fcompany%2F3780956%2Fadmin%2Ffeed%2Fposts%2F" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-white transition-colors shadow-[0_0_16px_rgba(59,130,246,0.35)] hover:shadow-[0_0_24px_rgba(59,130,246,0.55)] rounded-full p-2">
                 <Linkedin className="h-5 w-5" />
                 <span className="sr-only">LinkedIn</span>
               </Link>
@@ -99,7 +99,7 @@ export default function ModernFooter() {
                 </Link>
               </li>
               <li>
-                <Link href="#" className="text-white/70 hover:text-white transition-colors">
+                <Link href="/contact" className="text-white/70 hover:text-white transition-colors">
                   Contact
                 </Link>
               </li>
