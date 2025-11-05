@@ -2,6 +2,11 @@
 
 import { motion } from "framer-motion"
 import Image from "next/image"
+// Use static import so Next.js reliably bundles the asset even if added during dev
+// Path resolves to project root /public
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore - Next provides image types at build time
+import AICBuilding from "@/public/AIC_building-1.jpg"
 import { Button } from "@/components/ui/button"
 
 export default function Integrations() {
@@ -9,7 +14,8 @@ export default function Integrations() {
     {
       title: "ABB AIC",
       location: "Bengaluru",
-      image: "/tanti/ABB_AIC/ABB_AIC_Cover.jpg",
+      image: AICBuilding,
+      useNative: true,
       description: "Complete KNX automation system for luxury residential project"
     },
     {
@@ -61,13 +67,24 @@ export default function Integrations() {
               <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-xl blur-sm opacity-70 group-hover:opacity-100 transition-opacity duration-300"></div>
               <div className="relative overflow-hidden rounded-xl bg-white/90 border border-gray-200 backdrop-blur-sm shadow-lg group-hover:shadow-xl h-full flex flex-col">
                 <div className="aspect-[4/3] relative overflow-hidden">
-                  <Image
-                    src={story.image}
-                    alt={story.title}
-                    fill
-                    className="object-cover transition-transform duration-300 group-hover:scale-105"
-                    unoptimized
-                  />
+                  { (story as any).useNative ? (
+                    <img
+                      src={"/AIC_building-1.jpg"}
+                      alt={story.title}
+                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                      loading="eager"
+                      decoding="async"
+                    />
+                  ) : (
+                    <Image
+                      src={story.image}
+                      alt={story.title}
+                      fill
+                      className="object-cover transition-transform duration-300 group-hover:scale-105"
+                      unoptimized
+                      priority={index === 0}
+                    />
+                  )}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
                 </div>
                 

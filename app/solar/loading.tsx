@@ -1,31 +1,10 @@
 "use client"
 
 export default function Loading() {
-  if (typeof window !== 'undefined') {
-    // Prevent any background images from showing during loading
-    const style = document.createElement('style')
-    style.textContent = `
-      body, html, #__next, main, * {
-        background-image: none !important;
-      }
-      img[src*="image.png"], 
-      img[src*="dashboard"], 
-      img[src*="elevate"],
-      img[src*="nova"] {
-        display: none !important;
-      }
-    `
-    document.head.appendChild(style)
-  }
-
   return (
     <div 
       className="fixed inset-0 min-h-screen bg-white z-[9999]"
-      style={{ 
-        backgroundColor: '#FFFFFF',
-        backgroundImage: 'none !important',
-        background: '#FFFFFF'
-      }}
+      aria-hidden="true"
     />
   )
 }

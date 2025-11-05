@@ -435,20 +435,7 @@ main {
   background-color: #FFFFFF !important;
 }
 
-/* Block dashboard/AI interface images from showing anywhere */
-img[src*="image.png"],
-img[src*="dashboard"],
-img[src*="elevate"],
-img[src*="nova"],
-img[src*="AI"],
-*[style*="image.png"],
-*[style*="dashboard"],
-*[style*="elevate"],
-*[style*="nova"] {
-  display: none !important;
-  visibility: hidden !important;
-  opacity: 0 !important;
-}
+/* Removed global image hiding rule that unintentionally matched legitimate images (e.g., names containing "AI"). */
 
 /* Prevent background images matching dashboard patterns */
 html[style*="image.png"],
