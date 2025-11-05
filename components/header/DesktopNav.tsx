@@ -16,7 +16,7 @@ export default function DesktopNav() {
           Solutions
         </Link>
 
-        <Link href="#about" className="text-blue-600 hover:text-blue-700 transition-colors text-sm lg:text-base">
+        <Link href="/company" className="text-blue-600 hover:text-blue-700 transition-colors text-sm lg:text-base">
           Company
         </Link>
 
@@ -24,7 +24,7 @@ export default function DesktopNav() {
           Support
         </Link>
 
-        <Link href="#projects" className="text-blue-600 hover:text-blue-700 transition-colors text-sm lg:text-base">
+        <Link href="/projects" className="text-blue-600 hover:text-blue-700 transition-colors text-sm lg:text-base">
           Projects
         </Link>
       </nav>

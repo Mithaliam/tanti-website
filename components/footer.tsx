@@ -1,155 +1,78 @@
 import Link from "next/link"
-import Image from "next/image"
-import { Twitter, Facebook, Instagram, Linkedin, Github } from "lucide-react"
 
 export default function ModernFooter() {
   return (
-    <footer className="bg-black border-t border-white/10 py-6 sm:py-10 px-3 sm:px-6 lg:px-8">
-      <div className="mx-auto px-4 max-w-6xl">
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-8">
-          <div>
-            <Link href="/" className="flex items-center gap-2 mb-6">
-              <div className="relative w-32 h-8 sm:w-40 sm:h-10">
-                <img
-                  src="/tanti-automatics-logo.png"
-                  alt="Tanti Automatics Pvt. Ltd. Logo"
-                  className="w-full h-full object-contain"
-                />
-              </div>
+    <footer className="bg-white border-t border-gray-200">
+      {/* Top section */}
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-10">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 items-start">
+          {/* Left: Logo + tagline */}
+          <div className="flex flex-col items-center md:items-start text-center md:text-left">
+            <Link href="/" className="mb-4 inline-flex">
+              <img
+                src="/tanti-automatics-logo.png"
+                alt="Tanti Automatics Pvt. Ltd."
+                className="h-10 w-auto"
+              />
             </Link>
-            <p className="text-white/70 mb-6">
-              Empowering businesses with AI-powered solutions that drive growth and efficiency.
-            </p>
-            <div className="flex space-x-4">
-              <Link href="#" className="text-white/50 hover:text-white transition-colors">
-                <Twitter className="h-5 w-5" />
-                <span className="sr-only">Twitter</span>
-              </Link>
-              <Link href="https://www.facebook.com/Tantiautomation/" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-white transition-colors shadow-[0_0_16px_rgba(59,130,246,0.35)] hover:shadow-[0_0_24px_rgba(59,130,246,0.55)] rounded-full p-2">
-                <Facebook className="h-5 w-5" />
-                <span className="sr-only">Facebook</span>
-              </Link>
-              <Link href="https://www.instagram.com/tanti_automation/?hl=en" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-white transition-colors shadow-[0_0_16px_rgba(59,130,246,0.35)] hover:shadow-[0_0_24px_rgba(59,130,246,0.55)] rounded-full p-2">
-                <Instagram className="h-5 w-5" />
-                <span className="sr-only">Instagram</span>
-              </Link>
-              <Link href="https://www.linkedin.com/uas/login?session_redirect=https%3A%2F%2Fwww.linkedin.com%2Fcompany%2F3780956%2Fadmin%2Ffeed%2Fposts%2F" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-white transition-colors shadow-[0_0_16px_rgba(59,130,246,0.35)] hover:shadow-[0_0_24px_rgba(59,130,246,0.55)] rounded-full p-2">
-                <Linkedin className="h-5 w-5" />
-                <span className="sr-only">LinkedIn</span>
-              </Link>
-              <Link href="#" className="text-white/50 hover:text-white transition-colors">
-                <Github className="h-5 w-5" />
-                <span className="sr-only">GitHub</span>
-              </Link>
+            <p className="text-sm text-gray-700">Complete Building Automation</p>
+          </div>
+
+          {/* Center: Connect with us */}
+          <div className="text-center">
+            <h3 className="text-2xl font-semibold text-gray-900">Connect With Us</h3>
+            <div className="mt-3 space-y-1 text-gray-700">
+              <p>Tel: +91 962 022 0491 | +91 960 645 7175</p>
+              <p>
+                Email: <a className="text-blue-600 hover:underline" href="mailto:mail@tanti.co">mail@tanti.co</a> |{" "}
+                <a className="text-blue-600 hover:underline" href="mailto:projects@tanti.co">projects@tanti.co</a>
+              </p>
+            </div>
+            <div className="mt-4 flex items-center justify-center gap-3">
+              <a aria-label="Facebook" href="#" className="h-10 w-10 grid place-items-center rounded-md border border-gray-300 text-gray-600 hover:text-blue-600 hover:border-blue-600 transition-colors">{
+                /* facebook icon as svg */
+              }
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5"><path d="M22 12.07C22 6.48 17.52 2 11.93 2S2 6.48 2 12.07C2 17.1 5.66 21.2 10.44 22v-7.01H7.9v-2.92h2.54V9.41c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.24.2 2.24.2v2.47h-1.26c-1.24 0-1.63.77-1.63 1.56v1.87h2.78l-.44 2.92h-2.34V22C18.34 21.2 22 17.1 22 12.07z"/></svg>
+              </a>
+              <a aria-label="YouTube" href="#" className="h-10 w-10 grid place-items-center rounded-md border border-gray-300 text-gray-600 hover:text-red-600 hover:border-red-600 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5"><path d="M21.8 8.001a3.003 3.003 0 0 0-2.116-2.116C18.095 5.5 12 5.5 12 5.5s-6.095 0-7.684.385A3.003 3.003 0 0 0 2.2 8.001C1.815 9.59 1.815 12 1.815 12s0 2.41.385 3.999a3.003 3.003 0 0 0 2.116 2.116C6.905 18.5 12 18.5 12 18.5s6.095 0 7.684-.385A3.003 3.003 0 0 0 21.8 15.999C22.185 14.41 22.185 12 22.185 12s0-2.41-.385-3.999zM10 14.5v-5l5 2.5-5 2.5z"/></svg>
+              </a>
+              <a aria-label="Instagram" href="#" className="h-10 w-10 grid place-items-center rounded-md border border-gray-300 text-gray-600 hover:text-pink-600 hover:border-pink-600 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7zm5 3a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm6.5-.75a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5z"/></svg>
+              </a>
+              <a aria-label="LinkedIn" href="#" className="h-10 w-10 grid place-items-center rounded-md border border-gray-300 text-gray-600 hover:text-blue-700 hover:border-blue-700 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5"><path d="M6.94 6.5a1.94 1.94 0 1 1 0-3.88 1.94 1.94 0 0 1 0 3.88zM4.5 8.25h4.88V21H4.5V8.25zM14.04 8c-2.62 0-4.39 1.72-4.39 4.57V21h4.88v-7.07c0-1.68.84-2.73 2.25-2.73 1.28 0 1.88.9 1.88 2.73V21H23V13.2C23 9.9 21.2 8 18.58 8c-1.79 0-3.03.79-3.54 1.77h-.08V8H14.04z"/></svg>
+              </a>
             </div>
           </div>
 
-          <div>
-            <h3 className="text-lg font-bold mb-4">Product</h3>
-            <ul className="space-y-3">
-              <li>
-                <Link href="#" className="text-white/70 hover:text-white transition-colors">
-                  Features
-                </Link>
-              </li>
-              <li>
-                <Link href="#" className="text-white/70 hover:text-white transition-colors">
-                  Pricing
-                </Link>
-              </li>
-              <li>
-                <Link href="#" className="text-white/70 hover:text-white transition-colors">
-                  Integrations
-                </Link>
-              </li>
-              <li>
-                <Link href="#" className="text-white/70 hover:text-white transition-colors">
-                  Roadmap
-                </Link>
-              </li>
-              <li>
-                <Link href="#" className="text-white/70 hover:text-white transition-colors">
-                  Changelog
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="text-lg font-bold mb-4">Company</h3>
-            <ul className="space-y-3">
-              <li>
-                <Link href="#" className="text-white/70 hover:text-white transition-colors">
-                  About
-                </Link>
-              </li>
-              <li>
-                <Link href="#" className="text-white/70 hover:text-white transition-colors">
-                  Blog
-                </Link>
-              </li>
-              <li>
-                <Link href="#" className="text-white/70 hover:text-white transition-colors">
-                  Careers
-                </Link>
-              </li>
-              <li>
-                <Link href="#" className="text-white/70 hover:text-white transition-colors">
-                  Customers
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact" className="text-white/70 hover:text-white transition-colors">
-                  Contact
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="text-lg font-bold mb-4">Resources</h3>
-            <ul className="space-y-3">
-              <li>
-                <Link href="#" className="text-white/70 hover:text-white transition-colors">
-                  Documentation
-                </Link>
-              </li>
-              <li>
-                <Link href="#" className="text-white/70 hover:text-white transition-colors">
-                  Help Center
-                </Link>
-              </li>
-              <li>
-                <Link href="#" className="text-white/70 hover:text-white transition-colors">
-                  API Reference
-                </Link>
-              </li>
-              <li>
-                <Link href="#" className="text-white/70 hover:text-white transition-colors">
-                  Community
-                </Link>
-              </li>
-              <li>
-                <Link href="#" className="text-white/70 hover:text-white transition-colors">
-                  Status
-                </Link>
-              </li>
-            </ul>
+          {/* Right: Page links */}
+          <div className="md:justify-end md:text-right text-center">
+            <nav className="text-gray-800 text-sm space-x-3 md:space-x-2">
+              <Link href="/company" className="hover:underline">About</Link>
+              <span className="text-gray-400">|</span>
+              <Link href="/products" className="hover:underline">Products</Link>
+              <span className="text-gray-400">|</span>
+              <Link href="/solutions" className="hover:underline">Solutions</Link>
+              <span className="text-gray-400">|</span>
+              <Link href="/support" className="hover:underline">Support</Link>
+              <span className="text-gray-400">|</span>
+              <Link href="/career" className="hover:underline">Career</Link>
+            </nav>
           </div>
         </div>
+      </div>
 
-        <div className="mt-8 pt-6 border-t border-white/10 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-white/50 text-sm mb-4 md:mb-0">© {new Date().getFullYear()} Tanti. All rights reserved.</p>
-          <div className="flex gap-6">
-            <Link href="#" className="text-white/50 hover:text-white text-sm transition-colors">
-              Privacy Policy
-            </Link>
-            <Link href="#" className="text-white/50 hover:text-white text-sm transition-colors">
-              Terms of Service
-            </Link>
-            <Link href="#" className="text-white/50 hover:text-white text-sm transition-colors">
-              Cookie Policy
-            </Link>
+      {/* Bottom blue bar */}
+      <div className="bg-[#4066e6] text-white">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-sm">
+            Copyright 2009 - {new Date().getFullYear()}. All rights reserved. Develop and maintained by Tanti Automatic pvt ltd.
+          </p>
+          <div className="flex items-center gap-6 text-sm">
+            <Link href="/copyright" className="hover:underline">Copyright</Link>
+            <Link href="/terms-and-conditions" className="hover:underline">Terms & Conditions</Link>
+            <Link href="/faqs" className="hover:underline">FAQs</Link>
           </div>
         </div>
       </div>

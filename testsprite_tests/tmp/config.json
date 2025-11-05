@@ -1,0 +1,16 @@
+{
+  "status": "commited",
+  "type": "frontend",
+  "scope": "codebase",
+  "localEndpoint": "http://localhost:3001/C:\\Users\\USER 1\\Desktop\\tanti-website",
+  "executionArgs": {
+    "projectName": "tanti-website",
+    "projectPath": "C:\\Users\\USER 1\\Desktop\\tanti-website",
+    "testIds": [],
+    "additionalInstruction": "",
+    "envs": {
+      "API_KEY": "sk-user-R9r2ji099y_b7DUQDIsRAWwshHh9BO-X4I2w02KENiZ8PeF8ErrpB7khnrJAkPXdFJ7Hlsbf2Zf8-LjT7NUXp0tunHouPzHZv_8W54bmqEEmzRrMI47Okb3j4-SYg5Bl800"
+    }
+  },
+  "proxy": "http://8144ee10-2416-41bd-b0f7-8a92ec1a9c56:tCOiXCOIyxmGdxczixxqM8mhdz4OjGIk@tun.testsprite.com:8080"
+}

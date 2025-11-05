@@ -67,7 +67,7 @@ export default function SolarPanelsPage() {
 			</section>
 
 			{/* Why our panels */}
-			<section className="py-16">
+			<section className="pt-8 pb-16">
 				<div className="container mx-auto px-4">
 					<motion.h2
 						variants={cardVariants}

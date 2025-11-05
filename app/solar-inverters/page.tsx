@@ -67,7 +67,7 @@ export default function SolarInvertersPage() {
 			</section>
 
 			{/* Inverter Types */}
-			<section className="py-16">
+			<section className="pt-8 pb-16">
 				<div className="container mx-auto px-4">
 					<motion.h2
 						variants={cardVariants}
@@ -79,26 +79,26 @@ export default function SolarInvertersPage() {
 						Popular Inverter Options
 					</motion.h2>
 					<div className="grid md:grid-cols-3 gap-8">
-						{[
-							{
-								name: "String Inverters",
-								desc: "Cost‑effective and efficient for most residential & commercial rooftops.",
-								img: "/images/analytics.png",
-								points: ["High efficiency 97–98%", "Easy servicing", "Works with optimizers"],
-							},
-							{
-								name: "Micro Inverters",
-								desc: "Panel‑level conversion for shade tolerance and granular monitoring.",
-								img: "/images/automation.png",
-								points: ["Best for complex roofs", "Per‑panel monitoring", "Scalable"],
-							},
-							{
-								name: "Hybrid Inverters",
-								desc: "Seamlessly integrates batteries for backup and energy management.",
-								img: "/lithum%20battery.png",
-								points: ["Backup during outages", "Export to grid", "Time‑of‑use savings"],
-							},
-						].map((t, idx) => (
+                        {[
+                            {
+                                name: "String Inverters",
+                                desc: "Cost‑effective and efficient for most residential & commercial rooftops.",
+                                img: "/spring%20invertors.jpeg",
+                                points: ["High efficiency 97–98%", "Easy servicing", "Works with optimizers"],
+                            },
+                            {
+                                name: "Micro Inverters",
+                                desc: "Panel‑level conversion for shade tolerance and granular monitoring.",
+                                img: "/micro%20invertor.jpeg",
+                                points: ["Best for complex roofs", "Per‑panel monitoring", "Scalable"],
+                            },
+                            {
+                                name: "Hybrid Inverters",
+                                desc: "Seamlessly integrates batteries for backup and energy management.",
+                                img: "/hybrid%20invertor.jpeg",
+                                points: ["Backup during outages", "Export to grid", "Time‑of‑use savings"],
+                            },
+                        ].map((t, idx) => (
 							<motion.div key={idx} variants={cardVariants} initial="hidden" whileInView="visible" viewport={{ once: true }}>
 								<Card className="h-full group glow-card">
 									<CardHeader>
@@ -122,26 +122,7 @@ export default function SolarInvertersPage() {
 				</div>
 			</section>
 
-			{/* CTA */}
-			<section className="py-20 bg-gradient-to-r from-blue-500 to-cyan-500">
-				<div className="container mx-auto px-4 text-center text-white">
-					<motion.h2
-						variants={cardVariants}
-						initial="hidden"
-						whileInView="visible"
-						viewport={{ once: true }}
-						className="text-3xl md:text-4xl font-bold mb-4"
-					>
-						Upgrade your solar with the right inverter
-					</motion.h2>
-					<p className="text-lg opacity-90 max-w-3xl mx-auto mb-8">
-						Talk to our engineers for sizing, brand options, and compatibility with batteries.
-					</p>
-					<Button size="lg" variant="secondary" className="bg-white text-blue-600 hover:bg-gray-100 font-semibold px-8">
-						Request Consultation
-					</Button>
-				</div>
-			</section>
+			{/* CTA removed as requested */}
 		</div>
 	)
 }

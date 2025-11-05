@@ -1,0 +1,122 @@
+{
+  "tech_stack": [
+    "TypeScript",
+    "Next.js 15 (App Router)",
+    "React 19",
+    "Tailwind CSS",
+    "Framer Motion",
+    "Radix UI",
+    "GSAP",
+    "Node.js",
+    "Shadcn UI"
+  ],
+  "features": [
+    {
+      "name": "Home Page",
+      "description": "Landing page with hero, how-it-works, features, integrations, testimonials. Includes custom scroll restoration logic and lazy-loaded sections.",
+      "files": [
+        "app/page.tsx",
+        "components/hero.tsx",
+        "components/how-it-works.tsx",
+        "components/features.tsx",
+        "components/integrations.tsx",
+        "components/testimonials.tsx"
+      ]
+    },
+    {
+      "name": "Solar Page",
+      "description": "Solar solutions page with background video hero, feature cards, and GSAP-powered stacked sections.",
+      "files": [
+        "app/solar/page.tsx",
+        "components/SolarSections.jsx",
+        "components/SolarSections.css",
+        "app/solar/loading.tsx"
+      ]
+    },
+    {
+      "name": "Solar Panels",
+      "description": "Product page for solar panels with hero, why-choose section, and panel types cards.",
+      "files": [
+        "app/solar-panels/page.tsx"
+      ]
+    },
+    {
+      "name": "Solar Inverters",
+      "description": "Inverter options grid; images sourced from public assets. CTA removed per customization.",
+      "files": [
+        "app/solar-inverters/page.tsx"
+      ]
+    },
+    {
+      "name": "Solar Battery",
+      "description": "Battery storage benefits grid; CTA removed. Uses custom images from /public.",
+      "files": [
+        "app/solar-battery/page.tsx"
+      ]
+    },
+    {
+      "name": "Solutions Page",
+      "description": "Solutions overview with loading state and content layout.",
+      "files": [
+        "app/solutions/page.tsx",
+        "app/solutions/loading.tsx"
+      ]
+    },
+    {
+      "name": "Commercial & Residential Pages",
+      "description": "Static pages for verticals under /app with simple layouts.",
+      "files": [
+        "app/commercial/page.tsx",
+        "app/residential/page.tsx"
+      ]
+    },
+    {
+      "name": "API Route: Tanti Media",
+      "description": "Next.js route handler under /api/tanti-media (if used for media listing).",
+      "files": [
+        "app/api/tanti-media/route.ts"
+      ]
+    },
+    {
+      "name": "Header & Footer",
+      "description": "Responsive header with desktop/mobile nav; footer with social icons and glow effects.",
+      "files": [
+        "components/header/index.tsx",
+        "components/header/DesktopNav.tsx",
+        "components/header/MobileNav.tsx",
+        "components/footer.tsx"
+      ]
+    },
+    {
+      "name": "UI Components",
+      "description": "Shadcn-style UI (badge, button, card, tabs, accordion).",
+      "files": [
+        "components/ui/badge.tsx",
+        "components/ui/button.tsx",
+        "components/ui/card.tsx",
+        "components/ui/tabs.tsx",
+        "components/ui/accordion.tsx"
+      ]
+    },
+    {
+      "name": "Hooks & Utils",
+      "description": "Mobile detection hook and general utilities.",
+      "files": [
+        "hooks/use-mobile.tsx",
+        "lib/utils.ts"
+      ]
+    },
+    {
+      "name": "App Shell & Styles",
+      "description": "Root layout, global styles, Tailwind config, and Next.js config.",
+      "files": [
+        "app/layout.tsx",
+        "app/globals.css",
+        "tailwind.config.ts",
+        "next.config.js"
+      ]
+    }
+  ]
+}
+
+

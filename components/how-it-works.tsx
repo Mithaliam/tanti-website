@@ -100,12 +100,10 @@ export default function HowItWorks() {
           transition={{ duration: 0.5 }}
           className="text-center mb-3 sm:mb-4"
         >
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 text-[#06b6d4]">
-            How It Works
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 pb-1 text-[#06b6d4]">
+            What We Offer
           </h2>
-          <p className="text-sm sm:text-base md:text-lg text-black/70 max-w-2xl mx-auto">
-            Simple four-step process
-          </p>
+          
         </motion.div>
 
         {/* Desktop view - Grid layout with equal height cards */}

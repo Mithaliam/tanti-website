@@ -67,7 +67,7 @@ export default function SolarBatteryPage() {
 			</section>
 
 			{/* Use cases */}
-			<section className="py-16">
+			<section className="pt-6 pb-16">
 				<div className="container mx-auto px-4">
 					<motion.h2
 						variants={cardVariants}
@@ -80,9 +80,9 @@ export default function SolarBatteryPage() {
 					</motion.h2>
 					<div className="grid md:grid-cols-3 gap-8">
 						{[
-							{ name: "Backup During Outages", img: "/battery.jpg", points: ["Instant switchover", "Critical loads support", "Quiet & clean"] },
-							{ name: "Time‑of‑Use Savings", img: "/images/webinar.png", points: ["Charge off‑peak", "Use at peak tariff", "Lower bills"] },
-							{ name: "Self‑Consumption", img: "/solar%20panel.jpeg", points: ["Use more of your solar", "Reduce grid imports", "Increase ROI"] },
+						{ name: "Backup During Outages", img: "/Backup.jpeg", points: ["Instant switchover", "Critical loads support", "Quiet & clean"] },
+						{ name: "Time‑of‑Use Savings", img: "/time%20of%20use.png", points: ["Charge off‑peak", "Use at peak tariff", "Lower bills"] },
+						{ name: "Self‑Consumption", img: "/self%20consumption.png", points: ["Use more of your solar", "Reduce grid imports", "Increase ROI"] },
 						].map((t, idx) => (
 							<motion.div key={idx} variants={cardVariants} initial="hidden" whileInView="visible" viewport={{ once: true }}>
 								<Card className="h-full group glow-card">
@@ -107,26 +107,7 @@ export default function SolarBatteryPage() {
 				</div>
 			</section>
 
-			{/* CTA */}
-			<section className="py-20 bg-gradient-to-r from-blue-500 to-cyan-500">
-				<div className="container mx-auto px-4 text-center text-white">
-					<motion.h2
-						variants={cardVariants}
-						initial="hidden"
-						whileInView="visible"
-						viewport={{ once: true }}
-						className="text-3xl md:text-4xl font-bold mb-4"
-					>
-						Design your battery‑ready solar system
-					</motion.h2>
-					<p className="text-lg opacity-90 max-w-3xl mx-auto mb-8">
-						We help size the battery bank, choose compatible inverters, and set smart controls.
-					</p>
-					<Button size="lg" variant="secondary" className="bg-white text-blue-600 hover:bg-gray-100 font-semibold px-8">
-						Request Battery Quote
-					</Button>
-				</div>
-			</section>
+			{/* CTA removed as requested */}
 		</div>
 	)
 }

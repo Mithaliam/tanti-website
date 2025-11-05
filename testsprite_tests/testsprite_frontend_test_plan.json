@@ -1,0 +1,389 @@
+[
+  {
+    "id": "TC001",
+    "title": "Home Page Load and Content Verification",
+    "description": "Verify that the Home page loads successfully with all main sections: hero, process explanation, features overview, integrations, and testimonials, displaying correct content and images.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the Home page"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify hero section is displayed with correct headline, background image or animation"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify process explanation section shows all four steps: Commercial, Residential, Solar, and MEP"
+      },
+      {
+        "type": "assertion",
+        "description": "Check features overview section lists key smart building features properly"
+      },
+      {
+        "type": "assertion",
+        "description": "Validate integrations section displays expected integration logos and info"
+      },
+      {
+        "type": "assertion",
+        "description": "Check testimonials section loads client feedback with rating stars and text"
+      }
+    ]
+  },
+  {
+    "id": "TC002",
+    "title": "Navigation Links Functionality and Routing",
+    "description": "Ensure all navigation links in header and footer lead to correct pages and load content properly on both desktop and mobile viewports.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Open the website on desktop viewport"
+      },
+      {
+        "type": "action",
+        "description": "Click each link in the header navigation one by one: Home, Commercial, Residential, Solar, Solutions"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify corresponding page loads with expected content for each navigation link"
+      },
+      {
+        "type": "action",
+        "description": "Scroll to footer and click social icons and company links"
+      },
+      {
+        "type": "assertion",
+        "description": "Validate external/social links open correctly; internal links load pages without error"
+      },
+      {
+        "type": "action",
+        "description": "Resize browser to mobile viewport or use mobile device"
+      },
+      {
+        "type": "action",
+        "description": "Open mobile navigation menu"
+      },
+      {
+        "type": "action",
+        "description": "Repeat navigation link clicking and validation steps on mobile"
+      }
+    ]
+  },
+  {
+    "id": "TC003",
+    "title": "Solar Solutions Page Content and Video Hero Validation",
+    "description": "Validate that the Solar solutions page loads with background video hero, feature cards, and GSAP-powered stacked sections functioning as expected with correct content.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the Solar solutions page"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify background video in hero section plays correctly without errors"
+      },
+      {
+        "type": "assertion",
+        "description": "Check all feature cards are displayed with correct text and images"
+      },
+      {
+        "type": "assertion",
+        "description": "Scroll through GSAP stacked sections and verify smooth animations and transitions"
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm page content matches PRD-provided text and images"
+      }
+    ]
+  },
+  {
+    "id": "TC004",
+    "title": "Solar Panels Product Page Verification",
+    "description": "Verify the Solar Panels product page loads correctly with hero section, why-choose section, and panel types cards displaying accurate content.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the Solar Panels product page"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify hero section is displayed with correct heading and visual elements"
+      },
+      {
+        "type": "assertion",
+        "description": "Check why-choose section content and images are accurate and visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Validate panel types cards show correct product details and images"
+      }
+    ]
+  },
+  {
+    "id": "TC005",
+    "title": "Solar Inverters Page Content and Image Verification",
+    "description": "Confirm the Solar Inverters page loads an inverter options grid with all images sourced from public assets and that CTAs are correctly removed per customization.",
+    "category": "functional",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the Solar Inverters page"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the inverter options grid is present and all images load without broken links"
+      },
+      {
+        "type": "assertion",
+        "description": "Ensure that no call-to-action buttons are present as per customization"
+      }
+    ]
+  },
+  {
+    "id": "TC006",
+    "title": "Solar Battery Page and Benefit Grid Verification",
+    "description": "Validate the Solar Battery page displays battery storage benefits in a grid format with custom images from the public directory and confirms no displayed CTA buttons.",
+    "category": "functional",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the Solar Battery page"
+      },
+      {
+        "type": "assertion",
+        "description": "Check battery storage benefits grid is visible with accurate text and images"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify no call-to-action buttons are shown on this page"
+      }
+    ]
+  },
+  {
+    "id": "TC007",
+    "title": "Commercial and Residential Pages Static Content Validation",
+    "description": "Verify the static Commercial and Residential pages under /app display correct simple layout and content as specified in the PRD.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the Commercial page"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify page loads with correct heading and key content as per PRD"
+      },
+      {
+        "type": "action",
+        "description": "Navigate to the Residential page"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify page loads with proper heading and correct text content"
+      }
+    ]
+  },
+  {
+    "id": "TC008",
+    "title": "Success Stories Section Data and Display Check",
+    "description": "Verify the Success Stories section properly displays key projects with locations, automation types, images, and described outcomes matching the PRD content.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Access the Success Stories page or section"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify all listed projects show accurate location and automation details"
+      },
+      {
+        "type": "assertion",
+        "description": "Check that corresponding images for projects load correctly"
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm textual success descriptions align with PRD text"
+      }
+    ]
+  },
+  {
+    "id": "TC009",
+    "title": "Customer Testimonials Display and Content Accuracy",
+    "description": "Ensure customer testimonials are displayed with real client feedback, proper ratings, images, and matching PRD content, providing trust signals.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the Testimonials section or page"
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm each testimonial includes client name, image, rating stars, and feedback text"
+      },
+      {
+        "type": "assertion",
+        "description": "Check testimonial content matches provided PRD data"
+      }
+    ]
+  },
+  {
+    "id": "TC010",
+    "title": "Responsive Header and Footer Layout and Functionality",
+    "description": "Validate the header and footer render consistently with correct branding and navigation links, social icons with effects, and function properly on both desktop and mobile devices.",
+    "category": "ui",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Load website on desktop and mobile viewports"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify header shows navigation links with proper layout and branding on desktop"
+      },
+      {
+        "type": "assertion",
+        "description": "Open mobile menu and check header navigation links appear and are clickable"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify footer displays social icons with glow effects and company info on all devices"
+      },
+      {
+        "type": "assertion",
+        "description": "Check all links in header and footer are functional and lead to correct destinations"
+      }
+    ]
+  },
+  {
+    "id": "TC011",
+    "title": "Responsive Design and Layout Across Device Sizes",
+    "description": "Verify that pages and UI components adapt correctly and remain usable on various screen sizes, including small mobile phones, tablets, and large desktop monitors.",
+    "category": "ui",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Open website on a range of device viewport sizes from mobile phone to desktop"
+      },
+      {
+        "type": "assertion",
+        "description": "Check layout adapts without horizontal scroll or content overlap"
+      },
+      {
+        "type": "assertion",
+        "description": "Validate font sizes, images, buttons, and navigation remain accessible and visually consistent"
+      }
+    ]
+  },
+  {
+    "id": "TC012",
+    "title": "Animation and Interactive UI Elements Smooth Performance",
+    "description": "Ensure all animations powered by Framer Motion, GSAP, and other UI interactions load smoothly without visual glitches or performance issues.",
+    "category": "ui",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate through pages containing animations (Home, Solar page, etc.)"
+      },
+      {
+        "type": "assertion",
+        "description": "Observe that animations trigger correctly and run smoothly without stuttering"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify interactive components respond promptly to user input without errors"
+      }
+    ]
+  },
+  {
+    "id": "TC013",
+    "title": "API Route /api/tanti-media Responsiveness and Data Integrity",
+    "description": "Test the API route for Tanti media listing to ensure it returns correct data and handles errors gracefully.",
+    "category": "error handling",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Send a GET request to /api/tanti-media"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify API returns 200 status with expected list of media items in correct format"
+      },
+      {
+        "type": "action",
+        "description": "Send malformed or unauthorized request if applicable"
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm API responds with appropriate error code and message"
+      }
+    ]
+  },
+  {
+    "id": "TC014",
+    "title": "Error Handling for Missing or Broken Media Assets",
+    "description": "Check that the website gracefully handles missing or broken image and video assets without crashing or unhandled exceptions.",
+    "category": "error handling",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Temporarily replace or remove media files referenced in components (hero images, background videos, testimonial photos)"
+      },
+      {
+        "type": "action",
+        "description": "Load affected pages"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify placeholders or fallback UI appear without layout breaking"
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm no fatal errors or crashes occur"
+      }
+    ]
+  },
+  {
+    "id": "TC015",
+    "title": "Custom Scroll Restoration Logic Functionality",
+    "description": "Validate that the custom scroll restoration logic on the Home page retains previous scroll positions correctly upon navigation and back actions.",
+    "category": "functional",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Scroll down on Home page to a mid-section"
+      },
+      {
+        "type": "action",
+        "description": "Navigate to another page, e.g., Solar page"
+      },
+      {
+        "type": "action",
+        "description": "Use browser back button to return to Home page"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the scroll position on Home page restores to previous location before navigation"
+      }
+    ]
+  }
+]

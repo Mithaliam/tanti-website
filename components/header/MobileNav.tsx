@@ -29,15 +29,15 @@ export default function MobileNav({ isOpen }: MobileNavProps) {
           Solutions
         </Link>
 
-        <Link href="#about" className="py-2 px-2 border-b border-white/10 hover:bg-white/5 rounded-md transition-colors active:bg-white/10 text-blue-400">
+        <Link href="/company" className="py-2 px-2 border-b border-white/10 hover:bg-white/5 rounded-md transition-colors active:bg-white/10 text-blue-400">
           Company
         </Link>
 
-        <Link href="#contact" className="py-2 px-2 border-b border-white/10 hover:bg-white/5 rounded-md transition-colors active:bg-white/10 text-blue-400">
+        <Link href="/contact" className="py-2 px-2 border-b border-white/10 hover:bg-white/5 rounded-md transition-colors active:bg-white/10 text-blue-400">
           Support
         </Link>
 
-        <Link href="#projects" className="py-2 px-2 border-b border-white/10 hover:bg-white/5 rounded-md transition-colors active:bg-white/10 text-blue-400">
+        <Link href="/projects" className="py-2 px-2 border-b border-white/10 hover:bg-white/5 rounded-md transition-colors active:bg-white/10 text-blue-400">
           Projects
         </Link>
 

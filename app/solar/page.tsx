@@ -399,7 +399,7 @@ export default function SolarPage() {
                 <CardHeader>
                   <div className="w-full h-56 md:h-64 rounded-xl overflow-hidden mb-4 relative">
                     <Image
-                      src="/lithum%20battery.png"
+                      src="/battery%20solar%20pg.jpeg"
                       alt="Battery Storage"
                       fill
                       className="object-cover transition-transform duration-500 group-hover:scale-105"
