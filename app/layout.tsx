@@ -5,7 +5,12 @@ import { ThemeProvider } from "@/components/theme-provider"
 import ModernHeader from "@/components/header"
 import ModernFooter from "@/components/footer"
 
-const roboto = Roboto({ subsets: ["latin"], weight: ["400", "500", "700"] })
+const roboto = Roboto({ 
+  subsets: ["latin"], 
+  weight: ["400", "500", "700"],
+  display: "swap",
+  preload: true
+})
 
 export const metadata: Metadata = {
   title: "Tanti - Intelligent Building Systems & LMS",
@@ -38,6 +43,10 @@ export default function RootLayout({
         <meta name="theme-color" content="#ffffff" />
         <meta name="msapplication-TileColor" content="#ffffff" />
         <meta name="apple-mobile-web-app-status-bar-style" content="white" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+        <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
         {/* Add any other head tags if needed, metadata object handles common ones */}
       </head>
       <body className={`${roboto.className} text-black bg-white`} suppressHydrationWarning>
@@ -48,12 +57,6 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <ModernHeader />
-          {/* Global running disclaimer banner */}
-          <div className="w-full bg-yellow-200/90 text-blue-900 py-3 md:py-4 border-b border-yellow-300 mt-[60px] overflow-hidden">
-            <div className="whitespace-nowrap font-semibold text-base md:text-lg tracking-wide animate-[marquee-single_16s_linear_infinite]">
-              Our smart switches are still arguing about who should turn this page on ⚡🤖🔌😤.
-            </div>
-          </div>
           <main className="bg-white">{children}</main>
           <ModernFooter />
         </ThemeProvider>

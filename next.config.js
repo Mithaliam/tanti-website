@@ -55,11 +55,16 @@ const nextConfig = {
     optimizePackageImports: [
       'motion',
       'framer-motion',
-      '@tabler/icons-react'
+      '@tabler/icons-react',
+      'lucide-react'
     ],
     // Disable scroll restoration to prevent auto-scrolling on refresh
     scrollRestoration: false,
   },
+  // Enable compression
+  compress: true,
+  // Power optimizations
+  poweredByHeader: false,
   // Add compiler options for production
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production',

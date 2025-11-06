@@ -36,7 +36,7 @@ export default function ModernHero() {
           muted
           loop
           playsInline
-          preload="auto"
+          preload="metadata"
           className="absolute inset-0 w-full h-full object-cover"
         >
           <source src="/tanti Main background.mp4" type="video/mp4" />

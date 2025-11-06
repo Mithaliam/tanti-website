@@ -126,6 +126,12 @@ export default function ResidentialPage() {
 
   return (
     <div className="min-h-screen bg-white">
+      {/* Disclaimer banner - only on residential page */}
+      <div className="w-full bg-yellow-200/90 text-blue-900 py-3 md:py-4 border-b border-yellow-300 mt-[60px] overflow-hidden">
+        <div className="whitespace-nowrap font-semibold text-base md:text-lg tracking-wide animate-[marquee-single_16s_linear_infinite]">
+          Our smart switches are still arguing about who should turn this page on ⚡🤖🔌😤.
+        </div>
+      </div>
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-blue-600 via-blue-700 to-cyan-600 text-white py-20 px-4">
         <div className="container mx-auto max-w-6xl">

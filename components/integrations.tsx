@@ -63,12 +63,14 @@ export default function Integrations() {
               <div className="relative overflow-hidden rounded-xl bg-white/90 border border-gray-200 backdrop-blur-sm shadow-lg group-hover:shadow-xl h-full flex flex-col">
                 <div className="aspect-[4/3] relative overflow-hidden">
                   { (story as any).useNative ? (
-                    <img
+                    <Image
                       src={"/AIC_building-1.jpg"}
                       alt={story.title}
-                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                      loading="eager"
-                      decoding="async"
+                      fill
+                      className="object-cover transition-transform duration-300 group-hover:scale-105"
+                      priority={index === 0}
+                      loading={index === 0 ? "eager" : "lazy"}
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     />
                   ) : (
                     <Image
@@ -76,8 +78,9 @@ export default function Integrations() {
                       alt={story.title}
                       fill
                       className="object-cover transition-transform duration-300 group-hover:scale-105"
-                      unoptimized
                       priority={index === 0}
+                      loading={index === 0 ? "eager" : "lazy"}
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     />
                   )}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>

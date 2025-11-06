@@ -11,6 +11,53 @@ import { rememberScroll } from "@/hooks/useScrollRestore";
 
 const roboto = Roboto({ subsets: ["latin"], weight: ["400", "500", "700"] });
 
+// Image component with fallback support
+function ImageWithFallback({ 
+  src, 
+  fallback, 
+  alt, 
+  fill, 
+  className, 
+  loading, 
+  priority, 
+  sizes 
+}: { 
+  src: string; 
+  fallback?: string; 
+  alt: string; 
+  fill?: boolean; 
+  className?: string; 
+  loading?: "lazy" | "eager"; 
+  priority?: boolean; 
+  sizes?: string;
+}) {
+  const [imgSrc, setImgSrc] = useState(src);
+  const [hasError, setHasError] = useState(false);
+
+  useEffect(() => {
+    setImgSrc(src);
+    setHasError(false);
+  }, [src]);
+
+  return (
+    <Image
+      src={hasError && fallback ? fallback : imgSrc}
+      alt={alt}
+      fill={fill}
+      className={className}
+      loading={loading}
+      priority={priority}
+      sizes={sizes}
+      onError={() => {
+        if (fallback && !hasError) {
+          setHasError(true);
+          setImgSrc(fallback);
+        }
+      }}
+    />
+  );
+}
+
 export default function HowItWorks() {
   const [emblaRef, emblaApi] = useEmblaCarousel({
     loop: false,
@@ -126,18 +173,15 @@ export default function HowItWorks() {
                 className={`relative bg-white/90 backdrop-blur-sm border border-gray-200 rounded-lg overflow-hidden h-full flex flex-col shadow-lg transition-transform duration-300 ease-out group-hover:scale-[1.02] group-hover:-translate-y-1 group-hover:shadow-2xl ${roboto.className} ${step.title === "Residential" || step.title === "Commercial" || step.title === "Solar" ? "cursor-pointer" : ""}`}
               >
                 <div className="relative h-40 sm:h-48 overflow-hidden">
-                  <img
-                    src={`${step.image}?v=${assetVersion}`}
+                  <ImageWithFallback
+                    src={step.image}
+                    fallback={step.fallbackImage}
                     alt={step.title}
-                    className="absolute inset-0 w-full h-full object-cover"
-                    onError={(e) => {
-                      const target = e.currentTarget as HTMLImageElement;
-                      // Prevent infinite loop and force fallback with cache-bust
-                      target.onerror = null;
-                      if (step.fallbackImage) {
-                        target.src = `${step.fallbackImage}?v=${assetVersion}`;
-                      }
-                    }}
+                    fill
+                    className="object-cover"
+                    loading={index === 0 ? "eager" : "lazy"}
+                    priority={index === 0}
+                    sizes="(max-width: 640px) 85vw, (max-width: 1024px) 50vw, 25vw"
                   />
                   <div className="absolute inset-0 bg-black/20"></div>
                   <div className="absolute top-4 left-4 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-lg w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center text-lg sm:text-xl font-bold">
@@ -178,18 +222,14 @@ export default function HowItWorks() {
                   className={`flex-[0_0_85%] min-w-0 ml-4 first:ml-4 ${step.title === "Residential" || step.title === "Commercial" || step.title === "Solar" ? "cursor-pointer" : ""}`}
                 >
                   <div className="relative h-32 overflow-hidden">
-                    <img
-                      src={`${step.image}?v=${assetVersion}`}
+                    <ImageWithFallback
+                      src={step.image}
+                      fallback={step.fallbackImage}
                       alt={step.title}
-                      className="absolute inset-0 w-full h-full object-cover"
-                      onError={(e) => {
-                        const target = e.currentTarget as HTMLImageElement;
-                        // Prevent infinite loop and force fallback with cache-bust
-                        target.onerror = null;
-                        if (step.fallbackImage) {
-                          target.src = `${step.fallbackImage}?v=${assetVersion}`;
-                        }
-                      }}
+                      fill
+                      className="object-cover"
+                      loading="lazy"
+                      sizes="85vw"
                     />
                     <div className="absolute inset-0 bg-black/20"></div>
                     <div className="absolute top-3 left-3 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-lg w-8 h-8 flex items-center justify-center text-sm font-bold">
