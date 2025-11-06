@@ -14,10 +14,14 @@ const SolarSections = dynamic(() => import("@/components/SolarSections"), {
 import { useRouter } from "next/navigation"
 import Image from "next/image"
 import Link from "next/link"
+import { useScrollToTop } from "@/hooks/useScrollRestore"
 
 export default function SolarPage() {
   const router = useRouter()
   const heroVideoRef = useRef<HTMLVideoElement | null>(null)
+  
+  // Ensure page starts at top when navigated to
+  useScrollToTop()
   
   useEffect(() => {
     const v = heroVideoRef.current

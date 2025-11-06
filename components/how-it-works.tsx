@@ -6,12 +6,12 @@ import Image from "next/image";
 import useEmblaCarousel from "embla-carousel-react";
 import { ArrowRight } from "lucide-react";
 import { Roboto } from "next/font/google";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { rememberScroll } from "@/hooks/useScrollRestore";
 
 const roboto = Roboto({ subsets: ["latin"], weight: ["400", "500", "700"] });
 
 export default function HowItWorks() {
-  const router = useRouter();
   const [emblaRef, emblaApi] = useEmblaCarousel({
     loop: false,
     align: "start",
@@ -72,19 +72,20 @@ export default function HowItWorks() {
   // Navigation helper
   const scrollTo = (index: number) => emblaApi?.scrollTo(index);
 
-  // Handle card click
-  const handleCardClick = (step: any) => {
+  // Get navigation path for a step
+  const getStepPath = (step: { title: string }) => {
     if (step.title === "Residential") {
-      router.push("/residential");
+      return "/residential";
     } else if (step.title === "Commercial") {
-      router.push("/commercial");
+      return "/commercial";
     } else if (step.title === "Solar") {
-      router.push("/solar");
+      return "/solar";
     }
+    return "#";
   };
 
   return (
-    <section className="py-2 sm:py-3 md:py-4 relative overflow-hidden" style={{ backgroundColor: '#F5F5F0' }}>
+    <section id="cards-section" className="py-2 sm:py-3 md:py-4 relative overflow-hidden" style={{ backgroundColor: '#F5F5F0' }}>
       {/* Background elements */}
       <div className="absolute inset-0 z-0">
         <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-blue-500/10 rounded-full blur-[100px]"></div>
@@ -118,9 +119,11 @@ export default function HowItWorks() {
               className="group relative h-full"
             >
               <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-xl blur-sm opacity-70 group-hover:opacity-100 transition-opacity duration-300"></div>
-              <div 
+              <Link
+                href={getStepPath(step)}
+                scroll={false}
+                onClick={rememberScroll}
                 className={`relative bg-white/90 backdrop-blur-sm border border-gray-200 rounded-lg overflow-hidden h-full flex flex-col shadow-lg transition-transform duration-300 ease-out group-hover:scale-[1.02] group-hover:-translate-y-1 group-hover:shadow-2xl ${roboto.className} ${step.title === "Residential" || step.title === "Commercial" || step.title === "Solar" ? "cursor-pointer" : ""}`}
-                onClick={() => handleCardClick(step)}
               >
                 <div className="relative h-40 sm:h-48 overflow-hidden">
                   <img
@@ -156,7 +159,7 @@ export default function HowItWorks() {
                     </div>
                   )}
                 </div>
-              </div>
+              </Link>
             </motion.div>
           ))}
         </div>
@@ -167,10 +170,12 @@ export default function HowItWorks() {
           <div className="overflow-visible -mx-4 px-4" ref={emblaRef}>
             <div className="flex touch-pan-y">
               {steps.map((step, index) => (
-                <div
+                <Link
                   key={index}
+                  href={getStepPath(step)}
+                  scroll={false}
+                  onClick={rememberScroll}
                   className={`flex-[0_0_85%] min-w-0 ml-4 first:ml-4 ${step.title === "Residential" || step.title === "Commercial" || step.title === "Solar" ? "cursor-pointer" : ""}`}
-                  onClick={() => handleCardClick(step)}
                 >
                   <div className="relative h-32 overflow-hidden">
                     <img
@@ -200,7 +205,7 @@ export default function HowItWorks() {
                       {step.description}
                     </p>
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
           </div>

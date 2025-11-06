@@ -1,7 +1,7 @@
 "use client"
 
 import Image from "next/image"
-import { motion, useMotionValue, useSpring, useTransform, useScroll } from "framer-motion"
+import { motion, useMotionValue, useSpring, useTransform, useScroll, type MotionValue } from "framer-motion"
 import { Quote, UserRound } from "lucide-react"
 
 export default function ModernTestimonials() {
@@ -85,7 +85,7 @@ type Testimonial = {
 
 import { useState } from "react"
 
-function TiltGlowCard({ data, idx, yBackLeft }: { data: Testimonial; idx: number; yBackLeft: any }) {
+function TiltGlowCard({ data, idx, yBackLeft }: { data: Testimonial; idx: number; yBackLeft: MotionValue<number> }) {
   const cardX = useMotionValue(0)
   const cardY = useMotionValue(0)
   const springX = useSpring(cardX, { stiffness: 300, damping: 30 })
@@ -115,7 +115,7 @@ function TiltGlowCard({ data, idx, yBackLeft }: { data: Testimonial; idx: number
       transition={{ duration: 0.5, delay: idx * 0.1 }}
       onMouseMove={handleMove}
       onMouseLeave={handleLeave}
-      style={{ rotateX, rotateY, transformStyle: "preserve-3d" as any }}
+      style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
       className="relative group rounded-2xl border border-gray-200 bg-white/90 backdrop-blur-sm p-6 overflow-hidden will-change-transform glow-card"
     >
       {/* Floating quote mark */}
@@ -159,7 +159,7 @@ function Avatar({ src, alt }: { src: string; alt: string }) {
           <UserRound className="text-blue-600" size={28} />
         </div>
       ) : (
-        <Image src={src} alt={alt} fill className="rounded-full object-cover" onError={() => setFailed(true)} />
+        <Image src={src} alt={alt} fill sizes="56px" className="rounded-full object-cover" onError={() => setFailed(true)} />
       )}
     </div>
   )

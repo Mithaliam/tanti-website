@@ -5,6 +5,7 @@ import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
+import { useScrollToTop } from "@/hooks/useScrollRestore"
 
 /**
  * Commercial Page with Modern Hover Effects
@@ -42,6 +43,9 @@ import { Badge } from "@/components/ui/badge"
  * - Shadow intensity: shadow-lg to shadow-2xl on hover - adjust shadow level
  */
 export default function CommercialPage() {
+  // Ensure page starts at top when navigated to
+  useScrollToTop()
+  
   const heroVariants = {
     hidden: { opacity: 0, y: 30 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.8 } }

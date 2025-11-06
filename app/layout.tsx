@@ -33,14 +33,14 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-      <html lang="en" suppressHydrationWarning>
-        <head>
+    <html lang="en" suppressHydrationWarning data-scroll-behavior="smooth">
+      <head>
         <meta name="theme-color" content="#ffffff" />
         <meta name="msapplication-TileColor" content="#ffffff" />
         <meta name="apple-mobile-web-app-status-bar-style" content="white" />
         {/* Add any other head tags if needed, metadata object handles common ones */}
       </head>
-      <body className={`${roboto.className} text-black bg-white`}>
+      <body className={`${roboto.className} text-black bg-white`} suppressHydrationWarning>
         <ThemeProvider
           attribute="class"
           defaultTheme="light"

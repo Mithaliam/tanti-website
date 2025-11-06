@@ -4,12 +4,14 @@ import { useEffect, useState, useRef } from "react";
 import dynamic from "next/dynamic";
 import Hero from "@/components/hero";
 import ErrorBoundary from "@/components/error-boundary";
+import { useScrollRestore } from "@/hooks/useScrollRestore";
 
 // Scroll position persistence for Home page
 const ScrollRestoration = () => {
   useEffect(() => {
-    const STORAGE_KEY = `scroll:${location.pathname}`;
-    const STORAGE_KEY_ID = `scrollId:${location.pathname}`;
+    if (typeof window === 'undefined') return;
+    const STORAGE_KEY = `scroll:${window.location.pathname}`;
+    const STORAGE_KEY_ID = `scrollId:${window.location.pathname}`;
 
     if ("scrollRestoration" in history) {
       history.scrollRestoration = "manual";
@@ -66,9 +68,9 @@ const ScrollRestoration = () => {
       const target = e.target as HTMLElement | null;
       const a = target && (target.closest as any)?.call(target, 'a[href]');
       if (!a) return;
-      const url = new URL(a.href, location.origin);
+      const url = new URL(a.href, window.location.origin);
       const modified = (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || (a as HTMLAnchorElement).target === '_blank');
-      if (!modified && url.origin === location.origin) storeY();
+      if (!modified && url.origin === window.location.origin) storeY();
     };
     document.addEventListener('click', onClick, true);
 
@@ -76,15 +78,74 @@ const ScrollRestoration = () => {
       const orig = (history as any)[m];
       (history as any)[m] = function () { storeY(); return orig.apply(this, arguments as any); };
     });
-    window.addEventListener('popstate', storeY);
+    // Handle back navigation specifically for "What We Offer" section
+    const handlePopState = () => {
+      storeY();
+      // Check if we're returning to home page from commercial/residential/solar
+      if (window.location.pathname === '/') {
+        const navigatedFromWhatWeOffer = (() => {
+          try { return sessionStorage.getItem('navigatedFromWhatWeOffer') === 'true'; } catch { return false; }
+        })();
+        
+        if (navigatedFromWhatWeOffer) {
+          setTimeout(() => {
+            const section = document.getElementById('what-we-offer');
+            if (section) {
+              const html = document.documentElement;
+              const prevBehavior = html.style.scrollBehavior;
+              html.style.scrollBehavior = 'smooth';
+              
+              section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              
+              // Clear the flag after scrolling
+              try { sessionStorage.removeItem('navigatedFromWhatWeOffer'); } catch {}
+              
+              // Restore previous scroll-behavior after scrolling
+              setTimeout(() => { html.style.scrollBehavior = prevBehavior; }, 1000);
+            }
+          }, 100);
+        }
+      }
+    };
+    
+    window.addEventListener('popstate', handlePopState);
 
     const restore = () => {
       // Skip only on full reloads; for SPA navigations and back/forward, attempt restore
       const nav = (performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming | undefined);
       const navType = nav?.type;
       if (navType === 'reload') {
-        try { sessionStorage.removeItem(STORAGE_KEY); } catch {}
+        try { 
+          sessionStorage.removeItem(STORAGE_KEY);
+          sessionStorage.removeItem('navigatedFromWhatWeOffer');
+        } catch {}
         window.scrollTo(0, 0);
+        return;
+      }
+
+      // Check if we navigated from "What We Offer" section (only on back navigation)
+      const navigatedFromWhatWeOffer = (() => {
+        try { return sessionStorage.getItem('navigatedFromWhatWeOffer') === 'true'; } catch { return false; }
+      })();
+
+      if (navigatedFromWhatWeOffer && window.location.pathname === '/') {
+        // Scroll smoothly to "What We Offer" section
+        setTimeout(() => {
+          const section = document.getElementById('what-we-offer');
+          if (section) {
+            const html = document.documentElement;
+            const prevBehavior = html.style.scrollBehavior;
+            html.style.scrollBehavior = 'smooth';
+            
+            section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            
+            // Clear the flag after scrolling
+            try { sessionStorage.removeItem('navigatedFromWhatWeOffer'); } catch {}
+            
+            // Restore previous scroll-behavior after scrolling
+            setTimeout(() => { html.style.scrollBehavior = prevBehavior; }, 1000);
+          }
+        }, 100);
         return;
       }
 
@@ -155,7 +216,7 @@ const ScrollRestoration = () => {
       window.removeEventListener("beforeunload", storeY);
       window.removeEventListener("scroll", onScroll as any);
       document.removeEventListener('click', onClick, true);
-      window.removeEventListener('popstate', storeY);
+      window.removeEventListener('popstate', handlePopState);
       window.removeEventListener('load', onLoad);
       window.removeEventListener('pageshow', onPageShow as any);
       document.removeEventListener('DOMContentLoaded', onDOMContentLoaded);
@@ -193,8 +254,9 @@ function LazyLoad({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     // If we are restoring a previous scroll position, render immediately
+    if (typeof window === 'undefined') return;
     try {
-      const stored = sessionStorage.getItem(`scroll:${location.pathname}`);
+      const stored = sessionStorage.getItem(`scroll:${window.location.pathname}`);
       if (stored && parseInt(stored, 10) > 0) {
         setInView(true);
         return;
@@ -218,6 +280,8 @@ function LazyLoad({ children }: { children: React.ReactNode }) {
 }
 
 export default function Home() {
+  useScrollRestore('cards-section');
+  
   return (
     <div className="min-h-screen px-0 sm:px-4 text-black" style={{ backgroundColor: '#F5F5F0' }}>
       <ScrollRestoration />

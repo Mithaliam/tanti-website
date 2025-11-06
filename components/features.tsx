@@ -4,10 +4,10 @@ import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 // Tabs removed in favor of a static 2x2 card grid
 import { useIsMobile } from "@/hooks/use-mobile"
-import { useRouter } from "next/navigation"
+import Link from "next/link"
+import { rememberScroll } from "@/hooks/useScrollRestore"
 
 export default function ModernFeatures() {
-  const router = useRouter()
   const [activeTab, setActiveTab] = useState("residential")
   const isMobile = useIsMobile()
   const [mounted, setMounted] = useState(false)
@@ -17,15 +17,18 @@ export default function ModernFeatures() {
     setMounted(true)
   }, [])
 
-  // Handle feature card click
-  const handleFeatureClick = (feature: any) => {
+  // Get navigation path for a feature
+  const getFeaturePath = (feature: { id: string; title: string }) => {
     if (feature.title === "Switching") {
-      router.push("/switching")
+      return "/switching"
     } else if (feature.title === "ABB F@H") {
-      router.push("/residential")
+      return "/residential"
     } else if (feature.title === "Video Door Phone") {
-      // Add other redirects as needed
+      return "#" // Add path when available
+    } else if (feature.title === "IOT") {
+      return "#" // Add path when available
     }
+    return "#"
   }
 
   const features = [
@@ -143,23 +146,29 @@ export default function ModernFeatures() {
                   delay: idx * 0.15,
                   ease: "easeOut"
                 }}
-                className="group relative cursor-pointer"
-                onClick={() => handleFeatureClick(feature)}
+                className="group relative"
               >
                 <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-2xl blur-lg opacity-60 group-hover:opacity-90 transition-opacity"></div>
-                <div className="relative rounded-2xl overflow-hidden border border-gray-200 bg-white/90 shadow-lg">
+                <Link
+                  href={getFeaturePath(feature)}
+                  scroll={false}
+                  onClick={rememberScroll}
+                  className="relative rounded-2xl overflow-hidden border border-gray-200 bg-white/90 shadow-lg cursor-pointer block"
+                >
                   <div className="relative h-64 sm:h-72 md:h-[360px]">
                     <img src={feature.image} alt={feature.title} className="absolute inset-0 h-full w-full object-cover" />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
                     <div className="absolute inset-x-0 bottom-0 p-5 sm:p-6">
                       <h3 className="text-2xl sm:text-3xl font-bold text-white drop-shadow">{feature.title}</h3>
                       <p className="mt-1 text-white/90 max-w-xl hidden sm:block">{feature.description}</p>
-                      <button className="mt-4 inline-flex items-center justify-center rounded-lg bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 shadow-md group-hover:shadow-xl transition-all">
+                      <button 
+                        className="mt-4 inline-flex items-center justify-center rounded-lg bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 shadow-md group-hover:shadow-xl transition-all"
+                      >
                         Discover More
                       </button>
                     </div>
                   </div>
-                </div>
+                </Link>
               </motion.div>
             ))}
           </div>
@@ -177,23 +186,29 @@ export default function ModernFeatures() {
                   delay: idx * 0.15,
                   ease: "easeOut"
                 }}
-                className="group relative cursor-pointer"
-                onClick={() => handleFeatureClick(feature)}
+                className="group relative"
               >
                 <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-2xl blur-lg opacity-60 group-hover:opacity-90 transition-opacity"></div>
-                <div className="relative rounded-2xl overflow-hidden border border-gray-200 bg-white/90 shadow-lg">
+                <Link
+                  href={getFeaturePath(feature)}
+                  scroll={false}
+                  onClick={rememberScroll}
+                  className="relative rounded-2xl overflow-hidden border border-gray-200 bg-white/90 shadow-lg cursor-pointer block"
+                >
                   <div className="relative h-64 sm:h-72 md:h-[360px]">
                     <img src={feature.image} alt={feature.title} className="absolute inset-0 h-full w-full object-cover" />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
                     <div className="absolute inset-x-0 bottom-0 p-5 sm:p-6">
                       <h3 className="text-2xl sm:text-3xl font-bold text-white drop-shadow">{feature.title}</h3>
                       <p className="mt-1 text-white/90 max-w-xl hidden sm:block">{feature.description}</p>
-                      <button className="mt-4 inline-flex items-center justify-center rounded-lg bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 shadow-md group-hover:shadow-xl transition-all">
+                      <button 
+                        className="mt-4 inline-flex items-center justify-center rounded-lg bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 shadow-md group-hover:shadow-xl transition-all"
+                      >
                         Discover More
                       </button>
                     </div>
                   </div>
-                </div>
+                </Link>
               </motion.div>
             ))}
           </div>

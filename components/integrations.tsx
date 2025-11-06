@@ -2,11 +2,6 @@
 
 import { motion } from "framer-motion"
 import Image from "next/image"
-// Use static import so Next.js reliably bundles the asset even if added during dev
-// Path resolves to project root /public
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore - Next provides image types at build time
-import AICBuilding from "@/public/AIC_building-1.jpg"
 import { Button } from "@/components/ui/button"
 
 export default function Integrations() {
@@ -14,7 +9,7 @@ export default function Integrations() {
     {
       title: "ABB AIC",
       location: "Bengaluru",
-      image: AICBuilding,
+      image: "/AIC_building-1.jpg",
       useNative: true,
       description: "Complete KNX automation system for luxury residential project"
     },
