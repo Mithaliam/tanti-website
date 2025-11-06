@@ -153,8 +153,8 @@ export default function HowItWorks() {
                     {step.description}
                   </p>
 
-                  {index < steps.length - 1 && (
-                    <div className="hidden lg:flex items-center justify-end text-amber-400 mt-auto">
+                  {(index < steps.length - 1 || step.title === "MEP") && (
+                    <div className="hidden lg:flex items-center justify-end text-blue-500 mt-auto">
                       <ArrowRight className="w-5 h-5" />
                     </div>
                   )}

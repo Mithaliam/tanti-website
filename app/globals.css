@@ -176,6 +176,16 @@
   }
 }
 
+/* Single-line marquee that moves full width across the banner */
+@keyframes marquee-single {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
 @keyframes marquee-reverse {
   0% {
     transform: translateX(-50%);

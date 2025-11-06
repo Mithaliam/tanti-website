@@ -81,6 +81,10 @@ export default function ContactPage() {
                   <div className="font-semibold">Mysore Office:</div>
                   <div className="text-sm">61, Banashankari nilaya, Basaveshwaranagar,<br/>Mysuru, Karnataka 570022</div>
                 </div>
+                <div>
+                  <div className="font-semibold">Hubballi Office:</div>
+                  <div className="text-sm">Tanti automatics pvt ltd<br/>Shop No 19, 2nd Floor, Pride Icon,<br/>Beside Cubix Hotel, Gokul(Airport) Road,<br/>Hubballi - 580030</div>
+                </div>
                 <Button asChild className="bg-blue-600 hover:bg-blue-700">
                   <Link href={googleMapsUrl} target="_blank" rel="noopener noreferrer">Visit Us</Link>
                 </Button>

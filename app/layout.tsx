@@ -48,6 +48,12 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <ModernHeader />
+          {/* Global running disclaimer banner */}
+          <div className="w-full bg-yellow-200/90 text-blue-900 py-3 md:py-4 border-b border-yellow-300 mt-[60px] overflow-hidden">
+            <div className="whitespace-nowrap font-semibold text-base md:text-lg tracking-wide animate-[marquee-single_16s_linear_infinite]">
+              Our smart switches are still arguing about who should turn this page on ⚡🤖🔌😤.
+            </div>
+          </div>
           <main className="bg-white">{children}</main>
           <ModernFooter />
         </ThemeProvider>

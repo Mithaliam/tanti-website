@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion"
 import Image from "next/image"
+import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -60,43 +61,16 @@ export default function CommercialPage() {
     {
       title: "LMS",
       description: "A KNX-based Lighting Management System (LMS) is a smart solution that utilizes the KNX protocol to efficiently control and automate lighting in buildings, optimizing energy use and enabling seamless integration with other KNX-compatible devices and systems.",
-      image: "https://images.unsplash.com/photo-1540573133985-87b6da6d54a9?q=80&w=2069&auto=format&fit=crop",
+      image: "/LMS.jpeg",
       button1: "DALI Based Solutions",
       button2: "Day Light Harvesting"
     },
     {
       title: "BMS Control",
       description: "A Building Management System (BMS) is a centralized control system for monitoring and managing various building services like HVAC, lighting, security, and more. It optimizes energy usage, ensures comfort and safety, and provides data for efficient building operation.",
-      image: "https://images.unsplash.com/photo-1557804506-669a67965ba0?q=80&w=1974&auto=format&fit=crop",
+      image: "/BMS.jpeg",
       button1: "ABB Cylon",
       button2: "NETX Automation"
-    }
-  ]
-
-  const commercialSolutions = [
-    {
-      title: "Smart Office Automation",
-      description: "Transform your workspace with intelligent lighting, climate control, and access management systems for enhanced productivity and employee comfort.",
-      icon: "🏢",
-      features: ["Automated Lighting", "Climate Control", "Access Management", "Meeting Room Booking"]
-    },
-    {
-      title: "Retail & Hospitality",
-      description: "Create engaging customer experiences with dynamic lighting, security systems, and energy management solutions tailored for commercial spaces.",
-      icon: "🛍️",
-      features: ["Dynamic Lighting", "CCTV Integration", "Energy Monitoring", "Guest Comfort"]
-    },
-    {
-      title: "Industrial Automation",
-      description: "Enhance efficiency and safety in industrial environments with robust automation for machinery, energy, and environmental control systems.",
-      icon: "🏭",
-      features: ["Process Automation", "Energy Optimization", "Safety Systems", "Remote Monitoring"]
-    },
-    {
-      title: "Healthcare Facilities",
-      description: "Specialized automation solutions for healthcare environments, ensuring patient comfort, staff efficiency, and regulatory compliance.",
-      icon: "🏥",
-      features: ["Patient Comfort", "Staff Efficiency", "Compliance", "Emergency Systems"]
     }
   ]
 
@@ -105,14 +79,20 @@ export default function CommercialPage() {
     { name: "DALI", icon: "💡" },
     { name: "BACnet", icon: "🔗" },
     { name: "Modbus", icon: "🔌" },
-    { name: "IoT Platforms", icon: "🌐" },
-    { name: "Cloud Integration", icon: "☁️" }
+    { name: "IoT Platforms", icon: "🌐" }
   ]
 
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-blue-600 via-blue-700 to-cyan-600 text-white py-20 px-4 overflow-hidden">
+      <section
+        className="relative text-white py-20 px-4 overflow-hidden"
+        style={{
+          // Dark blue transparent gradient
+          backgroundImage:
+            'linear-gradient(to bottom right, rgba(10, 28, 74, 0.88), rgba(15, 49, 114, 0.78), rgba(24, 78, 174, 0.68))'
+        }}
+      >
         <div className="container mx-auto max-w-6xl">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div
@@ -122,7 +102,7 @@ export default function CommercialPage() {
               className="space-y-8"
             >
               <div className="space-y-4">
-                <h1 className="text-5xl lg:text-6xl font-bold leading-tight">
+                <h1 className="text-5xl lg:text-6xl font-bold leading-tight text-white">
                   Smart And Energy
                 </h1>
                 <h2 className="text-4xl lg:text-5xl font-bold text-amber-300">
@@ -132,12 +112,9 @@ export default function CommercialPage() {
               <p className="text-xl text-blue-100 max-w-lg">
                 Transform your commercial space into an intelligent, energy-efficient environment with our comprehensive building automation solutions.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Button size="lg" className="bg-white text-blue-600 hover:bg-gray-100 text-lg px-8 py-4">
-                  Explore Solutions
-                </Button>
-                <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-blue-600 text-lg px-8 py-4">
-                  Get Free Consultation
+              <div className="flex justify-center">
+                <Button size="lg" asChild className="bg-white text-blue-600 hover:bg-gray-100 text-lg px-8 py-4">
+                  <Link href="/solutions">Explore Solutions</Link>
                 </Button>
               </div>
             </motion.div>
@@ -149,8 +126,15 @@ export default function CommercialPage() {
               className="relative"
             >
               <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-8">
-                <div className="aspect-square bg-gradient-to-br from-white/20 to-white/5 rounded-2xl flex items-center justify-center">
-                  <div className="text-8xl text-white/60">🏢</div>
+                <div className="aspect-square bg-gradient-to-br from-white/20 to-white/5 rounded-2xl overflow-hidden relative">
+                  <Image 
+                    src="/commerial%20poster.jpeg"
+                    alt="Commercial Building Automation"
+                    fill
+                    className="object-cover rounded-2xl"
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    priority
+                  />
                 </div>
               </div>
             </motion.div>
@@ -194,7 +178,9 @@ export default function CommercialPage() {
                           src={solution.image} 
                           alt={solution.title}
                           fill
-                          className="object-cover"
+                          className="object-cover group-hover:scale-110 transition-transform duration-500"
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                          priority={solution.title === "LMS"}
                         />
                       </div>
                       {/* Blue overlay that rises from bottom on hover with content */}
@@ -272,55 +258,6 @@ export default function CommercialPage() {
         </div>
       </section>
 
-      {/* Commercial Solutions Overview */}
-      <section className="py-20 px-4 bg-white">
-        <div className="container mx-auto max-w-6xl">
-          <motion.div
-            variants={cardVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Complete Commercial Solutions</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Comprehensive automation solutions designed to transform every aspect of your commercial space
-            </p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {commercialSolutions.map((solution, index) => (
-              <motion.div
-                key={solution.title}
-                variants={cardVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-              >
-                <Card className="h-full text-center hover:shadow-lg transition-shadow duration-300">
-                  <CardContent className="p-8">
-                    <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                      <div className="text-3xl">{solution.icon}</div>
-                    </div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-4">{solution.title}</h3>
-                    <p className="text-gray-600 mb-6">{solution.description}</p>
-                    <div className="space-y-2">
-                      {solution.features.map((feature, featureIndex) => (
-                        <div key={featureIndex} className="flex items-center text-sm text-gray-600">
-                          <span className="w-4 h-4 text-green-500 mr-2">✓</span>
-                          {feature}
-                        </div>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Technologies Section */}
       <section className="py-20 px-4 bg-gray-50">
         <div className="container mx-auto max-w-6xl">
@@ -335,12 +272,9 @@ export default function CommercialPage() {
             <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
               We leverage a wide spectrum of leading technologies including KNX, DALI, BACnet, Modbus, IoT platforms, and cloud integration to deliver holistic solutions tailored to diverse commercial requirements.
             </p>
-            <Button size="lg" className="bg-blue-600 hover:bg-blue-700">
-              Discover More
-            </Button>
           </motion.div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 justify-items-center">
             {technologies.map((tech, index) => (
               <motion.div
                 key={tech.name}
@@ -349,9 +283,9 @@ export default function CommercialPage() {
                 whileInView="visible"
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="text-center"
+                className="text-center w-full"
               >
-                <Card className="p-6 hover:shadow-lg transition-shadow duration-300">
+                <Card className="p-6 hover:shadow-lg transition-shadow duration-300 h-28 flex flex-col items-center justify-center w-full">
                   <div className="text-4xl mx-auto mb-4">{tech.icon}</div>
                   <h3 className="font-semibold text-gray-900">{tech.name}</h3>
                 </Card>
@@ -375,14 +309,6 @@ export default function CommercialPage() {
             <p className="text-xl text-blue-100 max-w-2xl mx-auto">
               Get in touch with our experts to discuss your commercial automation needs and receive a customized solution.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="bg-white text-blue-600 hover:bg-gray-100 text-lg px-8 py-4">
-                Get Free Consultation
-              </Button>
-              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-blue-600 text-lg px-8 py-4">
-                View Our Projects
-              </Button>
-            </div>
           </motion.div>
         </div>
       </section>

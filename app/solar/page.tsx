@@ -14,16 +14,21 @@ const SolarSections = dynamic(() => import("@/components/SolarSections"), {
 import { useRouter } from "next/navigation"
 import Image from "next/image"
 import Link from "next/link"
-import { useScrollToTop } from "@/hooks/useScrollRestore"
+// import { useScrollToTop } from "@/hooks/useScrollRestore"
 
 export default function SolarPage() {
   const router = useRouter()
   const heroVideoRef = useRef<HTMLVideoElement | null>(null)
   
-  // Ensure page starts at top when navigated to
-  useScrollToTop()
+  // Ensure page starts at top when navigated to (temporarily disabled)
+  // useScrollToTop()
   
   useEffect(() => {
+    // Ensure we start at the very top when navigating to /solar
+    if (typeof window !== 'undefined') {
+      window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
+    }
+
     const v = heroVideoRef.current
     if (!v) return
     // Ensure autoplay on some browsers - non-blocking
@@ -88,12 +93,12 @@ export default function SolarPage() {
           <source src="/solar%20video.mp4" type="video/mp4" />
         </video>
         {/* Overlay removed per request to show original video */}
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-4 min-h-[85vh] md:min-h-screen flex items-center justify-center">
           <motion.div
             variants={heroVariants}
             initial="hidden"
             animate="visible"
-            className="relative z-20 text-center max-w-4xl mx-auto"
+            className="relative z-20 text-center max-w-4xl mx-auto -mt-20 md:-mt-28"
           >
             <h1 className="text-4xl md:text-6xl font-bold text-[#3B82F6] mb-6">
               Solar Energy Solutions
@@ -103,21 +108,7 @@ export default function SolarPage() {
               From residential installations to commercial projects, we provide sustainable 
               energy solutions that reduce costs and environmental impact.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button 
-                size="lg" 
-                className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white px-8 py-3 text-lg"
-              >
-                Get Solar Quote
-              </Button>
-              <Button 
-                variant="outline" 
-                size="lg" 
-                className="border-gray-300 text-gray-700 hover:bg-gray-50 px-8 py-3 text-lg"
-              >
-                Learn More
-              </Button>
-            </div>
+            {/* CTA buttons removed per request */}
 
             {/* Types of Installation inline section removed to avoid duplication */}
           </motion.div>
