@@ -28,7 +28,7 @@ export default function ModernHero() {
   }, [])
 
   return (
-    <section className="relative min-h-[100svh] flex items-center overflow-hidden">
+    <section id="hero-section" className="relative min-h-[100svh] flex items-center overflow-hidden">
       {/* Background video */}
       <div className="absolute inset-0 z-0">
         <video

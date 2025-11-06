@@ -4,6 +4,7 @@ import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import ModernHeader from "@/components/header"
 import ModernFooter from "@/components/footer"
+import ScrollRestorationProvider from "@/app/providers/ScrollRestorationProvider"
 
 const roboto = Roboto({ 
   subsets: ["latin"], 
@@ -50,16 +51,18 @@ export default function RootLayout({
         {/* Add any other head tags if needed, metadata object handles common ones */}
       </head>
       <body className={`${roboto.className} text-black bg-white`} suppressHydrationWarning>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="light"
-          enableSystem={false}
-          disableTransitionOnChange
-        >
-          <ModernHeader />
-          <main className="bg-white">{children}</main>
-          <ModernFooter />
-        </ThemeProvider>
+        <ScrollRestorationProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="light"
+            enableSystem={false}
+            disableTransitionOnChange
+          >
+            <ModernHeader />
+            <main className="bg-white">{children}</main>
+            <ModernFooter />
+          </ThemeProvider>
+        </ScrollRestorationProvider>
       </body>
     </html>
   )

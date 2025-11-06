@@ -1,10 +1,17 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import Image from "next/image"
 
 export default function SolutionsPage() {
+  // Track that we navigated to solutions page
+  useEffect(() => {
+    try {
+      sessionStorage.setItem('navigatedFromSolutions', 'true');
+    } catch {}
+  }, []);
+
   // State for modal - stores the active modal content key
   const [activeModal, setActiveModal] = useState<string | null>(null)
 

@@ -5,13 +5,9 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { useRouter } from "next/navigation"
-import { useScrollToTop } from "@/hooks/useScrollRestore"
 
 export default function ResidentialPage() {
   const router = useRouter()
-  
-  // Ensure page starts at top when navigated to
-  useScrollToTop()
   
   const heroVariants = {
     hidden: { opacity: 0, y: 30 },
