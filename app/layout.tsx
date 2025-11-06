@@ -17,10 +17,7 @@ export const metadata: Metadata = {
   title: "Tanti - Intelligent Building Systems & LMS",
   description: "Comprehensive automation solutions for residential, commercial, and security needs. Smart building systems and lighting management.",
   icons: {
-    icon: [
-      { url: "/tanti-favicon.svg", type: "image/svg+xml" },
-      { url: "/favicon-96x96.png", sizes: "96x96" },
-    ],
+    icon: "/tanti-favicon.svg",
     shortcut: "/tanti-favicon.svg",
     apple: "/web-app-manifest-192x192.png",
   },
