@@ -105,6 +105,8 @@ export default function SolarPanelsPage() {
                                               alt={f.title} 
                                               fill 
                                               className="object-cover" 
+                                              loading="eager"
+                                              priority
                                               style={{ objectPosition: f.title === 'Durability & Weather Resistance' ? 'center 70%' : 'center top' }}
                                             />
 										</div>
@@ -152,6 +154,8 @@ export default function SolarPanelsPage() {
                                               alt={t.name} 
                                               fill 
                                               className={`object-cover transition-transform duration-500 group-hover:scale-105`} 
+                                              loading="eager"
+                                              priority
                                               style={{ objectPosition: t.name === 'Thin‑Film' ? 'center 85%' : 'center top' }}
                                             />
 										</div>

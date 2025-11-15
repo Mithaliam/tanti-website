@@ -2,6 +2,7 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import Image from "next/image"
 
 export default function ModernFooter() {
   const pathname = usePathname()
@@ -18,11 +19,17 @@ export default function ModernFooter() {
           {/* Left: Logo + tagline */}
           <div className="flex flex-col items-center md:items-start text-center md:text-left">
             <Link href="/" className="mb-4 inline-flex">
-              <img
-                src="/tanti-automatics-logo.png"
-                alt="Tanti Automatics Pvt. Ltd."
-                className="h-10 w-auto"
-              />
+              <span className="relative block h-10 w-40">
+                <Image
+                  src="/tanti-automatics-logo.png"
+                  alt="Tanti Automatics Pvt. Ltd."
+                  fill
+                  className="object-contain"
+                  loading="eager"
+                  priority
+                  sizes="160px"
+                />
+              </span>
             </Link>
             <p className="text-sm text-gray-700">Complete Building Automation</p>
           </div>

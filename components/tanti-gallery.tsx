@@ -91,7 +91,7 @@ export default function TantiGallery() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
                   {grouped.videos.map((item) => (
                     <div key={item.path} className="relative aspect-video bg-white/5 border border-white/10 rounded-lg overflow-hidden">
-                      <video src={item.path} className="w-full h-full" controls preload="metadata" />
+                      <video src={item.path} className="w-full h-full" controls preload="auto" />
                     </div>
                   ))}
                 </div>

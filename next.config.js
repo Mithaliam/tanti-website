@@ -93,6 +93,23 @@ const nextConfig = {
 
     return config;
   },
+  async headers() {
+    return [
+      {
+        source: "/:all*(webp|avif|jpg|jpeg|png|svg)",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
+        ],
+      },
+      {
+        source: "/:all*(mp4|webm|m4v|mov)",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
+          { key: "Accept-Ranges", value: "bytes" },
+        ],
+      },
+    ]
+  },
 };
 
 module.exports = nextConfig

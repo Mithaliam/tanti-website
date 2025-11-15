@@ -159,7 +159,7 @@ function Avatar({ src, alt }: { src: string; alt: string }) {
           <UserRound className="text-blue-600" size={28} />
         </div>
       ) : (
-        <Image src={src} alt={alt} fill sizes="56px" className="rounded-full object-cover" onError={() => setFailed(true)} />
+        <Image src={src} alt={alt} fill sizes="56px" className="rounded-full object-cover" onError={() => setFailed(true)} loading="eager" priority />
       )}
     </div>
   )

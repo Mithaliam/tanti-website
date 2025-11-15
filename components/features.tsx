@@ -6,6 +6,7 @@ import { motion } from "framer-motion"
 import { useIsMobile } from "@/hooks/use-mobile"
 import Link from "next/link"
 import { rememberScroll } from "@/hooks/useScrollRestore"
+import Image from "next/image"
 
 export default function ModernFeatures() {
   const [activeTab, setActiveTab] = useState("residential")
@@ -140,7 +141,7 @@ export default function ModernFeatures() {
                 key={feature.id}
                 initial={{ opacity: 0, x: -100, y: 20 }}
                 whileInView={{ opacity: 1, x: 0, y: 0 }}
-                viewport={{ once: false, margin: "-50px" }}
+                viewport={{ once: false, margin: "200px" }}
                 transition={{ 
                   duration: 0.6, 
                   delay: idx * 0.15,
@@ -156,7 +157,15 @@ export default function ModernFeatures() {
                   className="relative rounded-2xl overflow-hidden border border-gray-200 bg-white/90 shadow-lg cursor-pointer block"
                 >
                   <div className="relative h-64 sm:h-72 md:h-[360px]">
-                    <img src={feature.image} alt={feature.title} className="absolute inset-0 h-full w-full object-cover" />
+                    <Image
+                      src={feature.image}
+                      alt={feature.title}
+                      fill
+                      className="absolute inset-0 h-full w-full object-cover"
+                      loading="eager"
+                      priority
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                    />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
                     <div className="absolute inset-x-0 bottom-0 p-5 sm:p-6">
                       <h3 className="text-2xl sm:text-3xl font-bold text-white drop-shadow">{feature.title}</h3>
@@ -180,7 +189,7 @@ export default function ModernFeatures() {
                 key={feature.id}
                 initial={{ opacity: 0, x: 100, y: 20 }}
                 whileInView={{ opacity: 1, x: 0, y: 0 }}
-                viewport={{ once: false, margin: "-50px" }}
+                viewport={{ once: false, margin: "200px" }}
                 transition={{ 
                   duration: 0.6, 
                   delay: idx * 0.15,
@@ -196,7 +205,15 @@ export default function ModernFeatures() {
                   className="relative rounded-2xl overflow-hidden border border-gray-200 bg-white/90 shadow-lg cursor-pointer block"
                 >
                   <div className="relative h-64 sm:h-72 md:h-[360px]">
-                    <img src={feature.image} alt={feature.title} className="absolute inset-0 h-full w-full object-cover" />
+                    <Image
+                      src={feature.image}
+                      alt={feature.title}
+                      fill
+                      className="absolute inset-0 h-full w-full object-cover"
+                      loading="eager"
+                      priority
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                    />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
                     <div className="absolute inset-x-0 bottom-0 p-5 sm:p-6">
                       <h3 className="text-2xl sm:text-3xl font-bold text-white drop-shadow">{feature.title}</h3>

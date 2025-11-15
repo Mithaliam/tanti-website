@@ -68,8 +68,8 @@ export default function Integrations() {
                       alt={story.title}
                       fill
                       className="object-cover transition-transform duration-300 group-hover:scale-105"
-                      priority={index === 0}
-                      loading={index === 0 ? "eager" : "lazy"}
+                      priority
+                      loading="eager"
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     />
                   ) : (
@@ -78,8 +78,8 @@ export default function Integrations() {
                       alt={story.title}
                       fill
                       className="object-cover transition-transform duration-300 group-hover:scale-105"
-                      priority={index === 0}
-                      loading={index === 0 ? "eager" : "lazy"}
+                      priority
+                      loading="eager"
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     />
                   )}

@@ -18,8 +18,12 @@ export default function SolarPage() {
   const router = useRouter()
   const heroVideoRef = useRef<HTMLVideoElement | null>(null)
   
+  // Scroll to top when page loads
   useEffect(() => {
-
+    window.scrollTo({ top: 0, behavior: 'instant' })
+  }, [])
+  
+  useEffect(() => {
     const v = heroVideoRef.current
     if (!v) return
     // Ensure autoplay on some browsers - non-blocking
@@ -78,7 +82,7 @@ export default function SolarPage() {
           muted
           loop
           playsInline
-          preload="none"
+          preload="auto"
           ref={heroVideoRef}
         >
           <source src="/solar%20video.mp4" type="video/mp4" />

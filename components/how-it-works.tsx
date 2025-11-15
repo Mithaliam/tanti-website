@@ -1,15 +1,12 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { useState, useEffect, useRef } from "react";
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import Image from "next/image";
 import useEmblaCarousel from "embla-carousel-react";
 import { ArrowRight } from "lucide-react";
-import { Roboto } from "next/font/google";
 import Link from "next/link";
 import { rememberScroll } from "@/hooks/useScrollRestore";
-
-const roboto = Roboto({ subsets: ["latin"], weight: ["400", "500", "700"] });
 
 // Image component with fallback support
 function ImageWithFallback({ 
@@ -18,8 +15,8 @@ function ImageWithFallback({
   alt, 
   fill, 
   className, 
-  loading, 
-  priority, 
+  loading = "eager", 
+  priority = true, 
   sizes 
 }: { 
   src: string; 
@@ -45,8 +42,7 @@ function ImageWithFallback({
       alt={alt}
       fill={fill}
       className={className}
-      loading={loading}
-      priority={priority}
+      {...(priority ? { priority: true } : { loading })}
       sizes={sizes}
       onError={() => {
         if (fallback && !hasError) {
@@ -58,13 +54,180 @@ function ImageWithFallback({
   );
 }
 
+// Premium 3D Card Component with Glassmorphism
+function PremiumCard({ 
+  step, 
+  index, 
+  getStepPath 
+}: { 
+  step: { number: string; title: string; description: string; image: string; fallbackImage: string };
+  index: number;
+  getStepPath: (step: { title: string }) => string;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  
+  const mouseXSpring = useSpring(x, { stiffness: 500, damping: 100 });
+  const mouseYSpring = useSpring(y, { stiffness: 500, damping: 100 });
+  
+  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["7.5deg", "-7.5deg"]);
+  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-7.5deg", "7.5deg"]);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!ref.current) return;
+    
+    const rect = ref.current.getBoundingClientRect();
+    const width = rect.width;
+    const height = rect.height;
+    const mouseX = e.clientX - rect.left;
+    const mouseY = e.clientY - rect.top;
+    const xPct = mouseX / width - 0.5;
+    const yPct = mouseY / height - 0.5;
+    
+    x.set(xPct);
+    y.set(yPct);
+  };
+
+  const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
+  };
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "200px" }}
+      transition={{ 
+        type: "spring",
+        stiffness: 100,
+        damping: 15,
+        delay: index * 0.1
+      }}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{
+        rotateX,
+        rotateY,
+        transformStyle: "preserve-3d",
+      }}
+      className="group relative h-full"
+    >
+      {/* Animated gradient border glow - Always visible with enhanced intensity */}
+      <motion.div 
+        className="absolute -inset-0.5 rounded-2xl bg-gradient-to-r from-blue-500 via-cyan-500 to-purple-500 opacity-60 group-hover:opacity-100 blur-sm transition-opacity duration-500"
+        animate={{
+          opacity: [0.6, 0.8, 0.6],
+        }}
+        transition={{
+          duration: 3,
+          repeat: Infinity,
+          ease: "easeInOut"
+        }}
+      />
+      
+      {/* Additional outer glow shadow for depth */}
+      <div className="absolute -inset-1 rounded-2xl bg-gradient-to-r from-blue-500/30 via-cyan-500/30 to-purple-500/30 blur-lg opacity-60 group-hover:opacity-100 transition-opacity duration-500" />
+      
+      {/* Glassmorphism card */}
+      <Link
+        href={getStepPath(step)}
+        scroll={step.title === "Solar" ? true : false}
+        onClick={step.title === "Solar" ? () => window.scrollTo(0, 0) : rememberScroll}
+        className={`relative h-full flex flex-col rounded-2xl overflow-hidden backdrop-blur-xl bg-gradient-to-br from-white/80 via-white/60 to-white/40 border border-white/30 shadow-2xl transition-all duration-500 ease-out group-hover:shadow-[0_20px_50px_rgba(59,130,246,0.3)] ${step.title === "Residential" || step.title === "Commercial" || step.title === "Solar" ? "cursor-pointer" : ""}`}
+        style={{ transform: "translateZ(0)" }}
+      >
+        {/* Floating badge */}
+        <motion.div
+          initial={{ scale: 0, rotate: -180 }}
+          whileInView={{ scale: 1, rotate: 0 }}
+          viewport={{ once: true }}
+          transition={{ 
+            type: "spring",
+            stiffness: 200,
+            damping: 15,
+            delay: index * 0.1 + 0.2
+          }}
+          className="absolute top-6 left-6 z-20 bg-gradient-to-br from-blue-500 to-cyan-500 text-white rounded-xl w-14 h-14 flex items-center justify-center text-xl font-bold shadow-lg shadow-blue-500/50"
+          style={{ transform: "translateZ(20px)" }}
+        >
+          {step.number}
+        </motion.div>
+
+        {/* Image container with parallax effect */}
+        <div className="relative h-56 sm:h-64 overflow-hidden rounded-t-2xl">
+          <motion.div
+            style={{
+              rotateX: useTransform(mouseYSpring, [-0.5, 0.5], ["-5deg", "5deg"]),
+              rotateY: useTransform(mouseXSpring, [-0.5, 0.5], ["5deg", "-5deg"]),
+              scale: 1.1,
+            }}
+            className="absolute inset-0"
+          >
+            <ImageWithFallback
+              src={step.image}
+              fallback={step.fallbackImage}
+              alt={step.title}
+              fill
+              className="object-cover transition-transform duration-700 group-hover:scale-110"
+              priority={index < 2}
+              loading="eager"
+              sizes="(max-width: 640px) 85vw, (max-width: 1024px) 50vw, 25vw"
+            />
+          </motion.div>
+          
+          {/* Gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+          
+          {/* Animated light streak */}
+          <motion.div
+            className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+            initial={{ x: "-100%" }}
+            animate={{ x: "200%" }}
+            transition={{
+              duration: 3,
+              repeat: Infinity,
+              repeatDelay: 2,
+              ease: "easeInOut"
+            }}
+          />
+        </div>
+
+        {/* Content section */}
+        <div className="p-6 sm:p-8 flex-grow flex flex-col bg-gradient-to-b from-white/90 to-white/70" style={{ transform: "translateZ(10px)" }}>
+          <h3 className="text-2xl sm:text-3xl font-bold mb-3 text-gray-900 group-hover:text-blue-600 transition-colors duration-300">
+            {step.title}
+          </h3>
+          
+          <p className="text-sm sm:text-base text-gray-700 mb-6 flex-grow leading-relaxed">
+            {step.description}
+          </p>
+
+          {/* Animated arrow */}
+          <motion.div
+            className="flex items-center justify-end text-blue-500 mt-auto"
+            whileHover={{ x: 5 }}
+            transition={{ type: "spring", stiffness: 400, damping: 17 }}
+          >
+            <ArrowRight className="w-6 h-6 group-hover:text-cyan-500 transition-colors duration-300" />
+          </motion.div>
+        </div>
+
+        {/* Subtle inner glow */}
+        <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-blue-500/0 via-cyan-500/0 to-purple-500/0 group-hover:from-blue-500/10 group-hover:via-cyan-500/10 group-hover:to-purple-500/10 transition-all duration-500 pointer-events-none" />
+      </Link>
+    </motion.div>
+  );
+}
+
 export default function HowItWorks() {
   const [emblaRef, emblaApi] = useEmblaCarousel({
     loop: false,
     align: "start",
   });
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const assetVersion = "v1-20251015";
 
   const steps = [
     {
@@ -132,132 +295,213 @@ export default function HowItWorks() {
   };
 
   return (
-    <section id="cards-section" className="py-2 sm:py-3 md:py-4 relative overflow-hidden" style={{ backgroundColor: '#F5F5F0' }}>
-      {/* Background elements */}
-      <div className="absolute inset-0 z-0">
-        <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-blue-500/10 rounded-full blur-[100px]"></div>
-        <div className="absolute bottom-0 left-0 w-1/3 h-1/3 bg-amber-500/10 rounded-full blur-[100px]"></div>
-        <div className="absolute inset-0 bg-[url('/images/grid.svg')] bg-repeat opacity-5"></div>
+    <section id="cards-section" className="py-16 sm:py-20 md:py-24 relative overflow-hidden" style={{ backgroundColor: '#F5F5F0' }}>
+      {/* Animated background - gradient waves and blobs */}
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        {/* Animated gradient blobs */}
+        <motion.div
+          className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-blue-500/20 to-cyan-500/20 rounded-full blur-3xl"
+          animate={{
+            x: [0, 50, 0],
+            y: [0, 30, 0],
+            scale: [1, 1.1, 1],
+          }}
+          transition={{
+            duration: 20,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+        <motion.div
+          className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-purple-500/20 to-pink-500/20 rounded-full blur-3xl"
+          animate={{
+            x: [0, -50, 0],
+            y: [0, -30, 0],
+            scale: [1, 1.2, 1],
+          }}
+          transition={{
+            duration: 25,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+        
+        {/* Grid pattern */}
+        <div className="absolute inset-0 bg-[url('/images/grid.svg')] bg-repeat opacity-[0.03]" />
+        
+        {/* Light streaks */}
+        <motion.div
+          className="absolute top-1/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-blue-500/30 to-transparent"
+          animate={{
+            opacity: [0.3, 0.6, 0.3],
+            x: ["-100%", "200%"],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "linear"
+          }}
+        />
       </div>
 
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        {/* Section title */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-3 sm:mb-4"
+          viewport={{ once: true, margin: "200px" }}
+          transition={{ 
+            type: "spring",
+            stiffness: 100,
+            damping: 15
+          }}
+          className="text-center mb-12 sm:mb-16"
         >
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 pb-1 text-[#06b6d4]">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-600 via-cyan-500 to-purple-600 bg-clip-text text-transparent">
             What We Offer
           </h2>
-          
         </motion.div>
 
-        {/* Desktop view - Grid layout with equal height cards */}
-        <div className="hidden sm:grid sm:grid-cols-2 sm:px-[5%] lg:grid-cols-4 gap-4 sm:gap-6">
+        {/* Desktop view - Premium cards grid */}
+        <div className="hidden sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
           {steps.map((step, index) => (
-            <motion.div
+            <PremiumCard
               key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="group relative h-full"
-            >
-              <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-xl blur-sm opacity-70 group-hover:opacity-100 transition-opacity duration-300"></div>
-              <Link
-                href={getStepPath(step)}
-                scroll={false}
-                onClick={rememberScroll}
-                className={`relative bg-white/90 backdrop-blur-sm border border-gray-200 rounded-lg overflow-hidden h-full flex flex-col shadow-lg transition-transform duration-300 ease-out group-hover:scale-[1.02] group-hover:-translate-y-1 group-hover:shadow-2xl ${roboto.className} ${step.title === "Residential" || step.title === "Commercial" || step.title === "Solar" ? "cursor-pointer" : ""}`}
-              >
-                <div className="relative h-40 sm:h-48 overflow-hidden">
-                  <ImageWithFallback
-                    src={step.image}
-                    fallback={step.fallbackImage}
-                    alt={step.title}
-                    fill
-                    className="object-cover"
-                    loading={index === 0 ? "eager" : "lazy"}
-                    priority={index === 0}
-                    sizes="(max-width: 640px) 85vw, (max-width: 1024px) 50vw, 25vw"
-                  />
-                  <div className="absolute inset-0 bg-black/20"></div>
-                  <div className="absolute top-4 left-4 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-lg w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center text-lg sm:text-xl font-bold">
-                    {step.number}
-                  </div>
-                </div>
-
-                <div className="p-4 sm:p-6 flex-grow flex flex-col">
-                  <h3 className="text-lg sm:text-xl font-bold mb-2 text-black">
-                    {step.title}
-                  </h3>
-                  <p className="text-sm sm:text-base text-black mb-4 flex-grow">
-                    {step.description}
-                  </p>
-
-                  {(index < steps.length - 1 || step.title === "MEP") && (
-                    <div className="hidden lg:flex items-center justify-end text-blue-500 mt-auto">
-                      <ArrowRight className="w-5 h-5" />
-                    </div>
-                  )}
-                </div>
-              </Link>
-            </motion.div>
+              step={step}
+              index={index}
+              getStepPath={getStepPath}
+            />
           ))}
         </div>
 
-        {/* Mobile view - Using Embla Carousel - Simplified */}
+        {/* Mobile view - Using Embla Carousel with Premium Effects */}
         <div className="sm:hidden">
-          {/* Remove overflow-hidden from container and apply to carousel only */}
           <div className="overflow-visible -mx-4 px-4" ref={emblaRef}>
             <div className="flex touch-pan-y">
               {steps.map((step, index) => (
-                <Link
+                <motion.div
                   key={index}
-                  href={getStepPath(step)}
-                  scroll={false}
-                  onClick={rememberScroll}
-                  className={`flex-[0_0_85%] min-w-0 ml-4 first:ml-4 ${step.title === "Residential" || step.title === "Commercial" || step.title === "Solar" ? "cursor-pointer" : ""}`}
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "200px" }}
+                  transition={{ 
+                    type: "spring",
+                    stiffness: 100,
+                    damping: 15,
+                    delay: index * 0.1
+                  }}
+                  className="flex-[0_0_85%] min-w-0 ml-4 first:ml-4 group"
                 >
-                  <div className="relative h-32 overflow-hidden">
-                    <ImageWithFallback
-                      src={step.image}
-                      fallback={step.fallbackImage}
-                      alt={step.title}
-                      fill
-                      className="object-cover"
-                      loading="lazy"
-                      sizes="85vw"
+                  <Link
+                    href={getStepPath(step)}
+                    scroll={step.title === "Solar" ? true : false}
+                    onClick={step.title === "Solar" ? () => window.scrollTo(0, 0) : rememberScroll}
+                    className={`relative h-full flex flex-col rounded-2xl overflow-hidden backdrop-blur-xl bg-gradient-to-br from-white/80 via-white/60 to-white/40 border border-white/30 shadow-2xl transition-all duration-500 ease-out active:scale-[0.98] active:shadow-[0_20px_50px_rgba(59,130,246,0.3)] ${step.title === "Residential" || step.title === "Commercial" || step.title === "Solar" ? "cursor-pointer" : ""}`}
+                    style={{ transform: "translateZ(0)" }}
+                  >
+                    {/* Animated gradient border glow - Always visible with enhanced intensity */}
+                    <motion.div 
+                      className="absolute -inset-0.5 rounded-2xl bg-gradient-to-r from-blue-500 via-cyan-500 to-purple-500 opacity-60 group-active:opacity-100 blur-sm transition-opacity duration-500"
+                      animate={{
+                        opacity: [0.6, 0.8, 0.6],
+                      }}
+                      transition={{
+                        duration: 3,
+                        repeat: Infinity,
+                        ease: "easeInOut"
+                      }}
                     />
-                    <div className="absolute inset-0 bg-black/20"></div>
-                    <div className="absolute top-3 left-3 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-lg w-8 h-8 flex items-center justify-center text-sm font-bold">
+                    
+                    {/* Additional outer glow shadow for depth */}
+                    <div className="absolute -inset-1 rounded-2xl bg-gradient-to-r from-blue-500/30 via-cyan-500/30 to-purple-500/30 blur-lg opacity-60 group-active:opacity-100 transition-opacity duration-500" />
+                    
+                    {/* Floating badge */}
+                    <motion.div
+                      initial={{ scale: 0, rotate: -180 }}
+                      whileInView={{ scale: 1, rotate: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ 
+                        type: "spring",
+                        stiffness: 200,
+                        damping: 15,
+                        delay: index * 0.1 + 0.2
+                      }}
+                      className="absolute top-4 left-4 z-20 bg-gradient-to-br from-blue-500 to-cyan-500 text-white rounded-xl w-12 h-12 flex items-center justify-center text-lg font-bold shadow-lg shadow-blue-500/50"
+                      style={{ transform: "translateZ(20px)" }}
+                    >
                       {step.number}
-                    </div>
-                  </div>
+                    </motion.div>
 
-                  <div className="p-3 flex-grow flex flex-col">
-                    <h3 className="text-base font-bold mb-1 text-black">
-                      {step.title}
-                    </h3>
-                    <p className="text-xs text-black">
-                      {step.description}
-                    </p>
-                  </div>
-                </Link>
+                    {/* Image container */}
+                    <div className="relative h-48 overflow-hidden rounded-t-2xl">
+                      <ImageWithFallback
+                        src={step.image}
+                        fallback={step.fallbackImage}
+                        alt={step.title}
+                        fill
+                        className="object-cover transition-transform duration-700 group-active:scale-110"
+                        priority={index === 0}
+                        loading={index === 0 ? "eager" : "lazy"}
+                        sizes="85vw"
+                      />
+                      
+                      {/* Gradient overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+                      
+                      {/* Animated light streak */}
+                      <motion.div
+                        className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+                        initial={{ x: "-100%" }}
+                        animate={{ x: "200%" }}
+                        transition={{
+                          duration: 3,
+                          repeat: Infinity,
+                          repeatDelay: 2,
+                          ease: "easeInOut"
+                        }}
+                      />
+                    </div>
+
+                    {/* Content section */}
+                    <div className="p-5 flex-grow flex flex-col bg-gradient-to-b from-white/90 to-white/70" style={{ transform: "translateZ(10px)" }}>
+                      <h3 className="text-xl font-bold mb-2 text-gray-900 group-active:text-blue-600 transition-colors duration-300">
+                        {step.title}
+                      </h3>
+                      
+                      <p className="text-sm text-gray-700 mb-4 flex-grow leading-relaxed">
+                        {step.description}
+                      </p>
+
+                      {/* Animated arrow */}
+                      <motion.div
+                        className="flex items-center justify-end text-blue-500"
+                        whileTap={{ x: 5 }}
+                        transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                      >
+                        <ArrowRight className="w-5 h-5 group-active:text-cyan-500 transition-colors duration-300" />
+                      </motion.div>
+                    </div>
+
+                    {/* Subtle inner glow */}
+                    <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-blue-500/0 via-cyan-500/0 to-purple-500/0 group-active:from-blue-500/10 group-active:via-cyan-500/10 group-active:to-purple-500/10 transition-all duration-500 pointer-events-none" />
+                  </Link>
+                </motion.div>
               ))}
             </div>
           </div>
         </div>
 
         {/* Carousel Navigation */}
-        <div className="flex justify-center mt-6 sm:mt-10 gap-2" aria-hidden="true">
+        <div className="flex justify-center mt-8 sm:mt-12 gap-2" aria-hidden="true">
           {steps.map((_, i) => (
             <button
               key={i}
               onClick={() => scrollTo(i)}
-              className={`w-2 bg-white/20 ${selectedIndex === i ? "h-6" : "h-3"} transition-all duration-300 rounded-full`}
+              className={`w-2 rounded-full transition-all duration-300 ${
+                selectedIndex === i 
+                  ? "h-6 bg-gradient-to-r from-blue-500 to-cyan-500" 
+                  : "h-3 bg-white/30"
+              }`}
               aria-label={`Go to step ${i + 1}`}
             />
           ))}
