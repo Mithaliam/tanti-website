@@ -4,6 +4,8 @@ import Image from "next/image"
 import { useEffect, useState } from "react"
 import { motion } from "framer-motion"
 
+const accentBlue = "#0064B6"
+
 const categories = [
   {
     title: "Residential Automation",
@@ -148,7 +150,10 @@ export default function SolutionsPage() {
           animate="visible"
           className="rounded-[32px] border border-white/40 bg-white/80 px-6 py-12 shadow-[0_25px_80px_rgba(0,60,136,0.08)] backdrop-blur-xl text-center md:px-10"
         >
-          <h1 className="text-4xl md:text-6xl font-semibold text-[#00C8FF] mb-4">
+          <h1
+            className="text-4xl md:text-6xl font-semibold mb-4"
+            style={{ color: accentBlue }}
+          >
             Solutions
           </h1>
           <p className="text-lg md:text-xl text-[#0b2d61]/80 max-w-3xl mx-auto">
@@ -199,7 +204,10 @@ export default function SolutionsPage() {
                 viewport={{ amount: 0.3 }}
                 className="rounded-[32px] border border-white/60 bg-white/90 px-6 py-8 shadow-[0_20px_60px_rgba(0,104,255,0.08)] backdrop-blur-xl md:px-10"
               >
-                <h2 className="text-3xl md:text-4xl font-semibold text-[#00C8FF] mb-4">
+                <h2
+                  className="text-3xl md:text-4xl font-semibold mb-4"
+                  style={{ color: accentBlue }}
+                >
                   {category.title}
                 </h2>
                 <p className="text-lg text-[#0b2d61]/80 mb-8 leading-relaxed">
@@ -211,7 +219,10 @@ export default function SolutionsPage() {
                       key={point}
                       className="flex items-start gap-4 text-[#0b2d61] text-lg font-medium"
                     >
-                      <span className="mt-1 flex h-10 w-10 items-center justify-center rounded-3xl border border-white/60 bg-gradient-to-br from-white to-[#f4f8ff] shadow-md text-[#0068ff]">
+                       <span
+                         className="mt-1 flex h-10 w-10 items-center justify-center rounded-3xl border border-white/60 bg-gradient-to-br from-white to-[#f4f8ff] shadow-md"
+                         style={{ color: accentBlue }}
+                       >
                         <svg
                           width="18"
                           height="18"
@@ -234,7 +245,14 @@ export default function SolutionsPage() {
                           <path d="m19.07 4.93-1.41 1.41" />
                   </svg>
                       </span>
-                      <span>{point}</span>
+                      <span
+                        className="transition-colors duration-200"
+                        style={{ color: "#0b2d61" }}
+                        onMouseEnter={(e) => (e.currentTarget.style.color = accentBlue)}
+                        onMouseLeave={(e) => (e.currentTarget.style.color = "#0b2d61")}
+                      >
+                        {point}
+                      </span>
                     </li>
                   ))}
                 </ul>
