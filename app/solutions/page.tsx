@@ -1,6 +1,7 @@
 "use client"
 
 import Image from "next/image"
+import { useEffect, useState } from "react"
 import { motion } from "framer-motion"
 
 const categories = [
@@ -86,10 +87,51 @@ const heroVariant = {
 
 const sectionVariant = {
   hidden: { opacity: 0, y: 50 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+  },
+}
+
+const imageVariant = {
+  hidden: { opacity: 0, scale: 0.92, y: 30 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    y: 0,
+    transition: { duration: 0.7, ease: "easeOut" },
+  },
+}
+
+const desktopTextVariant = {
+  hidden: { opacity: 0, x: 40 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.6, ease: "easeOut" },
+  },
+}
+
+const mobileTextVariant = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: "easeOut" },
+  },
 }
 
 export default function SolutionsPage() {
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const updateIsMobile = () => setIsMobile(window.innerWidth < 640)
+    updateIsMobile()
+    window.addEventListener("resize", updateIsMobile)
+    return () => window.removeEventListener("resize", updateIsMobile)
+  }, [])
+
   return (
     <div className="min-h-screen bg-[#f5f8ff]">
       {/* Ambient background */}
@@ -106,10 +148,7 @@ export default function SolutionsPage() {
           animate="visible"
           className="rounded-[32px] border border-white/40 bg-white/80 px-6 py-12 shadow-[0_25px_80px_rgba(0,60,136,0.08)] backdrop-blur-xl text-center md:px-10"
         >
-          <p className="text-sm uppercase tracking-[0.4em] text-[#0b2d61]/70 mb-6">
-            Solutions
-          </p>
-          <h1 className="text-4xl md:text-6xl font-semibold text-[#0b2d61] mb-4">
+          <h1 className="text-4xl md:text-6xl font-semibold text-[#00C8FF] mb-4">
             Solutions
           </h1>
           <p className="text-lg md:text-xl text-[#0b2d61]/80 max-w-3xl mx-auto">
@@ -128,6 +167,10 @@ export default function SolutionsPage() {
                 whileHover={{ y: -8 }}
                 transition={{ type: "spring", stiffness: 120 }}
                 className="relative"
+                variants={imageVariant}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ amount: 0.3 }}
               >
                 <div className="rounded-[32px] overflow-hidden shadow-[0_30px_80px_rgba(11,45,97,0.15)] h-[400px] md:h-[500px] lg:h-[550px] w-full">
                   <Image
@@ -150,19 +193,13 @@ export default function SolutionsPage() {
             const textBlock = (
               <motion.div
                 key="text"
-                variants={sectionVariant}
+                variants={isMobile ? mobileTextVariant : desktopTextVariant}
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: true, amount: 0.3 }}
+                viewport={{ amount: 0.3 }}
                 className="rounded-[32px] border border-white/60 bg-white/90 px-6 py-8 shadow-[0_20px_60px_rgba(0,104,255,0.08)] backdrop-blur-xl md:px-10"
               >
-                <p
-                  className="text-sm font-semibold uppercase tracking-[0.3em] mb-4"
-                  style={{ color: category.accent }}
-                >
-                  {category.title}
-                </p>
-                <h2 className="text-3xl md:text-4xl font-semibold text-[#0b2d61] mb-4">
+                <h2 className="text-3xl md:text-4xl font-semibold text-[#00C8FF] mb-4">
                   {category.title}
                 </h2>
                 <p className="text-lg text-[#0b2d61]/80 mb-8 leading-relaxed">
