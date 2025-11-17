@@ -394,6 +394,31 @@ div[class*="rounded-full"][style*="position: fixed"] {
   scroll-behavior: smooth;
 }
 
+/* Custom scrollbar for commercial page horizontal cards */
+.commercial-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(59, 130, 246, 0.5) rgba(229, 231, 235, 0.3);
+}
+
+.commercial-scrollbar::-webkit-scrollbar {
+  height: 8px;
+}
+
+.commercial-scrollbar::-webkit-scrollbar-track {
+  background: rgba(229, 231, 235, 0.3);
+  border-radius: 4px;
+}
+
+.commercial-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(59, 130, 246, 0.5);
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+
+.commercial-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(59, 130, 246, 0.7);
+}
+
 /* Custom gradient for Solar Installation cards hover effect */
 .installation-card-hover-gradient {
   background: linear-gradient(to right, #60A5FA, #1E40AF);

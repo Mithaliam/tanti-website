@@ -9,6 +9,7 @@ import Link from "next/link"
 
 export default function ModernHero() {
   const parallaxRef = useRef<HTMLDivElement>(null)
+  const videoRef = useRef<HTMLVideoElement>(null)
 
   useEffect(() => {
     // Only enable parallax effect on desktop devices
@@ -28,17 +29,35 @@ export default function ModernHero() {
     return () => document.removeEventListener("mousemove", handleMouseMove)
   }, [])
 
+  useEffect(() => {
+    // Ensure video plays immediately when component mounts
+    if (videoRef.current) {
+      videoRef.current.load() // Force reload to ensure preload works
+      videoRef.current.play().catch((error) => {
+        // Handle autoplay restrictions (some browsers require user interaction)
+        console.log("Autoplay prevented:", error)
+      })
+    }
+  }, [])
+
   return (
     <section id="hero-section" className="relative min-h-[100svh] flex items-center overflow-hidden">
       {/* Background video */}
       <div className="absolute inset-0 z-0">
         <video
+          ref={videoRef}
           autoPlay
           muted
           loop
           playsInline
           preload="auto"
           className="absolute inset-0 w-full h-full object-cover"
+          onLoadedData={() => {
+            // Ensure video plays once data is loaded
+            if (videoRef.current) {
+              videoRef.current.play().catch(() => {})
+            }
+          }}
         >
           <source src="/tanti Main background.mp4" type="video/mp4" />
         </video>

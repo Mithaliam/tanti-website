@@ -15,7 +15,17 @@ export default function TantiGallery() {
 
   useEffect(() => {
     let cancelled = false
-    fetch("/api/tanti-media")
+    // Use AbortController for better cancellation
+    const controller = new AbortController()
+    
+    // Start fetching immediately with prefetch hint
+    fetch("/api/tanti-media", {
+      signal: controller.signal,
+      cache: 'force-cache', // Use cached data when available
+      headers: {
+        'Accept': 'application/json',
+      }
+    })
       .then(async (r) => {
         // Safely read body to avoid JSON parse errors on empty/invalid payloads
         const text = await r.text().catch(() => "")
@@ -42,6 +52,7 @@ export default function TantiGallery() {
       })
     return () => {
       cancelled = true
+      controller.abort() // Cancel fetch on unmount
     }
   }, [])
 

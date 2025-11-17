@@ -84,6 +84,12 @@ export default function SolarPage() {
           playsInline
           preload="auto"
           ref={heroVideoRef}
+          onLoadedData={() => {
+            // Ensure video plays once data is loaded
+            if (heroVideoRef.current) {
+              heroVideoRef.current.play().catch(() => {})
+            }
+          }}
         >
           <source src="/solar%20video.mp4" type="video/mp4" />
         </video>

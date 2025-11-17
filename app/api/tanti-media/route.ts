@@ -44,7 +44,13 @@ export async function GET() {
       return NextResponse.json({ items: [] as MediaItem[] }, { status: 200 });
     }
     const items = await walk(tantiDir, publicDir);
-    return NextResponse.json({ items }, { headers: { "Cache-Control": "public, max-age=300, stale-while-revalidate=600" } });
+    return NextResponse.json({ items }, { 
+      headers: { 
+        "Cache-Control": "public, max-age=3600, stale-while-revalidate=7200, immutable",
+        "Content-Type": "application/json",
+        "X-Content-Type-Options": "nosniff"
+      } 
+    });
   } catch (error) {
     return NextResponse.json({ items: [] as MediaItem[], error: "failed_to_list" }, { status: 200 });
   }

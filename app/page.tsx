@@ -7,6 +7,7 @@ import ErrorBoundary from "@/components/error-boundary";
 import HowItWorks from "@/components/how-it-works";
 
 // Lazy load components with proper error handling - optimized for faster loading
+// Preload these components earlier by starting import immediately
 const Features = dynamic(() => import("@/components/features"), {
   ssr: false,
   loading: () => <div className="h-96 bg-gray-100 animate-pulse rounded-lg" />
@@ -21,6 +22,14 @@ const Integrations = dynamic(() => import("@/components/integrations"), {
   ssr: false,
   loading: () => <div className="h-96 bg-gray-100 animate-pulse rounded-lg" />
 });
+
+// Preload component chunks immediately on page load
+if (typeof window !== 'undefined') {
+  // Start preloading components in the background
+  import("@/components/features").catch(() => {})
+  import("@/components/testimonials").catch(() => {})
+  import("@/components/integrations").catch(() => {})
+}
 
 // Optimized LazyLoad wrapper component - loads content much earlier
 function LazyLoad({ children }: { children: React.ReactNode }) {
@@ -45,7 +54,7 @@ function LazyLoad({ children }: { children: React.ReactNode }) {
         }
       },
       { 
-        rootMargin: "400px", // Start loading 400px before element is visible
+        rootMargin: "600px", // Start loading 600px before element is visible (increased for earlier loading)
         threshold: 0.01 
       }
     );
@@ -66,6 +75,16 @@ function LazyLoad({ children }: { children: React.ReactNode }) {
 }
 
 export default function Home() {
+  // Preload API data immediately when component mounts
+  useEffect(() => {
+    // Prefetch API data in the background
+    fetch("/api/tanti-media", { 
+      method: 'GET',
+      cache: 'force-cache',
+      priority: 'low' // Low priority to not block critical resources
+    }).catch(() => {}) // Silently fail if not needed
+  }, [])
+
   return (
     <div className="min-h-screen px-0 sm:px-4 text-black" style={{ backgroundColor: '#F5F5F0' }}>
       <Hero />
