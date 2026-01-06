@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback, useRef, memo } from "react"
 import { Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
@@ -8,25 +8,43 @@ import Logo from "./Logo"
 import DesktopNav from "./DesktopNav"
 import MobileNav from "./MobileNav"
 
-export default function ModernHeader() {
+function ModernHeader() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [showWhiteGradient, setShowWhiteGradient] = useState(false)
+  const lastYRef = useRef(0)
+  const rafIdRef = useRef<number | null>(null)
   
-  // Handle scroll effect
-  useEffect(() => {
-    let lastY = window.scrollY
-    const handleScroll = () => {
+  // Throttled scroll handler using requestAnimationFrame for better performance
+  const handleScroll = useCallback(() => {
+    if (rafIdRef.current) return // Skip if already scheduled
+    
+    rafIdRef.current = requestAnimationFrame(() => {
       const currentY = window.scrollY
+      const lastY = lastYRef.current
       const isScrollingUp = currentY < lastY
       const pastThreshold = currentY > 80
+      
       setScrolled(currentY > 20)
       setShowWhiteGradient(isScrollingUp && pastThreshold)
-      lastY = currentY
-    }
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
+      lastYRef.current = currentY
+      rafIdRef.current = null
+    })
   }, [])
+  
+  // Handle scroll effect with throttling
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    
+    lastYRef.current = window.scrollY
+    window.addEventListener("scroll", handleScroll, { passive: true })
+    return () => {
+      window.removeEventListener("scroll", handleScroll)
+      if (rafIdRef.current) {
+        cancelAnimationFrame(rafIdRef.current)
+      }
+    }
+  }, [handleScroll])
 
   // Prevent body scroll when mobile menu is open
   useEffect(() => {
@@ -68,7 +86,10 @@ export default function ModernHeader() {
       </div>
 
       {/* Mobile Menu */}
-      <MobileNav isOpen={isMenuOpen} />
+      <MobileNav isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
     </header>
   )
 }
+
+// Memoize header to prevent re-renders when parent updates
+export default memo(ModernHeader)

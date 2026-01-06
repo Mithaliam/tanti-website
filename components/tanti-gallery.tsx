@@ -1,11 +1,63 @@
 "use client"
 
-import { useEffect, useState, useMemo } from "react"
+import { useEffect, useState, useMemo, useRef } from "react"
 import Image from "next/image"
 
 type MediaItem = {
   path: string
   type: "image" | "video"
+}
+
+// Lazy video component with Intersection Observer
+function LazyVideo({ src }: { src: string }) {
+  const videoRef = useRef<HTMLVideoElement>(null)
+  const [shouldLoad, setShouldLoad] = useState(false)
+  const [isInView, setIsInView] = useState(false)
+
+  useEffect(() => {
+    const video = videoRef.current
+    if (!video) return
+
+    // Use Intersection Observer for lazy loading
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsInView(true)
+            setShouldLoad(true)
+            observer.disconnect()
+          }
+        })
+      },
+      {
+        rootMargin: "50px", // Start loading 50px before video enters viewport
+        threshold: 0.1,
+      }
+    )
+
+    observer.observe(video)
+
+    return () => {
+      observer.disconnect()
+    }
+  }, [])
+
+  useEffect(() => {
+    if (shouldLoad && videoRef.current) {
+      videoRef.current.load()
+    }
+  }, [shouldLoad])
+
+  return (
+    <video
+      ref={videoRef}
+      src={shouldLoad ? src : undefined}
+      className="w-full h-full object-cover"
+      controls
+      preload={isInView ? "metadata" : "none"}
+      playsInline
+    />
+  )
 }
 
 export default function TantiGallery() {
@@ -79,7 +131,7 @@ export default function TantiGallery() {
               <div>
                 <h3 className="text-xl sm:text-2xl font-semibold text-white/90 mb-4">Images</h3>
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4">
-                  {grouped.images.map((item) => (
+                  {grouped.images.map((item, index) => (
                     <figure key={item.path} className="relative bg-white/5 border border-white/10 rounded-lg overflow-hidden">
                       <Image
                         src={item.path}
@@ -87,8 +139,10 @@ export default function TantiGallery() {
                         width={600}
                         height={400}
                         className="w-full h-auto object-cover"
-                        loading="lazy"
-                        sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
+                        priority={index < 5}
+                        loading={index < 5 ? undefined : index < 10 ? "eager" : "lazy"}
+                        sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 25vw, 20vw"
+                        quality={85}
                       />
                     </figure>
                   ))}
@@ -102,7 +156,7 @@ export default function TantiGallery() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
                   {grouped.videos.map((item) => (
                     <div key={item.path} className="relative aspect-video bg-white/5 border border-white/10 rounded-lg overflow-hidden">
-                      <video src={item.path} className="w-full h-full" controls preload="auto" />
+                      <LazyVideo src={item.path} />
                     </div>
                   ))}
                 </div>

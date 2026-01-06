@@ -57,7 +57,6 @@ export default function ParallaxCards() {
 						alt={card.title}
 						fill
 						className="absolute inset-0 h-full w-full object-cover"
-						loading="eager"
 						priority
 						sizes="(max-width: 640px) 80vw, (max-width: 1024px) 55vw, 28vw"
 					/>

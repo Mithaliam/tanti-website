@@ -76,7 +76,7 @@ export default function ResidentialCasambiPage() {
         />
         <div className="relative z-10 p-6 max-w-4xl mx-auto">
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
+            initial={{ opacity: 1, y: 0 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
@@ -106,7 +106,7 @@ export default function ResidentialCasambiPage() {
         <div className="container mx-auto px-6 text-center max-w-3xl">
           <motion.h2
             className="text-3xl md:text-5xl font-bold text-gray-900 mb-6"
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 1, y: 0 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.6 }}
@@ -115,7 +115,7 @@ export default function ResidentialCasambiPage() {
           </motion.h2>
           <motion.p
             className="text-lg md:text-xl text-gray-700 leading-relaxed"
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 1, y: 0 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.6, delay: 0.2 }}
@@ -130,7 +130,7 @@ export default function ResidentialCasambiPage() {
         <div className="container mx-auto px-6">
           <motion.h2
             className="text-3xl md:text-5xl font-bold text-center text-gray-900 mb-12"
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 1, y: 0 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.6 }}
@@ -142,7 +142,7 @@ export default function ResidentialCasambiPage() {
               <motion.div
                 key={index}
                 variants={cardVariants}
-                initial="hidden"
+                initial="visible"
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.3 }}
                 transition={{ delay: index * 0.1 }}
@@ -175,7 +175,7 @@ export default function ResidentialCasambiPage() {
         <div className="container mx-auto px-6 text-center max-w-4xl">
           <motion.h2
             className="text-3xl md:text-5xl font-bold text-gray-900 mb-6"
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 1, y: 0 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.6 }}
@@ -184,7 +184,7 @@ export default function ResidentialCasambiPage() {
           </motion.h2>
           <motion.p
             className="text-lg md:text-xl text-gray-700 leading-relaxed mb-12"
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 1, y: 0 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.6, delay: 0.2 }}
@@ -193,7 +193,7 @@ export default function ResidentialCasambiPage() {
           </motion.p>
           <motion.div
             className="relative w-full h-64 md:h-96 bg-gray-200 rounded-lg overflow-hidden shadow-xl"
-            initial={{ opacity: 0, scale: 0.9 }}
+            initial={{ opacity: 1, scale: 1 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.8, delay: 0.4 }}
@@ -216,7 +216,7 @@ export default function ResidentialCasambiPage() {
         <div className="container mx-auto px-6">
           <motion.h2
             className="text-3xl md:text-5xl font-bold text-center text-gray-900 mb-12"
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 1, y: 0 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.6 }}
@@ -228,7 +228,7 @@ export default function ResidentialCasambiPage() {
               <motion.div
                 key={index}
                 variants={cardVariants}
-                initial="hidden"
+                initial="visible"
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.3 }}
                 transition={{ delay: index * 0.1 }}
@@ -261,7 +261,7 @@ export default function ResidentialCasambiPage() {
         <div className="container mx-auto px-6 max-w-3xl">
           <motion.h2
             className="text-3xl md:text-5xl font-bold mb-6"
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 1, y: 0 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.6 }}
@@ -270,7 +270,7 @@ export default function ResidentialCasambiPage() {
           </motion.h2>
           <motion.p
             className="text-lg md:text-xl mb-8"
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 1, y: 0 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.6, delay: 0.2 }}
@@ -278,7 +278,7 @@ export default function ResidentialCasambiPage() {
             Contact us today to learn more about our Casambi solutions and get a personalized quote for your smart lighting project.
           </motion.p>
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 1, y: 0 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.6, delay: 0.4 }}
@@ -295,7 +295,7 @@ export default function ResidentialCasambiPage() {
         <div className="container mx-auto">
           <div className="grid md:grid-cols-3 gap-8">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 1, y: 0 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
@@ -325,7 +325,7 @@ export default function ResidentialCasambiPage() {
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 1, y: 0 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
               viewport={{ once: true }}
@@ -342,7 +342,7 @@ export default function ResidentialCasambiPage() {
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 1, y: 0 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
               viewport={{ once: true }}

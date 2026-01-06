@@ -56,7 +56,7 @@ export default function CommercialPage() {
       x: 0, 
       transition: { 
         duration: 0.8, 
-        ease: "easeOut" 
+        ease: "easeOut" as const
       } 
     }
   }
@@ -68,7 +68,7 @@ export default function CommercialPage() {
       x: 0, 
       transition: { 
         duration: 0.8, 
-        ease: "easeOut",
+        ease: "easeOut" as const,
         delay: 0.2
       } 
     }
@@ -81,7 +81,7 @@ export default function CommercialPage() {
       y: 0, 
       transition: { 
         duration: 0.8, 
-        ease: "easeOut" 
+        ease: "easeOut" as const
       } 
     }
   }
@@ -94,7 +94,7 @@ export default function CommercialPage() {
       scale: 1,
       transition: { 
         duration: 0.6, 
-        ease: "easeOut",
+        ease: "easeOut" as const,
         delay: 0.8
       } 
     }
@@ -102,12 +102,13 @@ export default function CommercialPage() {
 
   const cardVariants = {
     hidden: { opacity: 0, x: 50 },
-    visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: "easeOut" } }
+    visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: "easeOut" as const } }
   }
 
   const lmsSolutions = [
     {
       title: "LMS",
+      tag: "LMS",
       description: "A KNX-based Lighting Management System (LMS) is a smart solution that utilizes the KNX protocol to efficiently control and automate lighting in buildings, optimizing energy use and enabling seamless integration with other KNX-compatible devices and systems.",
       image: "/LMS.jpeg",
       button1: "DALI Based Solutions",
@@ -115,6 +116,7 @@ export default function CommercialPage() {
     },
     {
       title: "BMS Control",
+      tag: "BMS",
       description: "A Building Management System (BMS) is a centralized control system for monitoring and managing various building services like HVAC, lighting, security, and more. It optimizes energy usage, ensures comfort and safety, and provides data for efficient building operation.",
       image: "/BMS.jpeg",
       button1: "ABB Cylon",
@@ -122,6 +124,7 @@ export default function CommercialPage() {
     },
     {
       title: "EMS",
+      tag: "EMS",
       description: "An Energy Management System (EMS) is an advanced solution that monitors, controls, and optimizes energy consumption across buildings. It provides real-time insights, demand forecasting, and automated energy-saving strategies to reduce costs and improve sustainability.",
       image: "/energy management.jpeg",
       button1: "Energy Monitoring",
@@ -129,6 +132,7 @@ export default function CommercialPage() {
     },
     {
       title: "Additional Services",
+      tag: "Additional Services",
       description: "",
       image: "/central management.jpeg",
       button1: "",
@@ -316,9 +320,16 @@ export default function CommercialPage() {
                           fill
                           className="object-cover group-hover:scale-110 transition-transform duration-500"
                           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                          priority
-                          loading="eager"
+                          priority={index < 4}
+                          loading={index < 4 ? undefined : "lazy"}
+                          quality={85}
                         />
+                        {/* Pill-shaped tag */}
+                        <div className="absolute top-4 left-4 z-10">
+                          <span className="inline-flex items-center justify-center gap-2 rounded-full border border-white/60 bg-white/90 backdrop-blur-md px-5 py-2.5 text-sm font-semibold text-[#0b2d61] shadow-lg">
+                            {solution.tag || solution.title}
+                          </span>
+                        </div>
                       </div>
                       {/* Light blue overlay that rises from bottom on hover with content */}
                       <div className="absolute inset-0 bg-[#E3F2FD] opacity-0 group-hover:opacity-95 transition-all duration-500 transform translate-y-full group-hover:translate-y-0 flex items-center justify-center">

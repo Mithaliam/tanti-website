@@ -1,33 +1,35 @@
 "use client"
 
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, memo, useCallback } from "react"
 import Image from "next/image"
+// Tree-shake Framer Motion - only import motion
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, Star, Sparkles, Lightbulb, Building2, Zap, Home } from "lucide-react"
 import Link from "next/link"
 
-export default function ModernHero() {
+function ModernHero() {
   const parallaxRef = useRef<HTMLDivElement>(null)
   const videoRef = useRef<HTMLVideoElement>(null)
 
+  // Memoize mouse move handler to prevent recreation on each render
+  const handleMouseMove = useCallback((e: MouseEvent) => {
+    if (!parallaxRef.current || window.innerWidth < 768) return
+
+    const { clientX, clientY } = e
+    const { innerWidth, innerHeight } = window
+
+    const moveX = (clientX - innerWidth / 2) / 50
+    const moveY = (clientY - innerHeight / 2) / 50
+
+    parallaxRef.current.style.transform = `translate(${moveX}px, ${moveY}px)`
+  }, [])
+
   useEffect(() => {
     // Only enable parallax effect on desktop devices
-    const handleMouseMove = (e: MouseEvent) => {
-      if (!parallaxRef.current || window.innerWidth < 768) return
-
-      const { clientX, clientY } = e
-      const { innerWidth, innerHeight } = window
-
-      const moveX = (clientX - innerWidth / 2) / 50
-      const moveY = (clientY - innerHeight / 2) / 50
-
-      parallaxRef.current.style.transform = `translate(${moveX}px, ${moveY}px)`
-    }
-
     document.addEventListener("mousemove", handleMouseMove)
     return () => document.removeEventListener("mousemove", handleMouseMove)
-  }, [])
+  }, [handleMouseMove])
 
   useEffect(() => {
     // Ensure video plays immediately when component mounts
@@ -110,7 +112,7 @@ export default function ModernHero() {
               transition={{ duration: 0.5, delay: 0.3 }}
               className="flex flex-col max-w-[80%] mx-auto sm:flex-row gap-3 sm:gap-4 justify-center mb-8 sm:mb-12"
             >
-              <Link href="/contact">
+              <Link href="/contact" prefetch={true}>
                 <Button className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white border-0 h-10 sm:h-12 px-6 sm:px-8 text-sm sm:text-base">
                   Contact Us Today
                   <ArrowRight className="ml-2 h-3.5 w-3.5 sm:h-4 sm:w-4" />
@@ -239,3 +241,6 @@ export default function ModernHero() {
     </section>
   )
 }
+
+// Memoize component to prevent unnecessary re-renders
+export default memo(ModernHero)

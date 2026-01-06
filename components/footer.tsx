@@ -18,14 +18,13 @@ export default function ModernFooter() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 items-start">
           {/* Left: Logo + tagline */}
           <div className="flex flex-col items-center md:items-start text-center md:text-left">
-            <Link href="/" className="mb-4 inline-flex">
+            <Link href="/" prefetch={true} className="mb-4 inline-flex">
               <span className="relative block h-10 w-40">
                 <Image
                   src="/tanti-automatics-logo.png"
                   alt="Tanti Automatics Pvt. Ltd."
                   fill
                   className="object-contain"
-                  loading="eager"
                   priority
                   sizes="160px"
                 />
@@ -65,15 +64,15 @@ export default function ModernFooter() {
           {/* Right: Page links */}
           <div className="md:justify-end md:text-right text-center">
             <nav className="text-gray-800 text-sm space-x-3 md:space-x-2">
-              <Link href="/company" className="hover:underline">About</Link>
+              <Link href="/company" prefetch={true} className="hover:underline">About</Link>
               <span className="text-gray-400">|</span>
-              <Link href="/products" className="hover:underline">Products</Link>
+              <Link href="/products" prefetch={true} className="hover:underline">Products</Link>
               <span className="text-gray-400">|</span>
-              <Link href="/solutions" className="hover:underline">Solutions</Link>
+              <Link href="/solutions" prefetch={true} className="hover:underline">Solutions</Link>
               <span className="text-gray-400">|</span>
-              <Link href="/support" className="hover:underline">Support</Link>
+              <Link href="/support" prefetch={true} className="hover:underline">Support</Link>
               <span className="text-gray-400">|</span>
-              <Link href="/career" className="hover:underline">Career</Link>
+              <Link href="/career" prefetch={true} className="hover:underline">Career</Link>
             </nav>
           </div>
         </div>

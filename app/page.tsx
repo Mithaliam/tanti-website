@@ -23,13 +23,7 @@ const Integrations = dynamic(() => import("@/components/integrations"), {
   loading: () => <div className="h-96 bg-gray-100 animate-pulse rounded-lg" />
 });
 
-// Preload component chunks immediately on page load
-if (typeof window !== 'undefined') {
-  // Start preloading components in the background
-  import("@/components/features").catch(() => {})
-  import("@/components/testimonials").catch(() => {})
-  import("@/components/integrations").catch(() => {})
-}
+// Preload component chunks after initial render - moved to useEffect to prevent hydration issues
 
 // Optimized LazyLoad wrapper component - loads content much earlier
 function LazyLoad({ children }: { children: React.ReactNode }) {
@@ -54,7 +48,7 @@ function LazyLoad({ children }: { children: React.ReactNode }) {
         }
       },
       { 
-        rootMargin: "600px", // Start loading 600px before element is visible (increased for earlier loading)
+        rootMargin: "800px", // Start loading 800px before element is visible for instant appearance
         threshold: 0.01 
       }
     );
@@ -75,7 +69,7 @@ function LazyLoad({ children }: { children: React.ReactNode }) {
 }
 
 export default function Home() {
-  // Preload API data immediately when component mounts
+  // Preload API data and component chunks after mount to prevent hydration issues
   useEffect(() => {
     // Prefetch API data in the background
     fetch("/api/tanti-media", { 
@@ -83,6 +77,25 @@ export default function Home() {
       cache: 'force-cache',
       priority: 'low' // Low priority to not block critical resources
     }).catch(() => {}) // Silently fail if not needed
+
+    // Preload component chunks using requestIdleCallback
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(() => {
+        Promise.all([
+          import("@/components/features"),
+          import("@/components/testimonials"),
+          import("@/components/integrations")
+        ]).catch(() => {});
+      }, { timeout: 100 });
+    } else {
+      setTimeout(() => {
+        Promise.all([
+          import("@/components/features"),
+          import("@/components/testimonials"),
+          import("@/components/integrations")
+        ]).catch(() => {});
+      }, 100);
+    }
   }, [])
 
   return (

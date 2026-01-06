@@ -150,6 +150,8 @@ export default function SolarPage() {
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       className="object-cover transition-transform duration-500 group-hover:scale-110"
                       style={{ objectPosition: 'center 65%' }}
+                      priority
+                      quality={85}
                     />
                     <div className="absolute inset-0 bg-blue-600 opacity-0 group-hover:opacity-90 transition-all duration-500 transform translate-y-full group-hover:translate-y-0 flex items-center justify-center z-20">
                       <div className="text-white text-center p-6">
@@ -185,6 +187,8 @@ export default function SolarPage() {
                       fill
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       className="object-cover object-top transition-transform duration-500 group-hover:scale-110"
+                      priority
+                      quality={85}
                     />
                     <div className="absolute inset-0 bg-blue-600 opacity-0 group-hover:opacity-90 transition-all duration-500 transform translate-y-full group-hover:translate-y-0 flex items-center justify-center z-20">
                       <div className="text-white text-center p-6">
@@ -220,6 +224,8 @@ export default function SolarPage() {
                       fill
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       className="object-cover object-top transition-transform duration-500 group-hover:scale-110"
+                      priority
+                      quality={85}
                     />
                     <div className="absolute inset-0 bg-blue-600 opacity-0 group-hover:opacity-90 transition-all duration-500 transform translate-y-full group-hover:translate-y-0 flex items-center justify-center z-20">
                       <div className="text-white text-center p-6">
@@ -299,6 +305,9 @@ export default function SolarPage() {
                       alt="Solar Panels"
                       fill
                       className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      loading="lazy"
+                      quality={85}
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     />
                   </div>
                   <CardTitle className="text-xl font-bold text-gray-900">Solar Panels</CardTitle>
@@ -349,6 +358,9 @@ export default function SolarPage() {
                       alt="Solar Inverter"
                       fill
                       className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      loading="lazy"
+                      quality={85}
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     />
                   </div>
                   <CardTitle className="text-xl font-bold text-gray-900">Solar Inverters</CardTitle>
@@ -399,6 +411,9 @@ export default function SolarPage() {
                       alt="Battery Storage"
                       fill
                       className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      loading="lazy"
+                      quality={85}
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     />
                   </div>
                   <CardTitle className="text-xl font-bold text-gray-900">Battery Storage</CardTitle>
@@ -475,7 +490,7 @@ export default function SolarPage() {
                     viewport={{ once: false, amount: 0.2 }}
                   >
                     <div className="relative h-56 md:h-full min-h-[260px] bg-white rounded-xl">
-                      <Image src="/resi%20solar.jpeg" alt="Solar project - Sharan Gowda" fill className="object-contain" />
+                      <Image src="/resi%20solar.jpeg" alt="Solar project - Sharan Gowda" fill className="object-contain" loading="lazy" quality={85} sizes="(max-width: 768px) 100vw, 50vw" />
                     </div>
                   </motion.div>
                   <motion.div
@@ -569,7 +584,7 @@ export default function SolarPage() {
                     viewport={{ once: false, amount: 0.2 }}
                   >
                     <div className="relative h-56 md:h-full min-h-[260px] bg-white rounded-xl">
-                      <Image src="/commercial%20solar.jpeg" alt="Solar project - G B Suresh" fill className="object-contain" />
+                      <Image src="/commercial%20solar.jpeg" alt="Solar project - G B Suresh" fill className="object-contain" loading="lazy" quality={85} sizes="(max-width: 768px) 100vw, 50vw" />
                     </div>
                   </motion.div>
                 </div>

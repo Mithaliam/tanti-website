@@ -24,7 +24,7 @@ export default function SolarBatteryPage() {
 				<div className="container mx-auto px-4 py-16 md:py-24">
 					<motion.div
 						variants={heroVariants}
-						initial="hidden"
+						initial="visible"
 						animate="visible"
 						className="grid lg:grid-cols-2 gap-10 items-center"
 					>
@@ -71,7 +71,7 @@ export default function SolarBatteryPage() {
 				<div className="container mx-auto px-4">
 					<motion.h2
 						variants={cardVariants}
-						initial="hidden"
+						initial="visible"
 						whileInView="visible"
 						viewport={{ once: true }}
 						className="text-3xl md:text-4xl font-bold text-[#3B82F6] text-center mb-12"
@@ -84,7 +84,7 @@ export default function SolarBatteryPage() {
 						{ name: "Time‑of‑Use Savings", img: "/time%20of%20use.png", points: ["Charge off‑peak", "Use at peak tariff", "Lower bills"] },
 						{ name: "Self‑Consumption", img: "/self%20consumption.png", points: ["Use more of your solar", "Reduce grid imports", "Increase ROI"] },
 						].map((t, idx) => (
-							<motion.div key={idx} variants={cardVariants} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+							<motion.div key={idx} variants={cardVariants} initial="visible" whileInView="visible" viewport={{ once: true }}>
 								<Card className="h-full group glow-card">
 									<CardHeader>
 										<div className="relative w-full h-44 rounded-xl overflow-hidden mb-4">

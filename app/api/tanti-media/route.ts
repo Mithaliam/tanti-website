@@ -46,9 +46,10 @@ export async function GET() {
     const items = await walk(tantiDir, publicDir);
     return NextResponse.json({ items }, { 
       headers: { 
-        "Cache-Control": "public, max-age=3600, stale-while-revalidate=7200, immutable",
+        "Cache-Control": "public, max-age=86400, s-maxage=86400, stale-while-revalidate=604800",
         "Content-Type": "application/json",
-        "X-Content-Type-Options": "nosniff"
+        "X-Content-Type-Options": "nosniff",
+        "Vary": "Accept-Encoding"
       } 
     });
   } catch (error) {

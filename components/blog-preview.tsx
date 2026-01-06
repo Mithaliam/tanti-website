@@ -85,8 +85,9 @@ export default function BlogPreview() {
                     fill
                     sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 30vw"
                     className="object-cover group-hover:scale-105 transition-transform duration-500"
-                    loading="eager"
-                    priority
+                    priority={index < 2}
+                    loading={index < 2 ? undefined : "lazy"}
+                    quality={85}
                   />
                   <div 
                     className="absolute top-3 left-3 bg-black/60 backdrop-blur-md text-white text-xs font-medium px-2.5 py-1 rounded-full"

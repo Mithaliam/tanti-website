@@ -1,16 +1,14 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, memo, useCallback, useMemo } from "react"
 import { motion } from "framer-motion"
 // Tabs removed in favor of a static 2x2 card grid
-import { useIsMobile } from "@/hooks/use-mobile"
 import Link from "next/link"
 import { rememberScroll } from "@/hooks/useScrollRestore"
 import Image from "next/image"
 
-export default function ModernFeatures() {
+function ModernFeatures() {
   const [activeTab, setActiveTab] = useState("residential")
-  const isMobile = useIsMobile()
   const [mounted, setMounted] = useState(false)
 
   // Set mounted state to true on client-side
@@ -18,8 +16,8 @@ export default function ModernFeatures() {
     setMounted(true)
   }, [])
 
-  // Get navigation path for a feature
-  const getFeaturePath = (feature: { id: string; title: string }) => {
+  // Memoize navigation path function to prevent recreation
+  const getFeaturePath = useCallback((feature: { id: string; title: string }) => {
     if (feature.title === "Switching") {
       return "/switching"
     } else if (feature.title === "ABB F@H") {
@@ -30,7 +28,7 @@ export default function ModernFeatures() {
       return "#" // Add path when available
     }
     return "#"
-  }
+  }, [])
 
   const features = [
     {
@@ -136,7 +134,9 @@ export default function ModernFeatures() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
           {/* Left Column - Cards animate from left */}
           <div className="space-y-4 md:space-y-6">
-            {features.slice(0, 2).map((feature, idx) => (
+            {features.slice(0, 2).map((feature, idx) => {
+              const absoluteIndex = idx;
+              return (
               <motion.div
                 key={feature.id}
                 initial={{ opacity: 0, x: -100, y: 20 }}
@@ -162,9 +162,10 @@ export default function ModernFeatures() {
                       alt={feature.title}
                       fill
                       className="absolute inset-0 h-full w-full object-cover"
-                      loading="eager"
-                      priority
+                      priority={absoluteIndex < 2}
+                      loading={absoluteIndex < 2 ? undefined : "lazy"}
                       sizes="(max-width: 768px) 100vw, 50vw"
+                      quality={85}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
                     <div className="absolute inset-x-0 bottom-0 p-5 sm:p-6">
@@ -179,12 +180,15 @@ export default function ModernFeatures() {
                   </div>
                 </Link>
               </motion.div>
-            ))}
+              );
+            })}
           </div>
 
           {/* Right Column - Cards animate from right */}
           <div className="space-y-4 md:space-y-6">
-            {features.slice(2, 4).map((feature, idx) => (
+            {features.slice(2, 4).map((feature, idx) => {
+              const absoluteIndex = idx + 2;
+              return (
               <motion.div
                 key={feature.id}
                 initial={{ opacity: 0, x: 100, y: 20 }}
@@ -210,9 +214,10 @@ export default function ModernFeatures() {
                       alt={feature.title}
                       fill
                       className="absolute inset-0 h-full w-full object-cover"
-                      loading="eager"
-                      priority
+                      priority={absoluteIndex < 2}
+                      loading={absoluteIndex < 2 ? undefined : "lazy"}
                       sizes="(max-width: 768px) 100vw, 50vw"
+                      quality={85}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
                     <div className="absolute inset-x-0 bottom-0 p-5 sm:p-6">
@@ -227,10 +232,14 @@ export default function ModernFeatures() {
                   </div>
                 </Link>
               </motion.div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </div>
     </section>
   )
 }
+
+// Memoize component to prevent unnecessary re-renders
+export default memo(ModernFeatures)

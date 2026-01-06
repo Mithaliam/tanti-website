@@ -13,6 +13,9 @@ export default function KNXInfoSection() {
 
   // Check if Solutions dropdown is open or if we're on the KNX section
   useEffect(() => {
+    // Ensure we're on client side
+    if (typeof window === 'undefined' || typeof document === 'undefined') return
+
     const handleHashChange = () => {
       if (window.location.hash === '#knx-solutions') {
         setShowOverlay(true)
@@ -33,7 +36,7 @@ export default function KNXInfoSection() {
       }
     }
 
-    // Check initial state
+    // Check initial state after mount
     handleHashChange()
     checkDropdownState()
 

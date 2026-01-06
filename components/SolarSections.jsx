@@ -1,14 +1,11 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Check, Sun, Building2, Home, Factory } from "lucide-react";
 import "./SolarSections.css";
-
-gsap.registerPlugin(ScrollTrigger);
 
 // Roof type data with icons
 const roofTypes = [
@@ -24,7 +21,6 @@ const roofTypes = [
 		],
 		image: "/sleeping%20structure.jpeg",
 		icon: Home,
-		layout: "text-left" // text left, image right
 	},
 	{
 		id: 2,
@@ -38,7 +34,6 @@ const roofTypes = [
 		],
 		image: "/high%20rise.jpeg",
 		icon: Building2,
-		layout: "image-left" // image left, text right
 	},
 	{
 		id: 3,
@@ -52,7 +47,6 @@ const roofTypes = [
 		],
 		image: "/GI%20roof.jpeg",
 		icon: Factory,
-		layout: "text-left" // text left, image right
 	},
 	{
 		id: 4,
@@ -66,302 +60,108 @@ const roofTypes = [
 		],
 		image: "/tiles%20roof.jpeg",
 		icon: Sun,
-		layout: "image-left" // image left, text right
 	}
 ];
 
 export default function SolarSections() {
+	const [activeIndex, setActiveIndex] = useState(0);
+	const cardRefs = useRef([]);
 	const containerRef = useRef(null);
-	const sectionsRef = useRef([]);
-	const stepperRef = useRef(null);
-	const [activeStep, setActiveStep] = useState(0);
-	sectionsRef.current = [];
 
-	const setRef = (el, idx) => {
-		if (el) {
-			sectionsRef.current[idx] = el;
-		}
-	};
 
-	// Scroll to specific section
-	const scrollToSection = (index) => {
-		if (sectionsRef.current[index]) {
-			sectionsRef.current[index].scrollIntoView({ behavior: "smooth", block: "start" });
-		}
-	};
-
+	// Intersection Observer to track active card based on scroll
 	useEffect(() => {
-		let ctx;
-		let timeoutId;
-		const scrollTriggers = [];
-
-		// Wait for DOM to be fully ready before initializing
-		timeoutId = setTimeout(() => {
-			if (!containerRef.current) return;
-
-			ctx = gsap.context(() => {
-				sectionsRef.current.forEach((section, index) => {
-					if (!section) return;
-
-					const card = section.querySelector(".solar-card");
-					const image = section.querySelector(".solar-image");
-					const title = section.querySelector(".solar-title");
-					const description = section.querySelector(".solar-description");
-					const bullets = section.querySelectorAll(".solar-bullet");
-					const button = section.querySelector(".solar-button");
-					const floatingElements = section.querySelectorAll(".floating-element");
-
-					// Initial state for fade-in animations
-					gsap.set([title, description, bullets, button], { opacity: 0, y: 30 });
-					gsap.set(image, { scale: 1.05, opacity: 0 });
-					gsap.set(floatingElements, { opacity: 0, scale: 0.8 });
-
-					// ScrollTrigger for pinning and transitions - One card per screen
-					const st = gsap.fromTo(
-						section,
-						{ opacity: 1, yPercent: 0 },
-						{
-							opacity: 1,
-							yPercent: 0,
-							ease: "none",
-							scrollTrigger: {
-								trigger: section,
-								start: "top top",
-								end: "+=100vh", /* Full viewport height - ensures one card at a time */
-								pin: true,
-								pinSpacing: false,
-								scrub: true,
-								anticipatePin: 1,
-								onEnter: () => {
-									setActiveStep(index);
-									// Animate content in
-									gsap.to([title, description], {
-										opacity: 1,
-										y: 0,
-										duration: 0.8,
-										ease: "power2.out",
-										stagger: 0.1
-									});
-									gsap.to(bullets, {
-										opacity: 1,
-										y: 0,
-										duration: 0.6,
-										ease: "power2.out",
-										stagger: 0.1,
-										delay: 0.3
-									});
-									gsap.to(button, {
-										opacity: 1,
-										y: 0,
-										duration: 0.6,
-										ease: "power2.out",
-										delay: 0.6
-									});
-									gsap.to(image, {
-										scale: 1,
-										opacity: 1,
-										duration: 1,
-										ease: "power2.out"
-									});
-									gsap.to(floatingElements, {
-										opacity: 1,
-										scale: 1,
-										duration: 0.8,
-										ease: "back.out(1.7)",
-										stagger: 0.15
-									});
-								},
-								onLeave: () => {
-									// Fade out when leaving
-									gsap.to([title, description, bullets, button, image], {
-										opacity: 0.3,
-										duration: 0.3,
-										ease: "power2.in"
-									});
-								},
-								onEnterBack: () => {
-									setActiveStep(index);
-									// Re-animate when scrolling back
-									gsap.to([title, description, bullets, button, image], {
-										opacity: 1,
-										duration: 0.5,
-										ease: "power2.out"
-									});
-								}
-							}
-						}
-					);
-					scrollTriggers.push(st);
-
-					// Parallax effect for image as user scrolls within section
-					gsap.to(image, {
-						scale: 1.05,
-						scrollTrigger: {
-							trigger: section,
-							start: "top top",
-							end: "bottom top",
-							scrub: 1,
-							onUpdate: (self) => {
-								const progress = self.progress;
-								gsap.set(image, { scale: 1 + progress * 0.05 });
-							}
-						}
-					});
-
-					// Floating elements parallax
-					floatingElements.forEach((el, i) => {
-						gsap.to(el, {
-							y: (i % 2 === 0 ? -20 : 20),
-							x: (i % 2 === 0 ? 10 : -10),
-							rotation: (i % 2 === 0 ? 5 : -5),
-							scrollTrigger: {
-								trigger: section,
-								start: "top top",
-								end: "bottom top",
-								scrub: 1
-							}
-						});
-					});
-				});
-
-				// Sync stepper with scroll position
-				sectionsRef.current.forEach((section, index) => {
-					if (!section) return;
-					ScrollTrigger.create({
-						trigger: section,
-						start: "top center",
-						end: "bottom center",
-						onEnter: () => setActiveStep(index),
-						onEnterBack: () => setActiveStep(index)
-					});
-				});
-
-				// Refresh ScrollTrigger to ensure proper setup
-				ScrollTrigger.refresh();
-			}, containerRef);
-		}, 100);
+		const observers = cardRefs.current.map((card, index) => {
+			if (!card) return null;
+			
+			const observer = new IntersectionObserver(
+				([entry]) => {
+					if (entry.isIntersecting && entry.intersectionRatio > 0.3) {
+						setActiveIndex(index);
+					}
+				},
+				{
+					threshold: [0, 0.3, 0.5, 1],
+					rootMargin: "-20% 0px -20% 0px"
+				}
+			);
+			
+			observer.observe(card);
+			return observer;
+		});
 
 		return () => {
-			if (timeoutId) clearTimeout(timeoutId);
-			if (ctx) ctx.revert();
-			scrollTriggers.forEach(st => st?.kill());
+			observers.forEach(observer => observer?.disconnect());
 		};
 	}, []);
 
 	return (
-		<div ref={containerRef} className="solar-stack-wrapper">
-			{/* Vertical Stepper - Desktop Only */}
-			<div ref={stepperRef} className="solar-stepper">
-				{roofTypes.map((roof, index) => {
-					const Icon = roof.icon;
-					return (
-						<button
-							key={roof.id}
-							className={`stepper-item ${activeStep === index ? "active" : ""}`}
-							onClick={() => scrollToSection(index)}
-							aria-label={`Go to ${roof.title}`}
-						>
-							<div className="stepper-number">
-								{String(index + 1).padStart(2, "0")}
-							</div>
-							<div className="stepper-content">
-								<Icon className="stepper-icon" size={16} />
-								<span className="stepper-label">{roof.shortTitle}</span>
-							</div>
-							{index < roofTypes.length - 1 && <div className="stepper-line" />}
-						</button>
-					);
-				})}
-			</div>
+		<div ref={containerRef} className="solar-sections-wrapper">
+			{/* Cards Container - All 4 cards stacked vertically */}
+			<div className="solar-cards-container">
+					{roofTypes.map((roof, index) => {
+						const Icon = roof.icon;
+						const isActive = activeIndex === index;
+						
+						return (
+							<motion.div
+								key={roof.id}
+								ref={(el) => {
+									if (el) cardRefs.current[index] = el;
+								}}
+								className={`solar-card ${isActive ? "active" : ""}`}
+								initial={{ opacity: 0, y: 30 }}
+								whileInView={{ opacity: 1, y: 0 }}
+								viewport={{ once: true, margin: "-100px" }}
+								transition={{ duration: 0.5, delay: index * 0.1 }}
+							>
+								{/* Text Content - Left Side */}
+								<div className="solar-content">
+									<h2 className="solar-title">
+										<span className="pill-label">
+											<Icon className="pill-icon" size={18} />
+											{roof.title}
+										</span>
+									</h2>
+									<p className="solar-description">
+										{roof.description}
+									</p>
+									<ul className="solar-bullets">
+										{roof.bullets.map((bullet, i) => (
+											<li key={i} className="solar-bullet">
+												<Check className="bullet-icon" size={18} />
+												<span>{bullet}</span>
+											</li>
+										))}
+									</ul>
+									<Button
+										className="solar-button"
+										size="lg"
+										onClick={() => {
+											console.log(`Talk to expert about ${roof.title}`);
+										}}
+									>
+										Talk to an Expert
+									</Button>
+								</div>
 
-			{/* Main Scroll Stack Container */}
-			<div className="solar-stack">
-				{roofTypes.map((roof, index) => {
-					const Icon = roof.icon;
-					const isTextLeft = roof.layout === "text-left";
-
-					return (
-						<section
-							key={roof.id}
-							ref={(el) => setRef(el, index)}
-							className={`section section-${index + 1} bg-gradient`}
-						>
-							<div className="section-container">
-								<div className={`solar-card ${isTextLeft ? "layout-text-left" : "layout-image-left"}`}>
-									{/* Text Content */}
-									<div className="solar-content">
-										<h2 className="solar-title">
-											<span className="pill-label">
-												<Icon className="pill-icon" size={18} />
-												{roof.title}
-											</span>
-										</h2>
-										<p className="solar-description">{roof.description}</p>
-										<ul className="solar-bullets">
-											{roof.bullets.map((bullet, i) => (
-												<li key={i} className="solar-bullet">
-													<Check className="bullet-icon" size={18} />
-													<span>{bullet}</span>
-												</li>
-											))}
-										</ul>
-										<Button
-											className="solar-button"
-											size="lg"
-											onClick={() => {
-												// Handle CTA click - you can add navigation or modal here
-												console.log(`Talk to expert about ${roof.title}`);
-											}}
-										>
-											Talk to an Expert
-										</Button>
-									</div>
-
-									{/* Image Container */}
-									<div className="solar-image-wrapper">
-										<div className="solar-image-container">
-											<div className="solar-image">
-												<Image
-													src={roof.image}
-													alt={roof.title}
-													fill
-													className="object-cover"
-													loading="eager"
-													priority={index < 2}
-												/>
-											</div>
-											{/* Gradient border glow */}
-											<div className="image-glow" />
-											{/* Shine overlay for hover effect */}
-											<div className="image-shine" />
-										</div>
-
-										{/* Floating Decorative Elements */}
-										<div className="floating-element floating-1">
-											<Sun size={24} />
-										</div>
-										<div className="floating-element floating-2">
-											<div className="glow-dot" />
-										</div>
+								{/* Image Container - Right Side */}
+								<div className="solar-image-wrapper">
+									<div className="solar-image-container">
+										<Image
+											src={roof.image}
+											alt={roof.title}
+											fill
+											className="object-cover rounded-3xl"
+											priority={index < 2}
+											loading={index < 2 ? undefined : "lazy"}
+										/>
 									</div>
 								</div>
-							</div>
-						</section>
-					);
-				})}
-			</div>
-
-			{/* Horizontal Progress Indicator - Tablet/Mobile */}
-			<div className="solar-progress-mobile">
-				{roofTypes.map((roof, index) => (
-					<button
-						key={roof.id}
-						className={`progress-dot ${activeStep === index ? "active" : ""}`}
-						onClick={() => scrollToSection(index)}
-						aria-label={`Go to ${roof.title}`}
-					/>
-				))}
-			</div>
+							</motion.div>
+						);
+					})}
+				</div>
 		</div>
 	);
 }

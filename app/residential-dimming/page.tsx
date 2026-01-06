@@ -195,7 +195,7 @@ export default function ResidentialDimmingPage() {
         <motion.div 
           className="relative z-10 max-w-5xl mx-auto px-4"
           variants={heroVariants}
-          initial="hidden"
+          initial="visible"
           animate="visible"
         >
           <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 drop-shadow-2xl">
@@ -223,7 +223,7 @@ export default function ResidentialDimmingPage() {
           <motion.div 
             className="text-center mb-16"
             variants={fadeInVariants}
-            initial="hidden"
+            initial="visible"
             whileInView="visible"
             viewport={{ once: true }}
           >
@@ -241,7 +241,7 @@ export default function ResidentialDimmingPage() {
           <motion.div 
             className="bg-gray-50 rounded-2xl p-8"
             variants={cardVariants}
-            initial="hidden"
+            initial="visible"
             whileInView="visible"
             viewport={{ once: true }}
           >
@@ -252,7 +252,7 @@ export default function ResidentialDimmingPage() {
                   key={tech.name}
                   className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow"
                   variants={cardVariants}
-                  initial="hidden"
+                  initial="visible"
                   whileInView="visible"
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
@@ -281,7 +281,7 @@ export default function ResidentialDimmingPage() {
           <motion.div 
             className="text-center mb-16"
             variants={fadeInVariants}
-            initial="hidden"
+            initial="visible"
             whileInView="visible"
             viewport={{ once: true }}
           >
@@ -299,7 +299,7 @@ export default function ResidentialDimmingPage() {
                 key={benefit.title}
                 className="group"
                 variants={cardVariants}
-                initial="hidden"
+                initial="visible"
                 whileInView="visible"
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
@@ -334,7 +334,7 @@ export default function ResidentialDimmingPage() {
           <motion.div 
             className="text-center mb-16"
             variants={fadeInVariants}
-            initial="hidden"
+            initial="visible"
             whileInView="visible"
             viewport={{ once: true }}
           >
@@ -351,7 +351,7 @@ export default function ResidentialDimmingPage() {
               <motion.div
                 key={method.title}
                 variants={cardVariants}
-                initial="hidden"
+                initial="visible"
                 whileInView="visible"
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
@@ -385,7 +385,7 @@ export default function ResidentialDimmingPage() {
           <motion.div 
             className="text-center mb-16"
             variants={fadeInVariants}
-            initial="hidden"
+            initial="visible"
             whileInView="visible"
             viewport={{ once: true }}
           >
@@ -403,7 +403,7 @@ export default function ResidentialDimmingPage() {
                 key={area.title}
                 className="group"
                 variants={cardVariants}
-                initial="hidden"
+                initial="visible"
                 whileInView="visible"
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
@@ -439,7 +439,7 @@ export default function ResidentialDimmingPage() {
           <motion.div 
             className="text-center mb-16"
             variants={fadeInVariants}
-            initial="hidden"
+            initial="visible"
             whileInView="visible"
             viewport={{ once: true }}
           >
@@ -456,7 +456,7 @@ export default function ResidentialDimmingPage() {
               <motion.div
                 key={product.title}
                 variants={cardVariants}
-                initial="hidden"
+                initial="visible"
                 whileInView="visible"
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
@@ -489,7 +489,7 @@ export default function ResidentialDimmingPage() {
         <div className="max-w-4xl mx-auto px-4 text-center">
           <motion.div
             variants={fadeInVariants}
-            initial="hidden"
+            initial="visible"
             whileInView="visible"
             viewport={{ once: true }}
           >

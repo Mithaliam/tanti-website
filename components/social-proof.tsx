@@ -96,7 +96,6 @@ export default function SocialProof() {
                   width={60}
                   height={60}
                   className="object-contain filter brightness-0 invert"
-                  loading="eager"
                   priority
                 />
               </div>

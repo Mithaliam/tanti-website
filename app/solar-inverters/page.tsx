@@ -24,7 +24,7 @@ export default function SolarInvertersPage() {
 				<div className="container mx-auto px-4 py-16 md:py-24">
 					<motion.div
 						variants={heroVariants}
-						initial="hidden"
+						initial="visible"
 						animate="visible"
 						className="grid lg:grid-cols-2 gap-10 items-center"
 					>
@@ -71,7 +71,7 @@ export default function SolarInvertersPage() {
 				<div className="container mx-auto px-4">
 					<motion.h2
 						variants={cardVariants}
-						initial="hidden"
+						initial="visible"
 						whileInView="visible"
 						viewport={{ once: true }}
 						className="text-3xl md:text-4xl font-bold text-[#3B82F6] text-center mb-12"
@@ -99,7 +99,7 @@ export default function SolarInvertersPage() {
                                 points: ["Backup during outages", "Export to grid", "Time‑of‑use savings"],
                             },
                         ].map((t, idx) => (
-							<motion.div key={idx} variants={cardVariants} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+							<motion.div key={idx} variants={cardVariants} initial="visible" whileInView="visible" viewport={{ once: true }}>
 								<Card className="h-full group glow-card">
 									<CardHeader>
 										<div className="relative w-full h-44 rounded-xl overflow-hidden mb-4">

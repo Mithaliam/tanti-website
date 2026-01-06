@@ -24,7 +24,7 @@ export default function SolarPanelsPage() {
 				<div className="container mx-auto px-4 py-16 md:py-24">
 					<motion.div
 						variants={heroVariants}
-						initial="hidden"
+						initial="visible"
 						animate="visible"
 						className="grid lg:grid-cols-2 gap-10 items-center"
 					>
@@ -71,7 +71,7 @@ export default function SolarPanelsPage() {
 				<div className="container mx-auto px-4">
 					<motion.h2
 						variants={cardVariants}
-						initial="hidden"
+						initial="visible"
 						whileInView="visible"
 						viewport={{ once: true }}
 						className="text-3xl md:text-4xl font-bold text-[#3B82F6] text-center mb-12"
@@ -96,7 +96,7 @@ export default function SolarPanelsPage() {
                                 img: "/smart%20monitoring.jpg",
                             },
 						].map((f, idx) => (
-							<motion.div key={idx} variants={cardVariants} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+							<motion.div key={idx} variants={cardVariants} initial="visible" whileInView="visible" viewport={{ once: true }}>
                                 <Card className="h-full bg-gradient-to-br from-white/20 via-white/5 to-transparent backdrop-blur-sm border border-white/30 glow-card">
 									<CardHeader>
                                         <div className="relative w-full h-40 rounded-xl overflow-hidden mb-4">
@@ -132,7 +132,7 @@ export default function SolarPanelsPage() {
 				<div className="container mx-auto px-4">
 					<motion.h2
 						variants={cardVariants}
-						initial="hidden"
+						initial="visible"
 						whileInView="visible"
 						viewport={{ once: true }}
 						className="text-3xl md:text-4xl font-bold text-[#3B82F6] text-center mb-12"
@@ -145,7 +145,7 @@ export default function SolarPanelsPage() {
                             { name: "Polycrystalline", img: "/polycrystalline.jpeg", points: ["Balanced price‑to‑performance", "Proven reliability", "Ideal for larger roofs"] },
                             { name: "Thin‑Film", img: "/thin%20film.jpeg", points: ["Lightweight & flexible", "Performs well in heat", "Aesthetic integration"] },
 						].map((t, idx) => (
-							<motion.div key={idx} variants={cardVariants} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+							<motion.div key={idx} variants={cardVariants} initial="visible" whileInView="visible" viewport={{ once: true }}>
                                 <Card className="h-full group bg-gradient-to-br from-white/20 via-white/5 to-transparent backdrop-blur-sm border border-white/30 glow-card">
 									<CardHeader>
                                         <div className="relative w-full h-44 rounded-xl overflow-hidden mb-4">

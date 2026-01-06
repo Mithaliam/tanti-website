@@ -6,9 +6,10 @@ import { cn } from "@/lib/utils"
 
 type MobileNavProps = {
   isOpen: boolean
+  onClose: () => void
 }
 
-export default function MobileNav({ isOpen }: MobileNavProps) {
+export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
   
   return (
     <div 
@@ -21,31 +22,31 @@ export default function MobileNav({ isOpen }: MobileNavProps) {
         "container mx-auto px-3 py-4 flex flex-col gap-2 transition-all duration-300 overflow-y-auto",
         isOpen ? "translate-y-0" : "-translate-y-4"
       )}>
-        <Link href="/residential" className="py-2 px-2 border-b border-white/10 hover:bg-white/5 rounded-md transition-colors active:bg-white/10 text-blue-400">
+        <Link href="/residential" prefetch={true} onClick={onClose} className="py-2 px-2 border-b border-white/10 hover:bg-white/5 rounded-md transition-colors active:bg-white/10 text-blue-400">
           Products
         </Link>
 
-        <Link href="/solutions" className="py-2 px-2 border-b border-white/10 hover:bg-white/5 rounded-md transition-colors active:bg-white/10 text-blue-400">
+        <Link href="/solutions" prefetch={true} onClick={onClose} className="py-2 px-2 border-b border-white/10 hover:bg-white/5 rounded-md transition-colors active:bg-white/10 text-blue-400">
           Solutions
         </Link>
 
-        <Link href="/company" className="py-2 px-2 border-b border-white/10 hover:bg-white/5 rounded-md transition-colors active:bg-white/10 text-blue-400">
+        <Link href="/company" prefetch={true} onClick={onClose} className="py-2 px-2 border-b border-white/10 hover:bg-white/5 rounded-md transition-colors active:bg-white/10 text-blue-400">
           Company
         </Link>
 
-        <Link href="/contact" className="py-2 px-2 border-b border-white/10 hover:bg-white/5 rounded-md transition-colors active:bg-white/10 text-blue-400">
+        <Link href="/contact" prefetch={true} onClick={onClose} className="py-2 px-2 border-b border-white/10 hover:bg-white/5 rounded-md transition-colors active:bg-white/10 text-blue-400">
           Support
         </Link>
 
-        <Link href="/projects" className="py-2 px-2 border-b border-white/10 hover:bg-white/5 rounded-md transition-colors active:bg-white/10 text-blue-400">
+        <Link href="/projects" prefetch={true} onClick={onClose} className="py-2 px-2 border-b border-white/10 hover:bg-white/5 rounded-md transition-colors active:bg-white/10 text-blue-400">
           Projects
         </Link>
 
-        <Link href="#pricing" className="py-2 px-2 border-b border-white/10 hover:bg-white/5 rounded-md transition-colors active:bg-white/10 text-blue-400">
+        <Link href="#pricing" onClick={onClose} className="py-2 px-2 border-b border-white/10 hover:bg-white/5 rounded-md transition-colors active:bg-white/10 text-blue-400">
           Pricing
         </Link>
 
-        <Link href="#testimonials" className="py-2 px-2 border-b border-white/10 hover:bg-white/5 rounded-md transition-colors active:bg-white/10 text-blue-400">
+        <Link href="#testimonials" onClick={onClose} className="py-2 px-2 border-b border-white/10 hover:bg-white/5 rounded-md transition-colors active:bg-white/10 text-blue-400">
           Testimonials
         </Link>
 

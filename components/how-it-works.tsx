@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo, memo } from "react";
+// Tree-shake Framer Motion - only import what we use
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import Image from "next/image";
 import useEmblaCarousel from "embla-carousel-react";
@@ -8,7 +9,36 @@ import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { rememberScroll } from "@/hooks/useScrollRestore";
 
+// Normalize image URL to ensure consistent encoding between server and client
+// This prevents hydration mismatches with Next.js Image component
+function normalizeImageUrl(url: string): string {
+  // If URL is already encoded (contains %), return as-is to avoid double encoding
+  if (url.includes('%')) {
+    return url;
+  }
+  
+  // If URL starts with '/', encode it consistently
+  if (url.startsWith('/')) {
+    try {
+      // Split path into segments
+      const parts = url.split('/').filter(Boolean);
+      
+      // Encode each segment consistently using encodeURIComponent
+      // This ensures spaces become %20, & becomes %26, etc.
+      const encodedParts = parts.map(part => encodeURIComponent(part));
+      
+      // Reconstruct path with leading slash
+      return '/' + encodedParts.join('/');
+    } catch {
+      // If any error occurs, return original URL
+      return url;
+    }
+  }
+  return url;
+}
+
 // Image component with fallback support
+// This component ensures server/client hydration consistency by using regular img tag for problematic files
 function ImageWithFallback({ 
   src, 
   fallback, 
@@ -24,30 +54,84 @@ function ImageWithFallback({
   alt: string; 
   fill?: boolean; 
   className?: string; 
-  loading?: "lazy" | "eager"; 
+  loading?: "lazy" | "eager" | undefined; 
   priority?: boolean; 
   sizes?: string;
 }) {
-  const [imgSrc, setImgSrc] = useState(src);
-  const [hasError, setHasError] = useState(false);
-
-  useEffect(() => {
-    setImgSrc(src);
-    setHasError(false);
+  // Check if src contains special characters that cause hydration issues with Next.js Image
+  const hasSpecialChars = useMemo(() => {
+    return src.includes(' ') || src.includes('&') || src.includes('%');
   }, [src]);
+  
+  const [hasError, setHasError] = useState<boolean>(false);
+  const [isMounted, setIsMounted] = useState<boolean>(false);
+
+  // Track mount state to prevent hydration mismatches
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  // Reset error when src changes (only after mount)
+  useEffect(() => {
+    if (isMounted) {
+    setHasError(false);
+    }
+  }, [src, isMounted]);
+
+  // For images with special characters, use regular img tag to avoid Next.js URL encoding issues
+  // Always use src directly for initial render to ensure server/client match
+  // Only switch to fallback after mount and error (client-side only)
+  if (hasSpecialChars) {
+    // Use src directly for initial render - this ensures server/client match
+    const imageSrc = (hasError && fallback) ? fallback : src;
+    
+    return (
+      <img
+        src={imageSrc}
+        alt={alt}
+        className={className}
+        loading={loading}
+        onError={() => {
+          // Only handle error after mount to prevent hydration mismatch
+          if (fallback && !hasError && isMounted) {
+            setHasError(true);
+          }
+        }}
+        style={fill ? {
+          position: 'absolute',
+          inset: 0,
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover'
+        } : undefined}
+      />
+    );
+  }
+
+  // For normal images, use Next.js Image component
+  const normalizedSrc = useMemo(() => normalizeImageUrl(src), [src]);
+  const normalizedFallback = useMemo(() => fallback ? normalizeImageUrl(fallback) : undefined, [fallback]);
+  const normalizedImageSrc = hasError && normalizedFallback ? normalizedFallback : normalizedSrc;
+
+  // When priority is true, Next.js Image handles loading automatically
+  // Don't pass loading prop when priority is true to avoid hydration mismatch
+  const imageProps = priority 
+    ? { priority: true }
+    : loading ? { loading } : {};
 
   return (
     <Image
-      src={hasError && fallback ? fallback : imgSrc}
+      key={normalizedSrc}
+      src={normalizedImageSrc}
       alt={alt}
       fill={fill}
       className={className}
-      {...(priority ? { priority: true } : { loading })}
+      {...imageProps}
       sizes={sizes}
+      quality={85}
       onError={() => {
-        if (fallback && !hasError) {
+        if (normalizedFallback && !hasError) {
           setHasError(true);
-          setImgSrc(fallback);
         }
       }}
     />
@@ -173,7 +257,7 @@ function PremiumCard({
               fill
               className="object-cover transition-transform duration-700 group-hover:scale-110"
               priority={index < 2}
-              loading="eager"
+              loading={index < 2 ? undefined : "lazy"}
               sizes="(max-width: 640px) 85vw, (max-width: 1024px) 50vw, 25vw"
             />
           </motion.div>
@@ -222,7 +306,7 @@ function PremiumCard({
   );
 }
 
-export default function HowItWorks() {
+function HowItWorks() {
   const [emblaRef, emblaApi] = useEmblaCarousel({
     loop: false,
     align: "start",
@@ -235,7 +319,7 @@ export default function HowItWorks() {
       title: "Commercial",
       description:
         "Intelligent automation systems for commercial spaces. Enhance efficiency, safety, and sustainability with smart building solutions.",
-      image: "/Industry%20-%20Commercial%20-%20Institutional%20%26%20Industrial%201.jpeg",
+      image: "/Industry - Commercial - Institutional & Industrial 1.jpeg",
       fallbackImage: "/tanti/commercial.jpg",
     },
     {
@@ -244,7 +328,7 @@ export default function HowItWorks() {
       description:
         "Smart lighting and automation solutions for your home. Control your entire home seamlessly from anywhere.",
       image: "/Res.jpg",
-      fallbackImage: "/tanti/residential%20image.jpg",
+      fallbackImage: "/tanti/residential image.jpg",
     },
     {
       number: "03",
@@ -440,9 +524,9 @@ export default function HowItWorks() {
                         alt={step.title}
                         fill
                         className="object-cover transition-transform duration-700 group-active:scale-110"
-                        priority={index === 0}
-                        loading={index === 0 ? "eager" : "lazy"}
-                        sizes="85vw"
+                        priority={index < 2}
+                        loading={index < 2 ? undefined : "lazy"}
+                        sizes="(max-width: 640px) 85vw, (max-width: 1024px) 50vw, 33vw"
                       />
                       
                       {/* Gradient overlay */}
@@ -510,3 +594,6 @@ export default function HowItWorks() {
     </section>
   );
 }
+
+// Memoize component to prevent unnecessary re-renders
+export default memo(HowItWorks)

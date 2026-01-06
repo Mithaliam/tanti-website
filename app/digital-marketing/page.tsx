@@ -77,7 +77,7 @@ export default function DigitalMarketingPage() {
           {/* Main Title */}
           <motion.div
             variants={heroVariants}
-            initial="hidden"
+            initial="visible"
             animate="visible"
             className="text-center mb-16"
           >
@@ -92,7 +92,7 @@ export default function DigitalMarketingPage() {
               <motion.div
                 key={service.id}
                 variants={cardVariants}
-                initial="hidden"
+                initial="visible"
                 animate="visible"
                 transition={{ delay: index * 0.2 }}
                 className="bg-black/40 backdrop-blur-sm rounded-xl p-8 border border-white/10 hover:border-yellow-400/50 transition-all duration-300"

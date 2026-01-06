@@ -95,7 +95,7 @@ export default function SwitchingPage() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div
               variants={heroVariants}
-              initial="hidden"
+              initial="visible"
               animate="visible"
               className="space-y-8"
             >
@@ -124,7 +124,7 @@ export default function SwitchingPage() {
             </motion.div>
             <motion.div
               variants={heroVariants}
-              initial="hidden"
+              initial="visible"
               animate="visible"
               transition={{ delay: 0.3 }}
               className="relative"
@@ -144,7 +144,7 @@ export default function SwitchingPage() {
         <div className="container mx-auto max-w-4xl text-center">
           <motion.div
             variants={cardVariants}
-            initial="hidden"
+            initial="visible"
             whileInView="visible"
             viewport={{ once: true }}
             className="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100"
@@ -168,7 +168,7 @@ export default function SwitchingPage() {
         <div className="container mx-auto max-w-6xl">
           <motion.div
             variants={cardVariants}
-            initial="hidden"
+            initial="visible"
             whileInView="visible"
             viewport={{ once: true }}
             className="text-center mb-16"
@@ -184,7 +184,7 @@ export default function SwitchingPage() {
               <motion.div
                 key={feature.title}
                 variants={cardVariants}
-                initial="hidden"
+                initial="visible"
                 whileInView="visible"
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
@@ -217,7 +217,7 @@ export default function SwitchingPage() {
         <div className="container mx-auto max-w-6xl">
           <motion.div
             variants={cardVariants}
-            initial="hidden"
+            initial="visible"
             whileInView="visible"
             viewport={{ once: true }}
             className="text-center mb-16"
@@ -233,7 +233,7 @@ export default function SwitchingPage() {
               <motion.div
                 key={solution.title}
                 variants={cardVariants}
-                initial="hidden"
+                initial="visible"
                 whileInView="visible"
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.2 }}
@@ -274,7 +274,7 @@ export default function SwitchingPage() {
         <div className="container mx-auto max-w-6xl">
           <motion.div
             variants={cardVariants}
-            initial="hidden"
+            initial="visible"
             whileInView="visible"
             viewport={{ once: true }}
             className="text-center mb-16"
@@ -293,7 +293,7 @@ export default function SwitchingPage() {
               <motion.div
                 key={tech.name}
                 variants={cardVariants}
-                initial="hidden"
+                initial="visible"
                 whileInView="visible"
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
@@ -314,7 +314,7 @@ export default function SwitchingPage() {
         <div className="container mx-auto max-w-4xl text-center">
           <motion.div
             variants={cardVariants}
-            initial="hidden"
+            initial="visible"
             whileInView="visible"
             viewport={{ once: true }}
             className="space-y-8"

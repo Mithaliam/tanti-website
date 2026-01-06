@@ -108,7 +108,7 @@ export function useScrollRestoration(options: UseScrollRestorationOptions = {}):
   // Get current route key
   const getCurrentRouteKey = useCallback(() => {
     const search = searchParams?.toString() || "";
-    return getStorageKey(pathname, search ? `?${search}` : "");
+    return getStorageKey(pathname || "", search ? `?${search}` : "");
   }, [pathname, searchParams]);
   
   // Debounced save function
