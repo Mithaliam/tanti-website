@@ -20,7 +20,7 @@ export default function ModernTestimonials() {
         "Exceptional execution on our smart home. Installation was flawless and support is outstanding.",
       author: "Rajesh Kumar",
       role: "Homeowner",
-      avatar: "/placeholder-user.jpg",
+      avatar: "/tanti/clientspeak1.png",
       company: "Bengaluru",
       rating: 5,
     },
@@ -29,7 +29,7 @@ export default function ModernTestimonials() {
         "Energy savings and efficiency improvements have been remarkable. Highly professional team.",
       author: "Priya Sharma",
       role: "Facilities Manager",
-      avatar: "/placeholder-user.jpg",
+      avatar: "/tanti/clientspeak1.png",
       company: "Mumbai",
       rating: 5,
     },
@@ -152,15 +152,32 @@ function TiltGlowCard({ data, idx, yBackLeft }: { data: Testimonial; idx: number
 
 function Avatar({ src, alt }: { src: string; alt: string }) {
   const [failed, setFailed] = useState(false)
-  return (
-    <div className="relative w-14 h-14">
-      {failed ? (
+  
+  // Check if it's a placeholder image and use fallback immediately
+  const isPlaceholder = src.includes('placeholder')
+  
+  if (failed || isPlaceholder) {
+    return (
+      <div className="relative w-14 h-14">
         <div className="w-full h-full rounded-full bg-gradient-to-br from-blue-500/20 to-cyan-500/20 flex items-center justify-center ring-1 ring-blue-300/40">
           <UserRound className="text-blue-600" size={28} />
         </div>
-      ) : (
-        <Image src={src} alt={alt} fill sizes="56px" className="rounded-full object-cover" onError={() => setFailed(true)} priority />
-      )}
+      </div>
+    )
+  }
+  
+  return (
+    <div className="relative w-14 h-14">
+      <Image 
+        src={src} 
+        alt={alt} 
+        fill 
+        sizes="56px" 
+        className="rounded-full object-cover" 
+        onError={() => setFailed(true)} 
+        priority
+        unoptimized={src.includes('placeholder')}
+      />
     </div>
   )
 }

@@ -35,3 +35,6 @@
  * ```
  */
 
+// This is a documentation file, not a module
+export {};
+

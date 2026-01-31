@@ -1,14 +1,16 @@
 "use client"
+// Version: 2025-01-10 - Video Door Phone navigation fix
 
 import { useState, useEffect, memo, useCallback, useMemo } from "react"
 import { motion } from "framer-motion"
 // Tabs removed in favor of a static 2x2 card grid
+import { useRouter } from "next/navigation"
 import Link from "next/link"
 import { rememberScroll } from "@/hooks/useScrollRestore"
 import Image from "next/image"
 
 function ModernFeatures() {
-  const [activeTab, setActiveTab] = useState("residential")
+  const router = useRouter()
   const [mounted, setMounted] = useState(false)
 
   // Set mounted state to true on client-side
@@ -18,12 +20,14 @@ function ModernFeatures() {
 
   // Memoize navigation path function to prevent recreation
   const getFeaturePath = useCallback((feature: { id: string; title: string }) => {
+    // Explicitly handle ABB F@H first - check both title and id
+    if (feature.title === "ABB F@H" || feature.id === "abb-fh") {
+      return "/abb-free-at-home"
+    }
     if (feature.title === "Switching") {
       return "/switching"
-    } else if (feature.title === "ABB F@H") {
-      return "/residential"
     } else if (feature.title === "Video Door Phone") {
-      return "#" // Add path when available
+      return "/video-door-phone"
     } else if (feature.title === "IOT") {
       return "#" // Add path when available
     }
@@ -32,7 +36,7 @@ function ModernFeatures() {
 
   const features = [
     {
-      id: "residential",
+      id: "abb-fh",
       title: "ABB F@H",
       description:
         "Transform your home into a smart haven with our comprehensive residential automation solutions.",
@@ -150,11 +154,48 @@ function ModernFeatures() {
                 className="group relative"
               >
                 <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-2xl blur-lg opacity-60 group-hover:opacity-90 transition-opacity"></div>
-                <Link
-                  href={getFeaturePath(feature)}
-                  scroll={false}
-                  onClick={rememberScroll}
+                <div
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    rememberScroll();
+                    console.log("Feature clicked:", feature.title, feature.id);
+                    // Force redirect to abb-free-at-home for ABB F@H - explicit check
+                    if (feature.id === "abb-fh" || feature.title === "ABB F@H") {
+                      // Use replace to prevent back button issues and ensure correct navigation
+                      router.replace("/abb-free-at-home");
+                      return;
+                    }
+                    // Handle Video Door Phone navigation
+                    if (feature.title === "Video Door Phone" || feature.id === "security") {
+                      console.log("Navigating to /video-door-phone");
+                      // Use window.location for guaranteed navigation
+                      window.location.href = "/video-door-phone";
+                      return;
+                    }
+                    const path = getFeaturePath(feature);
+                    if (path && path !== "#") {
+                      router.push(path);
+                    }
+                  }}
                   className="relative rounded-2xl overflow-hidden border border-gray-200 bg-white/90 shadow-lg cursor-pointer block"
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      if (feature.id === "abb-fh" || feature.title === "ABB F@H") {
+                        router.replace("/abb-free-at-home");
+                      } else if (feature.title === "Video Door Phone" || feature.id === "security") {
+                        window.location.href = "/video-door-phone";
+                      } else {
+                        const path = getFeaturePath(feature);
+                        if (path && path !== "#") {
+                          router.push(path);
+                        }
+                      }
+                    }
+                  }}
                 >
                   <div className="relative h-64 sm:h-72 md:h-[360px]">
                     <Image
@@ -171,14 +212,14 @@ function ModernFeatures() {
                     <div className="absolute inset-x-0 bottom-0 p-5 sm:p-6">
                       <h3 className="text-2xl sm:text-3xl font-bold text-white drop-shadow">{feature.title}</h3>
                       <p className="mt-1 text-white/90 max-w-xl hidden sm:block">{feature.description}</p>
-                      <button 
-                        className="mt-4 inline-flex items-center justify-center rounded-lg bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 shadow-md group-hover:shadow-xl transition-all"
+                      <div 
+                        className="mt-4 inline-flex items-center justify-center rounded-lg bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 shadow-md group-hover:shadow-xl transition-all pointer-events-none"
                       >
                         Discover More
-                      </button>
+                      </div>
                     </div>
                   </div>
-                </Link>
+                </div>
               </motion.div>
               );
             })}
@@ -202,11 +243,48 @@ function ModernFeatures() {
                 className="group relative"
               >
                 <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-2xl blur-lg opacity-60 group-hover:opacity-90 transition-opacity"></div>
-                <Link
-                  href={getFeaturePath(feature)}
-                  scroll={false}
-                  onClick={rememberScroll}
+                <div
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    rememberScroll();
+                    console.log("Feature clicked:", feature.title, feature.id);
+                    // Force redirect to abb-free-at-home for ABB F@H - explicit check
+                    if (feature.id === "abb-fh" || feature.title === "ABB F@H") {
+                      // Use replace to prevent back button issues and ensure correct navigation
+                      router.replace("/abb-free-at-home");
+                      return;
+                    }
+                    // Handle Video Door Phone navigation
+                    if (feature.title === "Video Door Phone" || feature.id === "security") {
+                      console.log("Navigating to /video-door-phone");
+                      // Use window.location for guaranteed navigation
+                      window.location.href = "/video-door-phone";
+                      return;
+                    }
+                    const path = getFeaturePath(feature);
+                    if (path && path !== "#") {
+                      router.push(path);
+                    }
+                  }}
                   className="relative rounded-2xl overflow-hidden border border-gray-200 bg-white/90 shadow-lg cursor-pointer block"
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      if (feature.id === "abb-fh" || feature.title === "ABB F@H") {
+                        router.replace("/abb-free-at-home");
+                      } else if (feature.title === "Video Door Phone" || feature.id === "security") {
+                        window.location.href = "/video-door-phone";
+                      } else {
+                        const path = getFeaturePath(feature);
+                        if (path && path !== "#") {
+                          router.push(path);
+                        }
+                      }
+                    }
+                  }}
                 >
                   <div className="relative h-64 sm:h-72 md:h-[360px]">
                     <Image
@@ -223,14 +301,14 @@ function ModernFeatures() {
                     <div className="absolute inset-x-0 bottom-0 p-5 sm:p-6">
                       <h3 className="text-2xl sm:text-3xl font-bold text-white drop-shadow">{feature.title}</h3>
                       <p className="mt-1 text-white/90 max-w-xl hidden sm:block">{feature.description}</p>
-                      <button 
-                        className="mt-4 inline-flex items-center justify-center rounded-lg bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 shadow-md group-hover:shadow-xl transition-all"
+                      <div 
+                        className="mt-4 inline-flex items-center justify-center rounded-lg bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 shadow-md group-hover:shadow-xl transition-all pointer-events-none"
                       >
                         Discover More
-                      </button>
+                      </div>
                     </div>
                   </div>
-                </Link>
+                </div>
               </motion.div>
               );
             })}

@@ -141,12 +141,10 @@ function ImageWithFallback({
 // Premium 3D Card Component with Glassmorphism
 function PremiumCard({ 
   step, 
-  index, 
-  getStepPath 
+  index
 }: { 
-  step: { number: string; title: string; description: string; image: string; fallbackImage: string };
+  step: { number: string; title: string; description: string; image: string; fallbackImage: string; href: string };
   index: number;
-  getStepPath: (step: { title: string }) => string;
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const x = useMotionValue(0);
@@ -217,7 +215,7 @@ function PremiumCard({
       
       {/* Glassmorphism card */}
       <Link
-        href={getStepPath(step)}
+        href={step.href}
         scroll={step.title === "Solar" ? true : false}
         onClick={step.title === "Solar" ? () => window.scrollTo(0, 0) : rememberScroll}
         className={`relative h-full flex flex-col rounded-2xl overflow-hidden backdrop-blur-xl bg-gradient-to-br from-white/80 via-white/60 to-white/40 border border-white/30 shadow-2xl transition-all duration-500 ease-out group-hover:shadow-[0_20px_50px_rgba(59,130,246,0.3)] ${step.title === "Residential" || step.title === "Commercial" || step.title === "Solar" ? "cursor-pointer" : ""}`}
@@ -313,10 +311,12 @@ function HowItWorks() {
   });
   const [selectedIndex, setSelectedIndex] = useState(0);
 
+  // Static steps configuration with pre-computed href values to prevent hydration errors
   const steps = [
     {
       number: "01",
       title: "Commercial",
+      href: "/commercial", // Static href - no dynamic computation
       description:
         "Intelligent automation systems for commercial spaces. Enhance efficiency, safety, and sustainability with smart building solutions.",
       image: "/Industry - Commercial - Institutional & Industrial 1.jpeg",
@@ -325,6 +325,7 @@ function HowItWorks() {
     {
       number: "02",
       title: "Residential",
+      href: "/abb-free-at-home", // Static href - no dynamic computation
       description:
         "Smart lighting and automation solutions for your home. Control your entire home seamlessly from anywhere.",
       image: "/Res.jpg",
@@ -333,6 +334,7 @@ function HowItWorks() {
     {
       number: "03",
       title: "Solar",
+      href: "/solar", // Static href - no dynamic computation
       description:
         "Comprehensive solar energy solutions for residential and commercial projects. Reduce costs and environmental impact.",
       image: "/Solar.jpeg",
@@ -341,12 +343,13 @@ function HowItWorks() {
     {
       number: "04",
       title: "MEP",
+      href: "#", // Static href - no dynamic computation
       description:
         "Expert mechanical, electrical, and plumbing engineering services. Optimal system design, installation, and maintenance.",
       image: "/MEP.jpeg",
       fallbackImage: "/tanti/security.jpg",
     },
-  ];
+  ] as const;
 
   // Update selected index when the carousel scrolls
   const onSelect = () => {
@@ -366,17 +369,7 @@ function HowItWorks() {
   // Navigation helper
   const scrollTo = (index: number) => emblaApi?.scrollTo(index);
 
-  // Get navigation path for a step
-  const getStepPath = (step: { title: string }) => {
-    if (step.title === "Residential") {
-      return "/residential";
-    } else if (step.title === "Commercial") {
-      return "/commercial";
-    } else if (step.title === "Solar") {
-      return "/solar";
-    }
-    return "#";
-  };
+  // Removed getStepPath - now using static href from steps array to prevent hydration errors
 
   return (
     <section id="cards-section" className="py-16 sm:py-20 md:py-24 relative overflow-hidden" style={{ backgroundColor: '#F5F5F0' }}>
@@ -453,7 +446,6 @@ function HowItWorks() {
               key={index}
               step={step}
               index={index}
-              getStepPath={getStepPath}
             />
           ))}
         </div>
@@ -477,7 +469,7 @@ function HowItWorks() {
                   className="flex-[0_0_85%] min-w-0 ml-4 first:ml-4 group"
                 >
                   <Link
-                    href={getStepPath(step)}
+                    href={step.href}
                     scroll={step.title === "Solar" ? true : false}
                     onClick={step.title === "Solar" ? () => window.scrollTo(0, 0) : rememberScroll}
                     className={`relative h-full flex flex-col rounded-2xl overflow-hidden backdrop-blur-xl bg-gradient-to-br from-white/80 via-white/60 to-white/40 border border-white/30 shadow-2xl transition-all duration-500 ease-out active:scale-[0.98] active:shadow-[0_20px_50px_rgba(59,130,246,0.3)] ${step.title === "Residential" || step.title === "Commercial" || step.title === "Solar" ? "cursor-pointer" : ""}`}

@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   icons: {
     icon: "/tanti-favicon.svg",
     shortcut: "/tanti-favicon.svg",
-    apple: "/web-app-manifest-192x192.png",
+    apple: "/icon.svg",
   },
   manifest: "/site.webmanifest",
   generator: "Mohamed Djoudir",
@@ -61,6 +61,62 @@ export default function RootLayout({
         <link rel="preload" as="image" href="/tanti-automatics-logo.png" fetchPriority="high" />
         <link rel="preload" as="video" href="/tanti Main background.mp4" type="video/mp4" fetchPriority="high" />
         
+        {/* Development mode: Clear browser cache to prevent stale JavaScript */}
+        {process.env.NODE_ENV === 'development' && (
+          <>
+            <meta httpEquiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+            <meta httpEquiv="Pragma" content="no-cache" />
+            <meta httpEquiv="Expires" content="0" />
+            <script
+              dangerouslySetInnerHTML={{
+                __html: `
+                  (function() {
+                    // Clear all caches in development to prevent stale JavaScript
+                    if ('caches' in window) {
+                      caches.keys().then(function(names) {
+                        for (let name of names) {
+                          caches.delete(name);
+                        }
+                      });
+                    }
+                    
+                    // Force reload if service worker exists
+                    if ('serviceWorker' in navigator) {
+                      navigator.serviceWorker.getRegistrations().then(function(registrations) {
+                        for(let registration of registrations) {
+                          registration.unregister();
+                        }
+                      });
+                    }
+                    
+                    // Clear sessionStorage and localStorage of old data
+                    try {
+                      const keys = Object.keys(sessionStorage);
+                      keys.forEach(key => {
+                        if (key.includes('residential') || key.includes('scroll:') || key.includes('features')) {
+                          sessionStorage.removeItem(key);
+                        }
+                      });
+                    } catch(e) {}
+                    
+                    // Force reload JavaScript modules on navigation
+                    if (window.location.search.indexOf('_cache_bust=') === -1) {
+                      const url = new URL(window.location.href);
+                      url.searchParams.set('_cache_bust', Date.now().toString());
+                      // Only reload if we're not already in a reload loop
+                      if (!sessionStorage.getItem('cache_bust_reload')) {
+                        sessionStorage.setItem('cache_bust_reload', '1');
+                        setTimeout(() => {
+                          sessionStorage.removeItem('cache_bust_reload');
+                        }, 1000);
+                      }
+                    }
+                  })();
+                `,
+              }}
+            />
+          </>
+        )}
         {/* Defer non-critical preloads using requestIdleCallback */}
         <script
           dangerouslySetInnerHTML={{
@@ -68,7 +124,7 @@ export default function RootLayout({
               (function() {
                 // Prefetch routes and images after critical resources load
                 function prefetchResources() {
-                  const routes = ['/commercial', '/residential', '/solar', '/solutions', '/contact'];
+                  const routes = ['/commercial', '/abb-free-at-home', '/solar', '/solutions', '/contact'];
                   routes.forEach(route => {
                     const link = document.createElement('link');
                     link.rel = 'prefetch';

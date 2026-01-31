@@ -158,41 +158,63 @@ const nextConfig = {
     return config;
   },
   async headers() {
+    const isDev = process.env.NODE_ENV === 'development';
+    
     return [
       {
         source: "/:all*(webp|avif|jpg|jpeg|png|svg)",
         headers: [
-          { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
+          { key: "Cache-Control", value: isDev ? "no-cache, no-store, must-revalidate" : "public, max-age=31536000, immutable" },
           { key: "X-Content-Type-Options", value: "nosniff" },
         ],
       },
       {
         source: "/:all*(mp4|webm|m4v|mov)",
         headers: [
-          { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
+          { key: "Cache-Control", value: isDev ? "no-cache, no-store, must-revalidate" : "public, max-age=31536000, immutable" },
           { key: "Accept-Ranges", value: "bytes" },
         ],
       },
       {
         source: "/_next/static/:path*",
         headers: [
-          { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
+          { key: "Cache-Control", value: isDev ? "no-cache, no-store, must-revalidate, max-age=0" : "public, max-age=31536000, immutable" },
+          { key: "Pragma", value: isDev ? "no-cache" : undefined },
+          { key: "Expires", value: isDev ? "0" : undefined },
+        ].filter(h => h.value !== undefined),
+      },
+      {
+        source: "/_next/data/:path*",
+        headers: [
+          { key: "Cache-Control", value: isDev ? "no-cache, no-store, must-revalidate" : "public, max-age=0, must-revalidate" },
         ],
       },
       {
         source: "/api/:path*",
         headers: [
-          { key: "Cache-Control", value: "public, s-maxage=86400, stale-while-revalidate=604800" },
+          { key: "Cache-Control", value: isDev ? "no-cache, no-store, must-revalidate" : "public, s-maxage=86400, stale-while-revalidate=604800" },
         ],
       },
       {
         source: "/:path*",
         headers: [
+          { key: "Cache-Control", value: isDev ? "no-cache, no-store, must-revalidate" : "public, max-age=0, must-revalidate" },
+          { key: "Pragma", value: isDev ? "no-cache" : undefined },
+          { key: "Expires", value: isDev ? "0" : undefined },
           { key: "X-DNS-Prefetch-Control", value: "on" },
           { key: "X-Frame-Options", value: "SAMEORIGIN" },
           { key: "X-Content-Type-Options", value: "nosniff" },
           { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
-        ],
+        ].filter(h => h.value !== undefined),
+      },
+    ]
+  },
+  async redirects() {
+    return [
+      {
+        source: '/residential',
+        destination: '/abb-free-at-home',
+        permanent: true,
       },
     ]
   },

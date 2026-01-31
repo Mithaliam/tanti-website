@@ -14,15 +14,15 @@ function ModernHero() {
 
   // Memoize mouse move handler to prevent recreation on each render
   const handleMouseMove = useCallback((e: MouseEvent) => {
-    if (!parallaxRef.current || window.innerWidth < 768) return
+      if (!parallaxRef.current || window.innerWidth < 768) return
 
-    const { clientX, clientY } = e
-    const { innerWidth, innerHeight } = window
+      const { clientX, clientY } = e
+      const { innerWidth, innerHeight } = window
 
-    const moveX = (clientX - innerWidth / 2) / 50
-    const moveY = (clientY - innerHeight / 2) / 50
+      const moveX = (clientX - innerWidth / 2) / 50
+      const moveY = (clientY - innerHeight / 2) / 50
 
-    parallaxRef.current.style.transform = `translate(${moveX}px, ${moveY}px)`
+      parallaxRef.current.style.transform = `translate(${moveX}px, ${moveY}px)`
   }, [])
 
   useEffect(() => {

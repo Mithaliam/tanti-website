@@ -10,16 +10,23 @@ import MobileNav from "./MobileNav"
 
 function ModernHeader() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [mounted, setMounted] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [showWhiteGradient, setShowWhiteGradient] = useState(false)
   const lastYRef = useRef(0)
   const rafIdRef = useRef<number | null>(null)
+  
+  // Guard client-only logic - ensures server and client match on initial render
+  useEffect(() => {
+    setMounted(true)
+  }, [])
   
   // Throttled scroll handler using requestAnimationFrame for better performance
   const handleScroll = useCallback(() => {
     if (rafIdRef.current) return // Skip if already scheduled
     
     rafIdRef.current = requestAnimationFrame(() => {
+      if (typeof window === 'undefined') return
       const currentY = window.scrollY
       const lastY = lastYRef.current
       const isScrollingUp = currentY < lastY
@@ -32,9 +39,9 @@ function ModernHeader() {
     })
   }, [])
   
-  // Handle scroll effect with throttling
+  // Handle scroll effect with throttling - only after mount
   useEffect(() => {
-    if (typeof window === 'undefined') return
+    if (!mounted || typeof window === 'undefined') return
     
     lastYRef.current = window.scrollY
     window.addEventListener("scroll", handleScroll, { passive: true })
@@ -44,10 +51,12 @@ function ModernHeader() {
         cancelAnimationFrame(rafIdRef.current)
       }
     }
-  }, [handleScroll])
+  }, [handleScroll, mounted])
 
-  // Prevent body scroll when mobile menu is open
+  // Prevent body scroll when mobile menu is open - only after mount
   useEffect(() => {
+    if (!mounted || typeof document === 'undefined') return
+    
     if (isMenuOpen) {
       document.body.style.overflow = 'hidden';
     } else {
@@ -56,7 +65,7 @@ function ModernHeader() {
     return () => {
       document.body.style.overflow = '';
     };
-  }, [isMenuOpen]);
+  }, [isMenuOpen, mounted]);
 
   return (
     <header
